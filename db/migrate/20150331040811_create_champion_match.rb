@@ -4,6 +4,8 @@ class CreateChampionMatch < ActiveRecord::Migration
       t.references :champion
       t.references :match
       t.boolean :victory
+
+      t.timestamps
     end
 
     add_index :champion_matches, [:champion_id, :victory]

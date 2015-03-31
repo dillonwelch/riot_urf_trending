@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331180501) do
+ActiveRecord::Schema.define(version: 20150331040811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,21 +35,21 @@ ActiveRecord::Schema.define(version: 20150331180501) do
     t.datetime "updated_at"
   end
 
-  add_index "champions", ["name"], name: "index_champions_on_name", using: :btree
-  add_index "champions", ["riot_id"], name: "index_champions_on_riot_id", using: :btree
+  add_index "champions", ["name"], name: "index_champions_on_name", unique: true, using: :btree
+  add_index "champions", ["riot_id"], name: "index_champions_on_riot_id", unique: true, using: :btree
 
   create_table "matches", force: :cascade do |t|
     t.integer  "game_id"
-    t.json     "champion_data"
-    t.json     "raw_api_data"
+    t.string   "region"
     t.integer  "start_time",    limit: 8
     t.integer  "duration",      limit: 8
+    t.json     "champion_data"
+    t.json     "raw_api_data"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "region"
   end
 
-  add_index "matches", ["game_id"], name: "index_matches_on_game_id", using: :btree
+  add_index "matches", ["game_id"], name: "index_matches_on_game_id", unique: true, using: :btree
   add_index "matches", ["region"], name: "index_matches_on_region", using: :btree
 
   add_foreign_key "champion_matches", "champions", name: "fk_rails_champion_matches_champions", on_delete: :cascade
