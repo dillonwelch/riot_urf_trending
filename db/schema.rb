@@ -50,6 +50,6 @@ ActiveRecord::Schema.define(version: 20150331070655) do
 
   add_index "matches", ["game_id"], name: "index_matches_on_game_id", using: :btree
 
-  add_foreign_key "champion_matches", "champions", name: "fk_rails_champion_matches_champions"
-  add_foreign_key "champion_matches", "matches", name: "fk_rails_champion_matches_matches"
+  add_foreign_key "champion_matches", "champions", name: "fk_rails_champion_matches_champions", on_delete: :cascade
+  add_foreign_key "champion_matches", "matches", name: "fk_rails_champion_matches_matches", on_delete: :cascade
 end
