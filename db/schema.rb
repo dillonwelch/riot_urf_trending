@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331033656) do
+ActiveRecord::Schema.define(version: 20150331035425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "champions", force: :cascade do |t|
+    t.integer "riot_id"
+    t.string  "name"
+    t.json    "raw_api_data"
+  end
+
+  add_index "champions", ["name"], name: "index_champions_on_name", using: :btree
+  add_index "champions", ["riot_id"], name: "index_champions_on_riot_id", using: :btree
 
   create_table "matches", force: :cascade do |t|
     t.integer "game_id"
