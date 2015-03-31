@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331035425) do
+ActiveRecord::Schema.define(version: 20150331040811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "champion_matches", force: :cascade do |t|
+    t.integer "champion_id"
+    t.integer "match_id"
+    t.boolean "victory"
+  end
+
+  add_index "champion_matches", ["champion_id", "victory"], name: "index_champion_matches_on_champion_id_and_victory", using: :btree
+  add_index "champion_matches", ["match_id", "victory"], name: "index_champion_matches_on_match_id_and_victory", using: :btree
 
   create_table "champions", force: :cascade do |t|
     t.integer "riot_id"
@@ -27,10 +36,12 @@ ActiveRecord::Schema.define(version: 20150331035425) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "game_id"
-    t.json    "raw_api_data"
     t.json    "champion_data"
+    t.json    "raw_api_data"
   end
 
   add_index "matches", ["game_id"], name: "index_matches_on_game_id", using: :btree
 
+  add_foreign_key "champion_matches", "champions", name: "fk_rails_champion_matches_champions"
+  add_foreign_key "champion_matches", "matches", name: "fk_rails_champion_matches_matches"
 end
