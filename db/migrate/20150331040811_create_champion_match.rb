@@ -3,7 +3,8 @@ class CreateChampionMatch < ActiveRecord::Migration
     create_table :champion_matches do |t|
       t.references :champion
       t.references :match
-      t.boolean :victory
+      t.boolean    :victory
+      t.integer    :team_id
 
       t.timestamps
     end

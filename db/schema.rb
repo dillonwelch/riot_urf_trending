@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150331040811) do
     t.integer  "champion_id"
     t.integer  "match_id"
     t.boolean  "victory"
+    t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
