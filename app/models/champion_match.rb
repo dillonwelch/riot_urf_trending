@@ -6,4 +6,8 @@ class ChampionMatch < ActiveRecord::Base
   validates :match, presence: true
 
   validates :victory, presence: true
+
+  def self.find_by_game_id(game_id)
+    joins(:match).where(matches: { game_id: game_id } )
+  end
 end
