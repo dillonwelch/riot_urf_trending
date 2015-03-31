@@ -5,6 +5,8 @@ class CreateChampion < ActiveRecord::Migration
       t.index   :riot_id, unique: true
       t.string  :name
       t.index   :name, unique: true
+      t.string  :primary_role, index: true
+      t.string  :secondary_role, index: true
       t.json    :raw_api_data
 
       t.timestamps
