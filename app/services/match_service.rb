@@ -9,7 +9,14 @@ class MatchService < RiotApiService
   def match
     return @match unless @match.nil?
     @match = client.match.get(match_id)
-    Match.create!(game_id: match_id, champion_data: champion_data, raw_api_data: @match)
+    match = Match.create!(game_id: match_id,
+                          champion_data: champion_data,
+                          raw_api_data: @match)
+    # champion_data.each do |data|
+    #   ChampionMatch.create!(champion_id: data.first,
+    #                         match_id: match.id,
+    #                         victory: data.second)
+    # end
   end
 
   def teams
@@ -17,7 +24,7 @@ class MatchService < RiotApiService
   end
 
   def team(team_id)
-    @team ||= teams.find{ |hash| hash['teamId'] == team_id }
+    teams.find{ |hash| hash.fetch('teamId') == team_id }
   end
 
   def team_won?(team_id)
