@@ -7,7 +7,9 @@ class MatchService < RiotApiService
   end
 
   def match
-    @match ||= client.match.get(match_id)
+    return @match unless @match.nil?
+    @match = client.match.get(match_id)
+    Match.create!(game_id: match_id, champion_data: champion_data, raw_api_data: @match)
   end
 
   def teams
