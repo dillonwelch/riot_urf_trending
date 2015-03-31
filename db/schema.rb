@@ -11,33 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331040811) do
+ActiveRecord::Schema.define(version: 20150331070655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "champion_matches", force: :cascade do |t|
-    t.integer "champion_id"
-    t.integer "match_id"
-    t.boolean "victory"
+    t.integer  "champion_id"
+    t.integer  "match_id"
+    t.boolean  "victory"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "champion_matches", ["champion_id", "victory"], name: "index_champion_matches_on_champion_id_and_victory", using: :btree
   add_index "champion_matches", ["match_id", "victory"], name: "index_champion_matches_on_match_id_and_victory", using: :btree
 
   create_table "champions", force: :cascade do |t|
-    t.integer "riot_id"
-    t.string  "name"
-    t.json    "raw_api_data"
+    t.integer  "riot_id"
+    t.string   "name"
+    t.json     "raw_api_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "champions", ["name"], name: "index_champions_on_name", using: :btree
   add_index "champions", ["riot_id"], name: "index_champions_on_riot_id", using: :btree
 
   create_table "matches", force: :cascade do |t|
-    t.integer "game_id"
-    t.json    "champion_data"
-    t.json    "raw_api_data"
+    t.integer  "game_id"
+    t.json     "champion_data"
+    t.json     "raw_api_data"
+    t.integer  "start_time",    limit: 8
+    t.integer  "duration",      limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "matches", ["game_id"], name: "index_matches_on_game_id", using: :btree
