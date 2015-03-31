@@ -6,11 +6,12 @@ class StaticChampionService < RiotApiService
   def populate_database
     Champion.transaction do
       champions.each do | champion |
-        Champion.create!(riot_id: champion.id,
-                         name: champion.name,
-                         raw_api_data: champion.to_json,
-                         primary_role: champion.tags.first,
-                         secondary_role: champion.tags.second)
+        Champion.find_or_create_by(riot_id: champion.id) do | c |
+          c.name = champion.name
+          c.primary_role = champion.tags.first
+          c.secondary_role = champion.tags.second
+          c.raw_api_data = champion.to_json
+        end
       end
     end
   end

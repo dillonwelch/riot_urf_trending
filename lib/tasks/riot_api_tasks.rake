@@ -1,7 +1,5 @@
 task populate_static_champion_data: [:environment] do
   service = StaticChampionService.new
-  puts I18n.t('tasks.populate_static_champion_data.delete')
-  Champion.delete_all
   puts I18n.t('tasks.populate_static_champion_data.fetch')
   start_time = Time.zone.now
   service.populate_database

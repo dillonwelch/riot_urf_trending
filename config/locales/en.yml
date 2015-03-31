@@ -1,7 +1,6 @@
 en:
   tasks:
     populate_static_champion_data:
-      delete: Deleting old champion data.
       fetch: Fetching current champion data.
       finish: Service took %{time} seconds.
     populate_match_data:
