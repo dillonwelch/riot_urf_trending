@@ -7,6 +7,9 @@ class ChampionMatch < ActiveRecord::Base
 
   validates :victory, inclusion: [true, false]
 
+  delegate :game_id, to: :match
+  delegate :riot_id, to: :champion
+
   def self.find_by_game_id(game_id)
     joins(:match).where(matches: { game_id: game_id })
   end
