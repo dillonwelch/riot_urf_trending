@@ -7,3 +7,4 @@ en:
     populate_match_data:
       saving: Saving the match data for %{match}.
       saved: Match data saved.
+      not_found: Match %{match} not found.

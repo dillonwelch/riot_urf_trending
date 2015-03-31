@@ -31,13 +31,17 @@ ActiveRecord::Schema.define(version: 20150331040811) do
   create_table "champions", force: :cascade do |t|
     t.integer  "riot_id"
     t.string   "name"
+    t.string   "primary_role"
+    t.string   "secondary_role"
     t.json     "raw_api_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "champions", ["name"], name: "index_champions_on_name", unique: true, using: :btree
+  add_index "champions", ["primary_role"], name: "index_champions_on_primary_role", using: :btree
   add_index "champions", ["riot_id"], name: "index_champions_on_riot_id", unique: true, using: :btree
+  add_index "champions", ["secondary_role"], name: "index_champions_on_secondary_role", using: :btree
 
   create_table "matches", force: :cascade do |t|
     t.integer  "game_id"
