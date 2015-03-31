@@ -11,7 +11,9 @@ class MatchService < RiotApiService
     @match = client.match.get(match_id)
     match = Match.create!(game_id: match_id,
                           champion_data: champion_data,
-                          raw_api_data: @match)
+                          raw_api_data: @match,
+                          start_time: @match.fetch('matchCreation'),
+                          duration: @match.fetch('matchDuration'))
     champion_data.each do |data|
       ChampionMatch.create!(champion_id: Champion.find_by_riot_id(data.first).id,
                             match_id: match.id,
