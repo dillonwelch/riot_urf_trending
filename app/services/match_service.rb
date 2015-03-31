@@ -29,10 +29,11 @@ class MatchService < RiotApiService
 
   def champion_data
     participants.map do | participant |
-      [
-        participant.fetch('championId'),
-        team_won?(participant.fetch('teamId'))
-      ]
+      {
+        champion_id: participant.fetch('championId'),
+        team_id: participant.fetch('teamId'),
+        victory: team_won?(participant.fetch('teamId'))
+      }
     end
   end
 
@@ -44,10 +45,11 @@ class MatchService < RiotApiService
                                 start_time: match.fetch('matchCreation'),
                                 duration: match.fetch('matchDuration'))
     champion_data.each do | data |
-      champion_id = Champion.find_by_riot_id(data.first).id
+      champion_id = Champion.find_by_riot_id(data[:champion_id]).id
       ChampionMatch.create!(champion_id: champion_id,
                             match_id: match_model.id,
-                            victory: data.second)
+                            team_id: data[:team_id],
+                            victory: data[:victory])
     end
   end
 end
