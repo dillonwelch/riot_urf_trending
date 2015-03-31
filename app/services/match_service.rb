@@ -12,11 +12,11 @@ class MatchService < RiotApiService
     match = Match.create!(game_id: match_id,
                           champion_data: champion_data,
                           raw_api_data: @match)
-    # champion_data.each do |data|
-    #   ChampionMatch.create!(champion_id: data.first,
-    #                         match_id: match.id,
-    #                         victory: data.second)
-    # end
+    champion_data.each do |data|
+      ChampionMatch.create!(champion_id: Champion.find_by_riot_id(data.first).id,
+                            match_id: match.id,
+                            victory: data.second)
+    end
   end
 
   def teams
