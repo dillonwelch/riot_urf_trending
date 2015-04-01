@@ -4,6 +4,7 @@ ruby File.read("#{Dir.pwd}/.ruby-version").chomp
 
 gem 'rails', '4.2.0'
 
+gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'dotenv-rails', require: 'dotenv-rails'
 gem 'haml-rails'
