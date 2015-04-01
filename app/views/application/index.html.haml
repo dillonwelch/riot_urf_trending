@@ -1,54 +1,72 @@
-%table
-  Top fifty highest wins
-  %tr
-    %td
-      Champion
-    %td
-      Victories
-    %td
-      Losses
-    %td
-      Win Rate
-  - ChampionMatch.n_best(50).each do |champion|
+.content
+  %main
+  %table
+    Top fifty highest wins
     %tr
       %td
-        = champion.name
+        Champion
       %td
-        = champion.victories
+        Victories
       %td
-        = champion.losses
+        Losses
       %td
-        = champion.win_rate
-%table
-  Top five most played
-  %tr
-    %td
-      Champion
-    %td
-      Victories
-    %td
-      Losses
-  - ChampionMatch.n_most_played.each do |champion|
+        Win Rate
+    - ChampionMatch.n_best(50).each do |champion|
+      %tr
+        %td
+          = champion.name
+        %td
+          = champion.victories
+        %td
+          = champion.losses
+        %td
+          = champion.win_rate
+  %table
+    Top five most played
     %tr
       %td
-        = champion.name
+        Champion
       %td
-        = champion.victories
+        Victories
       %td
-        = champion.losses
-%table
-  %tr
-    %td
-      Champion
-    %td
-      Victories
-    %td
-      Losses
-  - @merged.each do |champion|
+        Losses
+    - ChampionMatch.n_most_played.each do |champion|
+      %tr
+        %td
+          = champion.name
+        %td
+          = champion.victories
+        %td
+          = champion.losses
+  %table
     %tr
       %td
-        = champion.name
+        Champion
       %td
-        = champion.victories
+        Victories
       %td
-        = champion.losses
+        Losses
+    - @merged.each do |champion|
+      %tr
+        %td
+          = champion.name
+        %td
+          = champion.victories
+        %td
+          = champion.losses
+      %table
+        %tr
+          %td
+            Champion
+          %td
+            Victories
+          %td
+            Losses
+        - @merged.each do |champion|
+          %tr
+            %td
+              = champion.name
+            %td
+              = champion.victories
+            %td
+              = champion.losses

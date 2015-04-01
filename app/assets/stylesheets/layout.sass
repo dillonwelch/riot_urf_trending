@@ -1,0 +1,27 @@
+$prime: #f53f3f
+$secondary: #FF7373
+
+.block
+  margin: 10px
+  padding: 10px
+
+.content
+  width: 95%
+  margin: auto
+  color: white
+  main
+    @extend .block
+    width: 65%
+    float: left
+    background-color: $prime
+  aside
+    @extend .block
+    width: 30%
+    float: right
+    background-color: $secondary
+  table
+    tr:nth-child(even)
+      background-color: $secondary
+    td
+      padding: 5px
+
