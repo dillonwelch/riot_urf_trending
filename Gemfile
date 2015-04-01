@@ -22,7 +22,7 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'byebug'
+  gem 'byebug', github: 'deivid-rodriguez/byebug', branch: 'master'
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end

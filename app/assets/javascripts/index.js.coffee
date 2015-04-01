@@ -9,8 +9,9 @@ $(document).ready ->
     url: 'best_win_rate_with_history'
     type: 'GET'
     success: (result) ->
+      hours = result.Amumu
       data = {
-          labels: ["30 Minutes", "25 Minutes", "20 Minutes", "15 Minutes", "10 Minutes", "5 Minutes"],
+          labels: ["6 hours", "5 hours", "4 hours", "3 hours", "2 hours", "1 hour"],
           datasets: [
               # {
               #     label: "Pick Rate",
@@ -30,7 +31,7 @@ $(document).ready ->
                   pointStrokeColor: "#fff",
                   pointHighlightFill: "#fff",
                   pointHighlightStroke: "rgba(151,187,205,1)",
-                  data: [result[0].win_rate, 0, 1, 0, 0, 0]
+                  data: [hours[6], hours[5], hours[4], hours[3], hours[2], hours[1]]
               }
           ]
       }
