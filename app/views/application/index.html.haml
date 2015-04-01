@@ -13,7 +13,7 @@
           Losses
         %td
           Win Rate
-      - ChampionMatch.n_best(50).each do |champion|
+      - ChampionMatch.n_best(5, Time.zone.now - 1.hour).each do |champion|
         %tr
           %td
             = champion.name
@@ -49,7 +49,7 @@
           Victories
         %td
           Losses
-      - @merged.each do |champion|
+      - ChampionMatch.all_wins_and_losses.each do |champion|
         %tr
           %td
             = champion.name
