@@ -1,0 +1,20 @@
+body
+  background-color: blue
+
+.block
+  margin: 10px
+  padding: 10px
+
+.content
+  width: 90%
+  margin: auto
+  main
+    @extend .block
+    width: 60%
+    background-color: white
+    float: left
+  aside
+    @extend .block
+    width: 30%
+    background-color: white
+    float: right
