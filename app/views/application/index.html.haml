@@ -1,16 +1,20 @@
-%table
-  %tr
-    %td
-      Champion
-    %td
-      Victories
-    %td
-      Losses
-  - @merged.each do |champion|
-    %tr
-      %td
-        = champion.name
-      %td
-        = champion.victories
-      %td
-        = champion.losses
+.content
+  %main
+    %table
+      %tr
+        %td
+          Champion
+        %td
+          Victories
+        %td
+          Losses
+      - @merged.each do |champion|
+        %tr
+          %td
+            = champion.name
+          %td
+            = champion.victories
+          %td
+            = champion.losses
+  %aside
+    bearsbears
