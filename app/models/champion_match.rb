@@ -88,14 +88,14 @@ class ChampionMatch < ActiveRecord::Base
   end
 
   def self.n_best(n = 5, start_time = Time.zone.now - 6.days, end_time = start_time + 1.hour)
-    select('coalesce(victories, 0) as victories, coalesce(losses, 0) as losses, name, coalesce((victories::float / count(name)), 0) as win_rate').
+    select('coalesce(victories, 0) as victories, coalesce(losses, 0) as losses, name, champions.id, coalesce((victories::float / count(name)), 0) as win_rate').
       joins(:match).where(
         '( ( start_time + duration * 1000) >= :start_time )
          and ( ( start_time + duration * 1000) < :end_time )',
          start_time: start_time.to_i * 1000,
          end_time: end_time.to_i * 1000).
       wins_and_losses(start_time, end_time).
-      group('name, victories, losses').
+      group('name, victories, losses, champions.id').
       order('win_rate desc, victories desc').
       limit(n)
   end
