@@ -1,72 +1,59 @@
 .content
   %main
-  %table
-    Top fifty highest wins
-    %tr
-      %td
-        Champion
-      %td
-        Victories
-      %td
-        Losses
-      %td
-        Win Rate
-    - ChampionMatch.n_best(50).each do |champion|
+    %table
+      Top fifty highest wins
       %tr
         %td
-          = champion.name
+          Champion
         %td
-          = champion.victories
+          Victories
         %td
-          = champion.losses
+          Losses
         %td
-          = champion.win_rate
-  %table
-    Top five most played
-    %tr
-      %td
-        Champion
-      %td
-        Victories
-      %td
-        Losses
-    - ChampionMatch.n_most_played.each do |champion|
-      %tr
-        %td
-          = champion.name
-        %td
-          = champion.victories
-        %td
-          = champion.losses
-  %table
-    %tr
-      %td
-        Champion
-      %td
-        Victories
-      %td
-        Losses
-    - @merged.each do |champion|
-      %tr
-        %td
-          = champion.name
-        %td
-          = champion.victories
-        %td
-          = champion.losses
-      %table
+          Win Rate
+      - ChampionMatch.n_best(50).each do |champion|
         %tr
           %td
-            Champion
+            = champion.name
           %td
-            Victories
+            = champion.victories
           %td
-            Losses
-        - @merged.each do |champion|
-          %tr
-            %td
-              = champion.name
-            %td
-              = champion.victories
-            %td
-              = champion.losses
+            = champion.losses
+          %td
+            = champion.win_rate
+    %table
+      Top five most played
+      %tr
+        %td
+          Champion
+        %td
+          Victories
+        %td
+          Losses
+      - ChampionMatch.n_most_played.each do |champion|
+        %tr
+          %td
+            = champion.name
+          %td
+            = champion.victories
+          %td
+            = champion.losses
+    %table
+      All champions
+      %tr
+        %td
+          Champion
+        %td
+          Victories
+        %td
+          Losses
+      - @merged.each do |champion|
+        %tr
+          %td
+            = champion.name
+          %td
+            = champion.victories
+          %td
+            = champion.losses
+  %aside
+    bearsbearsbears

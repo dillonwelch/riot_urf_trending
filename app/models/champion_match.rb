@@ -58,7 +58,7 @@ class ChampionMatch < ActiveRecord::Base
     )
   end
 
-  def self.wins_and_losses(start_time = Time.zone.now - 3.days, end_time = Time.zone.now)
+  def self.wins_and_losses(start_time = Time.zone.now - 6.days, end_time = Time.zone.now)
     all_wins(start_time, end_time).all_losses(start_time, end_time).joins('right outer join champions on champion_matches.champion_id = champions.id')
   end
 
