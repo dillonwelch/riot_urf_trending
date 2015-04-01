@@ -1,26 +1,12 @@
 <table>
-Victories
-<% @victories.each do |champion| %>
+Merged
+<% @merged.each do |champion| %>
   <tr>
     <td>
       <%= champion.name %>
     </td>
     <td>
       <%= champion.victories %>
-    </td>
-  </tr>
-<% end %>
-</table>
-
-<br>
-<br>
-
-<table>
-Losses
-<% @losses.each do |champion| %>
-  <tr>
-    <td>
-      <%= champion.name %>
     </td>
     <td>
       <%= champion.losses %>
