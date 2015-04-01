@@ -1,5 +1,5 @@
 class ChampionHistoryQuery
-  def initialize(champion_id:, hours: 12) #, start_time: hours.hours.ago)
+  def initialize(champion_id:, hours: 6) #, start_time: hours.hours.ago)
     @champion_id = champion_id
     @hours = hours
     # @start_time = start_time
@@ -30,7 +30,7 @@ class ChampionHistoryQuery
           coalesce(victories, 0) as victories,
           coalesce(losses, 0) as losses,
           champion_matches.champion_id,
-          coalesce((victories::float / count(name)), 0) as win_rate,
+          coalesce((victories::float / (victories + losses)), 0) as win_rate,
           :hour as time
           FROM "champion_matches"
           -- INNER JOIN "matches" ON "matches"."id" = "champion_matches"."match_id"

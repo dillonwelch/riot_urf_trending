@@ -9,6 +9,7 @@ $(document).ready ->
     url: 'best_win_rate_with_history'
     type: 'GET'
     success: (result) ->
+      debugger
       hours = result.Amumu
       data = {
           labels: ["6 hours", "5 hours", "4 hours", "3 hours", "2 hours", "1 hour"],
