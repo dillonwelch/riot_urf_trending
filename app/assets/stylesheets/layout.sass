@@ -1,20 +1,27 @@
-body
-  background-color: blue
+$prime: #f53f3f
+$secondary: #FF7373
 
 .block
   margin: 10px
   padding: 10px
 
 .content
-  width: 90%
+  width: 95%
   margin: auto
+  color: white
   main
     @extend .block
-    width: 60%
-    background-color: white
+    width: 65%
     float: left
+    background-color: $prime
   aside
     @extend .block
     width: 30%
-    background-color: white
     float: right
+    background-color: $secondary
+  table
+    tr:nth-child(even)
+      background-color: $secondary
+    td
+      padding: 5px
+
