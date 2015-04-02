@@ -37,19 +37,24 @@ task get_urf_matches: [:environment] do
   regions.each do |region|
     puts I18n.t('tasks.get_urf_matches.fetch_list', region: region)
     time = (Time.at ((Time.zone.now - 5.minutes).to_f / 5.minutes).floor * 5.minutes).to_i
-    service = ApiChallengeService.new(
-      beginDate: time,
-      region: region
-    )
-    puts I18n.t('tasks.get_urf_matches.fetch_matches', count: service.matches.count)
-    service.matches.each do |match|
-      begin
-        Rake::Task['populate_match_data'].reenable
-        Rake::Task['populate_match_data'].invoke(match, region)
-      rescue Lol::NotFound => e
-        puts 'Error'
-        puts e
+    begin
+      service = ApiChallengeService.new(
+        beginDate: time,
+        region: region
+      )
+      puts I18n.t('tasks.get_urf_matches.fetch_matches', count: service.matches.count)
+      service.matches.each do |match|
+        begin
+          Rake::Task['populate_match_data'].reenable
+          Rake::Task['populate_match_data'].invoke(match, region)
+        rescue Lol::NotFound => e
+          puts 'Error in match'
+          puts e
+        end
       end
+    rescue Lol::NotFound => e
+      puts 'Error in urf api'
+      puts e
     end
   end
 end
