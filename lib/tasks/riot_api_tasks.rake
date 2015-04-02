@@ -36,7 +36,7 @@ task get_urf_matches: [:environment] do
   regions = %w(br eune euw kr lan las na oce ru tr)
   regions.each do |region|
     puts I18n.t('tasks.get_urf_matches.fetch_list', region: region)
-    time = (Time.at ((Time.zone.now - 5.minutes).to_f / 5.minutes).floor * 5.minutes).to_i,
+    time = (Time.at ((Time.zone.now - 5.minutes).to_f / 5.minutes).floor * 5.minutes).to_i
     service = ApiChallengeService.new(
       beginDate: time,
       region: region
