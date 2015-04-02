@@ -11,4 +11,6 @@ en:
       fetch_list: Fetching match data for region %{region}.
       fetch_matches: Fetching %{count} matches.
   services:
-    rate_limit: Rate limit hit, waiting %{seconds} seconds.
+    rate_limit:
+      one: Rate limit hit, waiting %{count} second.
+      other: Rate limit hit, waiting %{count} seconds.

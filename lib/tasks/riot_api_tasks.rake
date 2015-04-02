@@ -38,7 +38,7 @@ task get_urf_matches: [:environment] do
   regions.each do |region|
     puts I18n.t('tasks.get_urf_matches.fetch_list', region: region)
     service = ApiChallengeService.new(
-      beginDate: Time.parse('01 Apr 2015 21:10').to_i,
+      beginDate: Time.parse('01 Apr 2015 20:10').to_i,
       region: region
     )
     puts I18n.t('tasks.get_urf_matches.fetch_matches', count: service.matches.count)

@@ -11,8 +11,9 @@ class MatchService < RiotApiService
     begin
       @match = client.match.get(match_id)
     rescue Lol::InvalidAPIResponse => e
-      puts I18n.t('services.rate_limit', seconds: 10)
-      sleep(10)
+      sleep_time = 1
+      puts I18n.t('services.rate_limit', count: sleep_time)
+      sleep(sleep_time)
       match
     end
   end
