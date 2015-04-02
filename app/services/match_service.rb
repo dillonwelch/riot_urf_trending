@@ -10,8 +10,7 @@ class MatchService < RiotApiService
     return @match unless @match.nil?
     begin
       @match = client.match.get(match_id)
-    rescue Exception => e
-      puts e
+    rescue Lol::InvalidApiResponse => e
       puts 'trying again'
       sleep(10)
       match

@@ -28,3 +28,11 @@ task :riot_seed_data do
     Rake::Task['populate_match_data'].invoke(match)
   end
 end
+
+task get_urf_matches: [:environment] do
+  service = ApiChallengeService.new beginDate: Time.parse('01 Apr 2015 20:05').to_i
+  service.matches.each do |match|
+    Rake::Task['populate_match_data'].reenable
+    Rake::Task['populate_match_data'].invoke(match)
+  end
+end
