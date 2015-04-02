@@ -6,6 +6,7 @@ gem 'rails', '4.2.0'
 
 gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'chart-js-rails'
 gem 'dotenv-rails', require: 'dotenv-rails'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
@@ -21,7 +22,7 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'byebug'
+  gem 'byebug', github: 'deivid-rodriguez/byebug', branch: 'master'
   gem 'spring'
   gem 'web-console', '~> 2.0'
 end

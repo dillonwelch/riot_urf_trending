@@ -1,59 +1,7 @@
 .content
   %main
-    %table
-      Top fifty highest wins
-      %tr
-        %td
-          Champion
-        %td
-          Victories
-        %td
-          Losses
-        %td
-          Win Rate
-      - ChampionMatch.n_best(50).each do |champion|
-        %tr
-          %td
-            = champion.name
-          %td
-            = champion.victories
-          %td
-            = champion.losses
-          %td
-            = champion.win_rate
-    %table
-      Top five most played
-      %tr
-        %td
-          Champion
-        %td
-          Victories
-        %td
-          Losses
-      - ChampionMatch.n_most_played.each do |champion|
-        %tr
-          %td
-            = champion.name
-          %td
-            = champion.victories
-          %td
-            = champion.losses
-    %table
-      All champions
-      %tr
-        %td
-          Champion
-        %td
-          Victories
-        %td
-          Losses
-      - @merged.each do |champion|
-        %tr
-          %td
-            = champion.name
-          %td
-            = champion.victories
-          %td
-            = champion.losses
+    .charts
+      - (1..5).each do |num|
+        %canvas{ id: "chart#{num}" }
   %aside
     bearsbearsbears
