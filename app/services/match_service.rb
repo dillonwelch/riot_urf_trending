@@ -8,7 +8,14 @@ class MatchService < RiotApiService
 
   def match
     return @match unless @match.nil?
-    @match = client.match.get(match_id)
+    begin
+      @match = client.match.get(match_id)
+    rescue Exception => e
+      puts e
+      puts 'trying again'
+      sleep(10)
+      match
+    end
   end
 
   def teams
