@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331040811) do
+ActiveRecord::Schema.define(version: 20150402042100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150331040811) do
     t.datetime "updated_at"
   end
 
-  add_index "matches", ["game_id"], name: "index_matches_on_game_id", unique: true, using: :btree
+  add_index "matches", ["game_id", "region"], name: "index_matches_on_game_id_and_region", unique: true, using: :btree
   add_index "matches", ["region"], name: "index_matches_on_region", using: :btree
 
   add_foreign_key "champion_matches", "champions", name: "fk_rails_champion_matches_champions", on_delete: :cascade
