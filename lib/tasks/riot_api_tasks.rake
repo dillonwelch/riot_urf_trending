@@ -10,7 +10,7 @@ end
 
 task :populate_match_data, [:match_id, :region] => [:environment] do | _t, args |
   service = MatchService.new(args.match_id, args.region)
-  if Match.find_by(game_id: args.match_id).nil?
+  if Match.find_by(game_id: args.match_id, region: args.region).nil?
     begin
       puts I18n.t('tasks.populate_match_data.saving', match: args.match_id)
       service.populate_database
