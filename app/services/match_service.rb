@@ -52,7 +52,7 @@ class MatchService < RiotApiService
                                 start_time: match.fetch('matchCreation'),
                                 duration: match.fetch('matchDuration'))
     champion_data.each do | data |
-      champion_id = Champion.find_by_riot_id(data[:champion_id]).id
+      champion_id = Champion.where(riot_id: data[:champion_id]).pluck(:id)
       ChampionMatch.create!(champion_id: champion_id,
                             match_id: match_model.id,
                             team_id: data[:team_id],
