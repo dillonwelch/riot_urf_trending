@@ -33,19 +33,23 @@ task :riot_seed_data do
 end
 
 task get_urf_matches: [:environment] do
-  start_time = Time.zone.now
   regions = %w(br eune euw kr lan las na oce ru tr)
   regions.each do |region|
     puts I18n.t('tasks.get_urf_matches.fetch_list', region: region)
+    time = (Time.at ((Time.zone.now - 5.minutes).to_f / 5.minutes).floor * 5.minutes).to_i,
     service = ApiChallengeService.new(
-      beginDate: Time.parse('01 Apr 2015 20:10').to_i,
+      beginDate: time,
       region: region
     )
     puts I18n.t('tasks.get_urf_matches.fetch_matches', count: service.matches.count)
     service.matches.each do |match|
-      Rake::Task['populate_match_data'].reenable
-      Rake::Task['populate_match_data'].invoke(match, region)
+      begin
+        Rake::Task['populate_match_data'].reenable
+        Rake::Task['populate_match_data'].invoke(match, region)
+      rescue Lol::NotFound => e
+        puts 'Error'
+        puts e
+      end
     end
   end
-  puts Time.zone.now - start_time
 end
