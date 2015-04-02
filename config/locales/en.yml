@@ -7,3 +7,10 @@ en:
       saving: Saving the match data for %{match}.
       saved: Match data saved.
       not_found: Match %{match} not found.
+    get_urf_matches:
+      fetch_list: Fetching match data for region %{region}.
+      fetch_matches: Fetching %{count} matches.
+  services:
+    rate_limit:
+      one: Rate limit hit, waiting %{count} second.
+      other: Rate limit hit, waiting %{count} seconds.

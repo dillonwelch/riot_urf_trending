@@ -8,7 +8,14 @@ class MatchService < RiotApiService
 
   def match
     return @match unless @match.nil?
-    @match = client.match.get(match_id)
+    begin
+      @match = client.match.get(match_id)
+    rescue Lol::InvalidAPIResponse => e
+      sleep_time = 1
+      puts I18n.t('services.rate_limit', count: sleep_time)
+      sleep(sleep_time)
+      match
+    end
   end
 
   def teams
