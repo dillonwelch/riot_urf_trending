@@ -5,7 +5,8 @@ $(document).ready ->
     success: (result) ->
       position = 1
       $.each result, (name, hours) ->
-        $("#title#{position}").text(name)
+        $("#title#{position}").text("##{position}: #{name}")
+        $("#image#{position}").attr('src', "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{name}.png")
         ctx = $("#chart#{position}").get(0).getContext('2d')
         options = {
           multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>%"
