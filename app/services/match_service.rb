@@ -34,6 +34,17 @@ class MatchService < RiotApiService
     @participants ||= match['participants']
   end
 
+  def participant(teamId, championId)
+    participant = participants.find do |participant|
+      participant.fetch('teamId') == teamId &&
+        participant.fetch('championId') == championId
+    end
+  end
+
+  def participant_stat(teamId, championId, stat_name)
+    participant(teamId, championId).fetch('stats').fetch(stat_name)
+  end
+
   def champion_data
     participants.map do | participant |
       {
@@ -56,6 +67,9 @@ class MatchService < RiotApiService
       ChampionMatch.create!(champion_id: champion_id,
                             match_id: match_model.id,
                             team_id: data[:team_id],
+                            kills: participant_stat(data[:team_id], data[:champion_id], 'kills'),
+                            deaths: participant_stat(data[:team_id], data[:champion_id], 'deaths'),
+                            assists: participant_stat(data[:team_id], data[:champion_id], 'assists'),
                             victory: data[:victory])
     end
   end
