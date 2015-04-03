@@ -7,6 +7,10 @@ class ChampionMatch < ActiveRecord::Base
 
   validates :victory, inclusion: [true, false]
 
+  validates :kills, presence: true, numericality: { only_integer: true }
+  validates :deaths, presence: true, numericality: { only_integer: true }
+  validates :assists, presence: true, numericality: { only_integer: true }
+
   delegate :game_id, to: :match
   delegate :riot_id, to: :champion
 
