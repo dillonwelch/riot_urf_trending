@@ -13,6 +13,7 @@ $(document).ready ->
           scaleStartValue: 0
           scaleSteps: 10
           scaleStepWidth: 10
+          scaleFontColor: "#fff"
         }
         data = {
             labels: ["6 hours", "5 hours", "4 hours", "3 hours", "2 hours", "1 hour"],
