@@ -5,9 +5,14 @@ $(document).ready ->
     success: (result) ->
       position = 1
       $.each result, (name, hours) ->
+        $("#title#{position}").text(name)
         ctx = $("#chart#{position}").get(0).getContext('2d')
         options = {
           multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>%"
+          scaleOverride: true
+          scaleStartValue: 0
+          scaleSteps: 10
+          scaleStepWidth: 10
         }
         data = {
             labels: ["6 hours", "5 hours", "4 hours", "3 hours", "2 hours", "1 hour"],
