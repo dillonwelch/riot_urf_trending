@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   def index
   end
 
+  def home
+  end
+
   def best_win_rate_with_history
     hours = params[:hours].to_i
     # Time.zone.now = 2:08PM => 1:00PM
