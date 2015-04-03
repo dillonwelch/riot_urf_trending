@@ -1,16 +1,16 @@
 class ChampionHistoryQuery
-  def initialize(champion_id:, hours: 6) #, start_time: hours.hours.ago)
+  def initialize(champion_id:, start_time:, hours: 6)
     @champion_id = champion_id
     @hours = hours
-    # @start_time = start_time
+    @start_time = start_time
   end
 
   def run
     queries = []
-    (1..hours).each do |hour|
+    (0..hours - 1).each do |hour|
       query = one_hour_query(champion_id: champion_id,
-                             start_time: hour.hours.ago,
-                             end_time: (hour - 1).hours.ago,
+                             start_time: start_time - hour.hours,
+                             end_time: start_time - (hour + 1).hours,
                              hour: hour)
       queries << query
     end

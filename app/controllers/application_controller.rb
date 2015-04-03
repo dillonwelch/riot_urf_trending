@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     final_data = {}
     best.each do |champion|
       final_data[champion.name] = {}
-      result = ChampionHistoryQuery.new(champion_id: champion.id).run
+      result = ChampionHistoryQuery.new(champion_id: champion.id, start_time: time).run
       result.each do |hour|
         final_data[champion.name][hour['time']] = hour['win_rate']
       end
