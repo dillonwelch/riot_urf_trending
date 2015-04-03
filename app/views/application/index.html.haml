@@ -1,7 +1,8 @@
+.banner
+  %h1
+    Top 5 champions in the last hour for URF
 .content
   %main
-    %h1
-      Top 5 champions in the last hour for URF
     .charts
       - (1..5).each do |num|
         %h2{ id: "title#{num}" }

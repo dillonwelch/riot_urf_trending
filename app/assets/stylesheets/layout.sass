@@ -1,10 +1,17 @@
-$prime: #f53f3f
-$secondary: #FF7373
+$prime: #114455
+$secondary: #406976
 
 .block
   margin: 10px
-  padding: 10px
+  padding: 20px
 
+.banner
+  padding: 20px
+  width: 100%
+  height: 200px
+  background-image: url(image_path('riot_urf_background.jpg'))
+  background-size: cover
+  color: white
 .content
   width: 95%
   margin: auto
@@ -14,6 +21,9 @@ $secondary: #FF7373
     width: 65%
     float: left
     background-color: $prime
+    h1
+      padding: 10px
+      background-color: $secondary
   aside
     @extend .block
     width: 30%
@@ -26,5 +36,6 @@ $secondary: #FF7373
       padding: 5px
   .charts
     canvas
+      margin-bottom: 40px
       height: 300px
-      width: 500px
+      width: 100%
