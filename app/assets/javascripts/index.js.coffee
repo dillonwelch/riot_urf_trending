@@ -1,11 +1,11 @@
-$(document).ready ->
+$(window).load ->
   $.ajax(
     url: 'best_win_rate_with_history'
     type: 'GET'
     success: (result) ->
       position = 1
       $.each result, (name, hours) ->
-        ctx = $("#chart#{position}").get(0).getContext('2d')
+        ctx = $("#chart#{position}").get(0)
         options = {
           multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>%"
         }
