@@ -10,7 +10,7 @@ end
 
 task :populate_match_data, [:match_id, :region] => [:environment] do | _t, args |
   service = MatchService.new(args.match_id, args.region)
-  if Match.find_by(game_id: args.match_id, region: args.region).nil?
+  if Match.find_by(game_id: args.match_id, region: args.region.upcase).nil?
     begin
       puts I18n.t('tasks.populate_match_data.saving', match: args.match_id)
       service.populate_database
@@ -34,9 +34,9 @@ end
 
 task get_urf_matches: [:environment] do
   regions = %w(br eune euw kr lan las na oce ru tr)
+  time = (Time.at ((Time.zone.now - 10.minutes).to_f / 5.minutes).floor * 5.minutes).to_i
   regions.each do |region|
     puts I18n.t('tasks.get_urf_matches.fetch_list', region: region)
-    time = (Time.at ((Time.zone.now - 5.minutes).to_f / 5.minutes).floor * 5.minutes).to_i
     begin
       service = ApiChallengeService.new(
         beginDate: time,
