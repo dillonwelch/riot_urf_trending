@@ -43,3 +43,5 @@ build/
 *.swp
 *.orig
 .env
+bin/*
+public/assets/*
