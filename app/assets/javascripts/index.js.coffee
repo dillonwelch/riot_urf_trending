@@ -6,8 +6,27 @@ $(document).ready ->
       success: (result) ->
         position = 1
         $.each result, (name, hours) ->
+          display_name = name.replace("%20", '')
+          bad_images = ['Fiddlesticks', 'Bard', 'Wukong']
+          if display_name == "Kog'Maw"
+            display_name = "KogMaw"
+          else if display_name == "Kha'Zix"
+            display_name = "Khazix"
+          else if display_name == "Rek'Sai"
+            display_name = "RekSai"
+          else if display_name == "Dr.Mundo"
+            display_name = "DrMundo"
+          else if display_name == "Cho'Gath"
+            display_name = "Chogath"
+          else if display_name == "LeBlanc"
+            display_name = "Leblanc"
+          else if display_name == "Vel'Koz"
+            display_name = "Velkoz"
+          else if $.inArray(display_name, bad_images)
+            display_name = "Teemo"
+
           $("#title#{position}").text("##{position}: #{name}")
-          $("#image#{position}").attr('src', "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{name}.png")
+          $("#image#{position}").attr('src', "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{name.replace("%20", '').replace("'", '')}.png")
           ctx = $("#chart#{position}").get(0).getContext('2d')
           options = {
             multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>%"
