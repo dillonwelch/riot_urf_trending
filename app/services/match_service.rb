@@ -59,9 +59,9 @@ class MatchService < RiotApiService
     match_model = Match.create!(game_id: match_id,
                                 champion_data: champion_data,
                                 region: match.fetch('region'),
-                                raw_api_data: match,
                                 start_time: match.fetch('matchCreation'),
                                 duration: match.fetch('matchDuration'))
+    MatchApiData.create!(match: match_model, raw_api_data: match)
     champion_data.each do | data |
       champion_id = Champion.where(riot_id: data[:champion_id]).pluck(:id).first
       ChampionMatch.create!(champion_id: champion_id,
