@@ -2,6 +2,8 @@ FactoryGirl.define do
   factory :match do
     sequence(:game_id)
     sequence(:region) { |n| "Region #{n}" }
+    start_time        { (Time.zone.now - 5.minutes).to_i * 1000 }
+    duration          { 300.seconds }
 
      factory :match_with_raw_api_data do
        transient do
