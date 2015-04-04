@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def best_win_rate_with_history
     hours = params[:hours].to_i
     # Time.zone.now = 2:08PM => 1:00PM
-    time = Time.at ( ((Time.zone.now - 2.hours).to_f / 1.hour).floor * 1.hour)
+    time = Time.at ( ((Time.zone.now - 1.hour).to_f / 1.hour).floor * 1.hour)
 
     cache_key = "n_best_5_#{time}"
     best = Rails.cache.read(cache_key)
