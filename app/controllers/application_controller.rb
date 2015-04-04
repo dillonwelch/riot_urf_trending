@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     hours = params[:hours].to_i
     # Time.zone.now = 2:08PM => 1:00PM
     time = Time.at ( ((Time.zone.now - 1.hour).to_f / 1.hour).floor * 1.hour)
-    best = ChampionMatch.n_best(5, Time.zone.now - 1.hours)
+    best = ChampionMatch.n_best(5, time)
     final_data = {}
     best.each do |champion|
       final_data[champion.name] = {}
