@@ -3,4 +3,5 @@ class Champion < ActiveRecord::Base
   validates :name, presence: true
 
   has_many :champion_matches
+  has_one :champion_api_data
 end
