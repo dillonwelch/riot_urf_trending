@@ -14,12 +14,14 @@ class ApplicationController < ActionController::Base
     # Time.zone.now = 2:08PM => 1:00PM
     time = Time.at ( ((Time.zone.now - 1.hour).to_f / 1.hour).floor * 1.hour)
     best = ChampionMatch.n_best(5, time)
+    champions = Champion.where(id: best.map(&:champion_id)).pluck(:id, :name)
     final_data = {}
     best.each do |champion|
-      final_data[champion.name] = {}
-      result = ChampionHistoryQuery.new(champion_id: champion.id, start_time: time).run
+      name = champions.find{ |c| c.first == champion.champion_id }.second
+      final_data[name] = {}
+      result = ChampionHistoryQuery.new(champion_id: champion.champion_id, start_time: time).run
       result.each do |hour|
-        final_data[champion.name][hour['time']] = hour['win_rate']
+        final_data[name][hour['time']] = hour['win_rate']
       end
     end
     render json: final_data.to_json
