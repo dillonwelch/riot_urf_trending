@@ -7,11 +7,12 @@ class ChampionHistoryQuery
 
   def run
     queries = []
-    (1..hours).each do |hour|
+    (0..hours - 1).each do |hour|
+      my_time = start_time - hour.hours
       query = one_hour_query(champion_id: champion_id,
-                             start_time: start_time + (hour - 1).hour,
-                             end_time:   start_time + hour.hour,
-                             hour: hour)
+                             start_time: my_time,
+                             end_time:   my_time + 1.hour,
+                             hour: hour + 1)
       queries << query
     end
     ActiveRecord::Base.connection.execute(queries.join(' UNION ALL '))
@@ -30,7 +31,7 @@ class ChampionHistoryQuery
           coalesce(victories, 0) as victories,
           coalesce(losses, 0) as losses,
           champion_matches.champion_id,
-          coalesce((victories::float / (victories + losses) * 100), 0) as win_rate,
+          coalesce((victories::float / (victories + losses)) * 100, 0) as win_rate,
           :hour as time
           FROM "champion_matches"
           -- INNER JOIN "matches" ON "matches"."id" = "champion_matches"."match_id"
