@@ -1,5 +1,5 @@
 $(document).ready ->
-  if $(".charts")
+  if $(".charts").length
     $.ajax(
       url: 'best_win_rate_with_history'
       type: 'GET'

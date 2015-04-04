@@ -1,5 +1,5 @@
 $(document).ready ->
-  if $("#teemoKills")
+  if $("#teemoKills").length
     refresh =  () ->
       $.ajax(
         url: 'api/champions/Teemo/deaths'
