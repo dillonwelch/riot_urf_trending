@@ -26,7 +26,7 @@ $(document).ready ->
             display_name = "Teemo"
 
           $("#title#{position}").text("##{position}: #{name}")
-          $("#image#{position}").attr('src', "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{display_name}}.png")
+          $("#image#{position}").attr('src', "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{display_name}.png")
           ctx = $("#chart#{position}").get(0).getContext('2d')
           options = {
             multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>%"
