@@ -35,6 +35,7 @@ $(document).ready ->
             scaleSteps: 10
             scaleStepWidth: 10
             scaleFontColor: "#fff"
+            scaleGridLineColor : "#406976"
           }
           data = {
               labels: ["6 hours", "5 hours", "4 hours", "3 hours", "2 hours", "1 hour"],
