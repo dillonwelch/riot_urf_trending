@@ -9,7 +9,6 @@ class AddKdaDataToChampionMatch < ActiveRecord::Migration
     add_index :champion_matches, :assists
 
     Match.all.each do |match|
-      puts "Adding KDA data to champion_matches."
       raw = match.raw_api_data
       unless raw.nil?
         raw_data = raw.to_hash
