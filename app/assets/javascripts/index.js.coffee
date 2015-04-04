@@ -6,7 +6,7 @@ $(document).ready ->
       success: (result) ->
         position = 1
         $.each result, (name, hours) ->
-          display_name = name.replace("%20", '')
+          display_name = name.replace(" ", '')
           bad_images = ['Fiddlesticks', 'Bard', 'Wukong']
           if display_name == "Kog'Maw"
             display_name = "KogMaw"
