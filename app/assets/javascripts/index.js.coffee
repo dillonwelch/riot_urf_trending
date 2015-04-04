@@ -22,7 +22,7 @@ $(document).ready ->
             display_name = "Leblanc"
           else if display_name == "Vel'Koz"
             display_name = "Velkoz"
-          else if $.inArray(display_name, bad_images)
+          else if $.inArray(display_name, bad_images) != -1
             display_name = "Teemo"
 
           $("#title#{position}").text("##{position}: #{name}")
