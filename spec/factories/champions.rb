@@ -16,5 +16,15 @@ FactoryGirl.define do
                 raw_api_data: evaluator.raw_api_data)
        end
      end
+
+     factory :champion_with_champion_matches do
+       transient do
+         count 10
+       end
+
+       after(:create) do |champion, evaluator|
+         create_list(:champion_match, evaluator.count, champion: champion)
+       end
+     end
   end
 end
