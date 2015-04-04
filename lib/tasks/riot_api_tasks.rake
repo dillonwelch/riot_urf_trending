@@ -8,7 +8,7 @@ task populate_static_champion_data: [:environment] do
               time: end_time - start_time)
 end
 
-task :populate_match_data, [:match_id, :region] => [:environment] do | _t, args |
+task :populate_match_data, %i(match_id region) => [:environment] do |_t, args|
   service = MatchService.new(args.match_id, args.region)
   if Match.find_by(game_id: args.match_id, region: args.region.upcase).nil?
     begin
@@ -34,15 +34,17 @@ end
 
 task get_urf_matches: [:environment] do
   regions = %w(br eune euw kr lan las na oce ru tr)
-  time = (Time.at ((Time.zone.now - 10.minutes).to_f / 5.minutes).floor * 5.minutes).to_i
+  floor_time = ((Time.zone.now - 10.minutes).to_f / 5.minutes).floor * 5.minutes
+  time = (Time.at(floor_time)).to_i
   regions.each do |region|
     puts I18n.t('tasks.get_urf_matches.fetch_list', region: region)
     begin
       service = ApiChallengeService.new(
-        beginDate: time,
+        begin_date: time,
         region: region
       )
-      puts I18n.t('tasks.get_urf_matches.fetch_matches', count: service.matches.count)
+      puts I18n.t('tasks.get_urf_matches.fetch_matches',
+                  count: service.matches.count)
       service.matches.each do |match|
         begin
           Rake::Task['populate_match_data'].reenable

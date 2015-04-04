@@ -23,7 +23,7 @@ class MatchService < RiotApiService
   end
 
   def team(team_id)
-    teams.detect { | hash | hash.fetch('teamId') == team_id }
+    teams.detect { |hash| hash.fetch('teamId') == team_id }
   end
 
   def team_won?(team_id)
@@ -46,7 +46,7 @@ class MatchService < RiotApiService
   end
 
   def champion_data
-    participants.map do | participant |
+    participants.map do |participant|
       {
         champion_id: participant.fetch('championId'),
         team_id: participant.fetch('teamId'),
@@ -62,7 +62,7 @@ class MatchService < RiotApiService
                                 start_time: match.fetch('matchCreation'),
                                 duration: match.fetch('matchDuration'))
     MatchApiData.create!(match: match_model, raw_api_data: match)
-    champion_data.each do | data |
+    champion_data.each do |data|
       champion_id = Champion.where(riot_id: data[:champion_id]).pluck(:id).first
       ChampionMatch.create!(champion_id: champion_id,
                             match_id: match_model.id,
