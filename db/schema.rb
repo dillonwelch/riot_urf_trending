@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404103150) do
+ActiveRecord::Schema.define(version: 20150404105902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20150404103150) do
   add_index "champion_matches", ["deaths"], name: "index_champion_matches_on_deaths", using: :btree
   add_index "champion_matches", ["kills"], name: "index_champion_matches_on_kills", using: :btree
   add_index "champion_matches", ["match_id", "victory"], name: "index_champion_matches_on_match_id_and_victory", using: :btree
+  add_index "champion_matches", ["victory"], name: "index_champion_matches_on_victory_false", where: "(victory = false)", using: :btree
+  add_index "champion_matches", ["victory"], name: "index_champion_matches_on_victory_true", where: "(victory = true)", using: :btree
 
   create_table "champions", force: :cascade do |t|
     t.integer  "riot_id"
