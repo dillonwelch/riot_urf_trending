@@ -2,7 +2,7 @@ require './config/boot'
 require './config/environment'
 require 'clockwork'
 
-def execute_rake(task, file = 'riot_api_tasks.rake')
+def execute_rake(task, file='riot_api_tasks.rake')
   require 'rake'
   rake = Rake::Application.new
   Rake.application = rake

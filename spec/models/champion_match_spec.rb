@@ -183,9 +183,9 @@ RSpec.describe ChampionMatch do
       end
 
       it 'calculates the win rates correctly' do
-        expect(result.first.win_rate).to be_within(0.1).of 5/7.0
-        expect(result.second.win_rate).to be_within(0.1).of 3/7.0
-        expect(result.third.win_rate).to be_within(0.1).of 1/7.0
+        expect(result.first.win_rate).to be_within(0.1).of 5 / 7.0
+        expect(result.second.win_rate).to be_within(0.1).of 3 / 7.0
+        expect(result.third.win_rate).to be_within(0.1).of 1 / 7.0
       end
     end
   end
