@@ -1,5 +1,13 @@
 module Api
   class ChampionController < ApplicationController
+    def total_kills
+      render json: ChampionMatch.count(:kills)
+    end
+
+    def total_deaths
+      render json: ChampionMatch.count(:deaths)
+    end
+
     def kills
       render json: ChampionMatch.where(champion_id: champion.id).count(:kills)
     end
