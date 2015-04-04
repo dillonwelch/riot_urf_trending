@@ -51,12 +51,8 @@ class ChampionHistoryQuery
               and ( ( start_time + duration * 1000) >= :start_time )
               and ( ( start_time + duration * 1000) < :end_time )
               group by champion_id
-          ) as losses on losses.champion_id = champion_matches.champion_id
-          right outer join champions on champion_matches.champion_id = champions.id
-          -- WHERE (( ( start_time + duration * 1000) >= :start_time )
-          --       and ( ( start_time + duration * 1000) < :end_time ))
-          --       AND champion_matches.champion_id = :champion_id
-          where champions.id = :champion_id
+          ) as losses on losses.champion_id = victories.champion_id
+          where champion_matches.champion_id = :champion_id
           GROUP BY champion_matches.champion_id, victories, losses
         ),
         champion_id: champion_id,
