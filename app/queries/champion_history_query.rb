@@ -9,7 +9,7 @@ class ChampionHistoryQuery
     queries = []
     (1..hours).each do |hour|
       query = one_hour_query(champion_id: champion_id,
-                             start_time: start_time,
+                             start_time: start_time + (hour - 1).hour,
                              end_time:   start_time + hour.hour,
                              hour: hour)
       queries << query
