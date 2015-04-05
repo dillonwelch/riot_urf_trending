@@ -7,8 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :champions do
-      get '/total_kills',  action: :total_kills
-      get '/total_deaths', action: :total_deaths
+      get '/total_kills_and_deaths', action: :total_kills_and_deaths
 
       get '/:name/kills',  action: :kills
       get '/:name/deaths', action: :deaths

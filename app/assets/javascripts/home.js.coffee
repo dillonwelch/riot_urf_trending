@@ -29,25 +29,14 @@ $(document).ready ->
     refresh()
     setInterval(refresh, refreshRate)
 
-  if totalKills.length
+  if totalKills.length && totalDeaths.length
     refresh = () ->
       $.ajax(
-        url: 'api/champions/total_kills'
+        url: 'api/champions/total_kills_and_deaths'
         type: 'GET'
         success: (result) ->
-          totalKills.html(result)
-      )
-
-    refresh()
-    setInterval(refresh, refreshRate)
-
-  if totalDeaths.length
-    refresh = () ->
-      $.ajax(
-        url: 'api/champions/total_deaths'
-        type: 'GET'
-        success: (result) ->
-          totalDeaths.html(result)
+          totalKills.html(result.kills)
+          totalDeaths.html(result.deaths - result.kills)
       )
 
     refresh()

@@ -34,14 +34,14 @@ RSpec.describe ChampionMatch do
     let!(:cm2) { create(:champion_match) }
 
     it 'only returns the ChampionMatch with the champion riot_id' do
-      expect(ChampionMatch.find_by_game_id(cm1.champion.riot_id)).to eq [cm1]
+      expect(ChampionMatch.find_by_riot_id(cm1.champion.riot_id)).to eq [cm1]
     end
 
     describe 'riot_id that does not exist' do
       let(:riot_id) { cm1.champion.riot_id + cm2.champion.riot_id }
 
       it 'returns nil' do
-        expect(ChampionMatch.find_by_game_id(riot_id)).to eq []
+        expect(ChampionMatch.find_by_riot_id(riot_id)).to eq []
       end
     end
   end

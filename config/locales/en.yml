@@ -24,7 +24,7 @@ en:
       title: URF Sampling
       matches_sampled: Matches Sampled
       total_kills: Champions Slain
-      total_deaths: Total Deaths
+      total_deaths: Executions
       teemo_corpses: Teemo Corpses
   champions:
     by_win_rate:
