@@ -13,12 +13,10 @@ gem 'dotenv-rails', require: 'dotenv-rails'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
-gem 'jquery-turbolinks'
 gem 'memcachier'
 gem 'pg'
 gem 'ruby-lol', require: 'lol'
 gem 'sass-rails', '~> 5.0'
-gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
 group :doc do
