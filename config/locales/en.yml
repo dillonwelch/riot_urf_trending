@@ -16,6 +16,7 @@ en:
       other: Rate limit hit, waiting %{count} seconds.
   layouts:
     application:
+      title: RiotNurfTrending
       champion_win_rate: Top 5 by win rate
       home: Home
   application:
