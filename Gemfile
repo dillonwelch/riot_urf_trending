@@ -34,6 +34,7 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter', git:'git@github.com:circleci/rspec_junit_formatter.git'
   gem 'shoulda-matchers'
 end
 
