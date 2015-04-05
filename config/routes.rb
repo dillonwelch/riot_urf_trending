@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'application#home'
+  root 'application#index'
 
   namespace :champions do
     get '/by_win_rate', to: :by_win_rate

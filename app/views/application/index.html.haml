@@ -1,5 +1,5 @@
 .header
-  %h1 URF Sampling
+  %h1= t('.title')
 .stats-bg
   .statsbox
     %table.stats_table
@@ -8,19 +8,18 @@
           .well
             %span#totalMatches.odometer
             %small
-              %p Matches Sampled
+              %p= t('.matches_sampled')
         %td
           .well
             %span#totalKills.odometer
             %small
-              %p Total Kills
+              %p= t('.total_kills')
         %td
           .well
             %span#totalDeaths.odometer
             %small
-              %p Total Deaths
+              %p= t('.total_deaths')
 .teemo-bg
   .well
     %span#teemoKills.odometer
-    %small
-      Teemo corpses
+    %small= t('.teemo_corpses')

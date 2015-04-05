@@ -18,3 +18,10 @@ en:
     application:
       champion_win_rate: Top 5 by win rate
       home: Home
+  application:
+    index:
+      title: URF Sampling
+      matches_sampled: Matches Sampled
+      total_kills: Total Kills
+      total_deaths: Total Deaths
+      teemo_corpses: Teemo Corpses
