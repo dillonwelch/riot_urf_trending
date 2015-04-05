@@ -1,13 +1,25 @@
-.banner
-  %h1
-    Top 5 champions in the last hour for URF
-.content
-  %main
-    .charts
-      - (1..5).each do |num|
-        %h2
-          %span{ id: "title#{num}" }
-          %img{ id: "image#{num}", height: '40px' }
-        %canvas{ id: "chart#{num}" }
-  %aside
-    bearsbearsbears
+.header
+  %h1= t('.title')
+.stats-bg
+  .statsbox
+    %table.stats_table
+      %tr
+        %td
+          .well
+            %span#totalMatches.odometer
+            %small
+              %p= t('.matches_sampled')
+        %td
+          .well
+            %span#totalKills.odometer
+            %small
+              %p= t('.total_kills')
+        %td
+          .well
+            %span#totalDeaths.odometer
+            %small
+              %p= t('.total_deaths')
+.teemo-bg
+  .well
+    %span#teemoKills.odometer
+    %small= t('.teemo_corpses')

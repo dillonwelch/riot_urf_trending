@@ -1,0 +1,10 @@
+.banner
+  %h1= t('.title')
+.content
+  %main
+    .charts
+      - (1..5).each do |num|
+        %h2
+          %span{ id: "title#{num}" }
+          %img{ id: "image#{num}", height: '40px' }
+        %canvas{ id: "chart#{num}" }

@@ -14,3 +14,17 @@ en:
     rate_limit:
       one: Rate limit hit, waiting %{count} second.
       other: Rate limit hit, waiting %{count} seconds.
+  layouts:
+    application:
+      champion_win_rate: Top 5 by win rate
+      home: Home
+  application:
+    index:
+      title: URF Sampling
+      matches_sampled: Matches Sampled
+      total_kills: Champions Slain
+      total_deaths: Total Deaths
+      teemo_corpses: Teemo Corpses
+  champions:
+    by_win_rate:
+      title: Top 5 champions in the last hour for URF

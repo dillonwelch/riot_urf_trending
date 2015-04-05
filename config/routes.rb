@@ -1,17 +1,23 @@
 Rails.application.routes.draw do
   root 'application#index'
 
-  get '/home', to: 'application#home'
-
-  get '/best_win_rate_with_history', to: 'application#best_win_rate_with_history'
+  namespace :champions do
+    get '/by_win_rate', action: :by_win_rate
+  end
 
   namespace :api do
-    get '/champions/total_kills',  to: 'champion#total_kills'
-    get '/champions/total_deaths', to: 'champion#total_deaths'
+    namespace :champions do
+      get '/total_kills',  action: :total_kills
+      get '/total_deaths', action: :total_deaths
 
-    get '/champions/:name/kills',  to: 'champion#kills'
-    get '/champions/:name/deaths', to: 'champion#deaths'
+      get '/:name/kills',  action: :kills
+      get '/:name/deaths', action: :deaths
 
-    get '/matches/total', to: 'match#total'
+      get '/best_win_rate_with_history', action: :best_win_rate_with_history
+    end
+
+    namespace :matches do
+      get '/total', action: :total
+    end
   end
 end

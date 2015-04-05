@@ -1,5 +1,5 @@
 module Api
-  class MatchController < ApplicationController
+  class MatchesController < ApplicationController
     def total
       render json: Match.count
     end
