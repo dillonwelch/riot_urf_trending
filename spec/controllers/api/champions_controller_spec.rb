@@ -1,31 +1,22 @@
 RSpec.describe Api::ChampionsController do
-  describe 'GET :total_kills' do
-    let(:count) { 2 }
+  describe 'GET :total_kills_and_deaths' do
+    let(:count)  { 2 }
+    let(:result) { JSON.parse(response.body) }
 
     before do
       count.times do
-        create(:champion_match, kills: 3)
+        create(:champion_match, kills: 3, deaths: 4)
       end
+
+      get :total_kills_and_deaths
     end
 
     it 'returns the total amount of kills' do
-      get :total_kills
-      expect(response.body).to eq '6'
-    end
-  end
-
-  describe 'GET :total_deaths' do
-    let(:count) { 2 }
-
-    before do
-      count.times do
-        create(:champion_match, deaths: 3)
-      end
+      expect(result['kills']).to eq 6
     end
 
     it 'returns the total amount of deaths' do
-      get :total_deaths
-      expect(response.body).to eq '6'
+      expect(result['deaths']).to eq 8
     end
   end
 
