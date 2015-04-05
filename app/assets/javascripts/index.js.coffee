@@ -1,7 +1,7 @@
 $(document).ready ->
   if $(".charts").length
     $.ajax(
-      url: 'best_win_rate_with_history'
+      url: '/api/champions/best_win_rate_with_history'
       type: 'GET'
       success: (result) ->
         position = 1
