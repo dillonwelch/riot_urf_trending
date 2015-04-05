@@ -22,8 +22,8 @@
       .collapse.navbar-collapse#bs-example-navbar-collapse-1
         %ul.nav.navbar-nav
           %li.active
-            %a{ href: '#' }
-              Home
+            %a{ href: root_path }
+              = t('.home')
               %span.sr-only
                 (current)
           %li
@@ -35,10 +35,8 @@
               %span.caret
             %ul.dropdown-menu{ role: 'menu' }
               %li
-                %a{ href: '#' }
-                  Action
-                %a{ href: '#' }
-                  Another action
+                = link_to 'Action' , '#'
+                = link_to 'Another action' , '#'
         %form.navbar-form.navbar-left{ role: 'search' }
           %div.form-group
             %input.form-control{ type: 'text', placeholder: 'Search' }
@@ -51,9 +49,7 @@
               %span.caret
             %ul.dropdown-menu{ role: 'menu' }
               %li
-                %a{ href: '#' }
-                  Action
-                %a{ href: '#' }
-                  Another action
+                = link_to t('.champion_win_rate'), champions_by_win_rate_path
+                = link_to 'Another action' , '#'
   %body
     = yield
