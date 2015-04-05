@@ -23,6 +23,7 @@ module Api
       cache_key = "n_best_5_#{time}"
       best = Rails.cache.read(cache_key)
 
+      # Look at block
       if best.nil?
         best = ChampionMatch.n_best(5, time)
         Rails.cache.write(cache_key, best.to_a)

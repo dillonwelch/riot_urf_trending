@@ -31,7 +31,7 @@ class ChampionHistoryQuery
           coalesce(victories, 0) as victories,
           coalesce(losses, 0) as losses,
           champion_matches.champion_id,
-          coalesce((victories::float / (victories + losses)) * 100, 0) as win_rate,
+          coalesce((victories::float / (victories + coalesce(losses, 0))) * 100, 0) as win_rate,
           :hour as time
           FROM "champion_matches"
           -- INNER JOIN "matches" ON "matches"."id" = "champion_matches"."match_id"
