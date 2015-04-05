@@ -17,6 +17,7 @@ en:
   layouts:
     application:
       title: RiotNurfTrending
+      champions_drop_down: Champions
       champion_win_rate: Top 5 by win rate
       home: Home
   application:
