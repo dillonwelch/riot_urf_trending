@@ -89,6 +89,8 @@ RSpec.describe Api::ChampionsController do
     let(:mm5) { create(:match, start_time: other_time) }
 
     before do
+      Timecop.freeze(Time.utc(2015, 4, 5, 9, 7, 26))
+
       [m1, m2, m3, m4, m5].each do |m|
         create(:champion_match, champion: c1, match: m, victory: true)
       end
@@ -177,11 +179,13 @@ RSpec.describe Api::ChampionsController do
       }
     end
 
-    it 'does the thing' do
-      Timecop.freeze(Time.utc(2015, 4, 5, 9, 7, 26))
+    after do
+      Timecop.return
+    end
+
+    it 'returns the expected data' do
       get :best_win_rate_with_history
       expect(JSON.parse(response.body)).to eq expected
-      Timecop.return
     end
   end
 end
