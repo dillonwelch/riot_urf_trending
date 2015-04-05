@@ -1,23 +1,22 @@
 module Api
   class ChampionsController < ApplicationController
     def total_kills
-      render json: ChampionMatch.count(:kills)
+      render json: ChampionMatch.sum(:kills)
     end
 
     def total_deaths
-      render json: ChampionMatch.count(:deaths)
+      render json: ChampionMatch.sum(:deaths)
     end
 
     def kills
-      render json: ChampionMatch.where(champion_id: champion.id).count(:kills)
+      render json: ChampionMatch.where(champion_id: champion.id).sum(:kills)
     end
 
     def deaths
-      render json: ChampionMatch.where(champion_id: champion.id).count(:deaths)
+      render json: ChampionMatch.where(champion_id: champion.id).sum(:deaths)
     end
 
     def best_win_rate_with_history
-      hours = params[:hours].to_i
       # Time.zone.now = 2:08PM => 1:00PM
       time = Time.at ( ((Time.zone.now - 1.hour).to_f / 1.hour).floor * 1.hour)
 
