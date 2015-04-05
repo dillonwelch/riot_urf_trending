@@ -6,15 +6,6 @@ class ChampionHistoryQuery
   end
 
   def run
-    queries = []
-    (0..hours - 1).each do |hour|
-      my_time = start_time - hour.hours
-      query = one_hour_query(champion_id: champion_id,
-                             start_time: my_time,
-                             end_time:   my_time + 1.hour,
-                             hour: hour + 1)
-      queries << query
-    end
     ActiveRecord::Base.connection.execute(queries.join(' UNION ALL '))
   end
 
@@ -22,6 +13,19 @@ class ChampionHistoryQuery
 
   attr_reader :champion_id, :start_time, :hours
 
+  def queries
+    queries = []
+    (0..hours - 1).each do |hour|
+      my_time = start_time - hour.hours
+      queries << one_hour_query(champion_id: champion_id,
+                                start_time: my_time,
+                                end_time:   my_time + 1.hour,
+                                hour: hour + 1)
+    end
+    queries
+  end
+
+  # rubocop:disable all
   def one_hour_query(champion_id:, start_time:, end_time:, hour:)
     ActiveRecord::Base.send(
       :sanitize_sql_array,
@@ -31,10 +35,10 @@ class ChampionHistoryQuery
           coalesce(victories, 0) as victories,
           coalesce(losses, 0) as losses,
           champion_matches.champion_id,
-          coalesce((victories::float / (victories + coalesce(losses, 0))) * 100, 0) as win_rate,
+          coalesce((victories::float /
+                   (victories + coalesce(losses, 0))) * 100, 0) as win_rate,
           :hour as time
           FROM "champion_matches"
-          -- INNER JOIN "matches" ON "matches"."id" = "champion_matches"."match_id"
           left outer join (
               select count(victory) as victories, champion_id
               from champion_matches
@@ -43,7 +47,8 @@ class ChampionHistoryQuery
               and ( ( start_time + duration * 1000) >= :start_time )
               and ( ( start_time + duration * 1000) < :end_time )
               group by champion_id
-          ) as victories on victories.champion_id = champion_matches.champion_id left outer join (
+          ) as victories on victories.champion_id = champion_matches.champion_id
+          left outer join (
               select count(victory) as losses, champion_id
               from champion_matches
               join matches on champion_matches.match_id = matches.id
@@ -62,4 +67,5 @@ class ChampionHistoryQuery
       ]
     )
   end
+  #rubocop:enable all
 end

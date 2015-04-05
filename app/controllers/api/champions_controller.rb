@@ -1,11 +1,11 @@
 module Api
   class ChampionsController < ApplicationController
     def total_kills_and_deaths
-       total = ChampionMatch.select('sum(kills) as kills,
-                                    sum(deaths) as deaths').reorder('').first
+      total = ChampionMatch.select('sum(kills) as kills,
+                                   sum(deaths) as deaths').reorder('').first
 
-       render json: { kills: total.kills,
-                      deaths: total.deaths }.to_json
+      render json: { kills: total.kills,
+                     deaths: total.deaths }.to_json
     end
 
     def kills
