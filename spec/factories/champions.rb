@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :champion do
     sequence(:riot_id)
-    sequence(:name)    { |n| "Champion #{n}" }
-    primary_role       { |n| "Role #{n}" }
-    secondary_role     { |n| "Role #{n}" }
+    sequence(:name)           { |n| "Champion #{n}" }
+    sequence(:primary_role)   { |n| "Role #{n}" }
+    sequence(:secondary_role) { |n| "Role #{n}" }
 
     factory :champion_with_raw_api_data do
       transient do
