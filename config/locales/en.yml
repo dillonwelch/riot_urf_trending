@@ -22,6 +22,9 @@ en:
     index:
       title: URF Sampling
       matches_sampled: Matches Sampled
-      total_kills: Total Kills
+      total_kills: Champions Slain
       total_deaths: Total Deaths
       teemo_corpses: Teemo Corpses
+  champions:
+    by_win_rate:
+      title: Top 5 champions in the last hour for URF

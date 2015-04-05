@@ -45,3 +45,5 @@ build/
 .env
 bin/*
 public/assets/*
+
+.rspec-local

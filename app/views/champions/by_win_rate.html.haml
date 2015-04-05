@@ -1,6 +1,5 @@
 .banner
-  %h1
-    Top 5 champions in the last hour for URF
+  %h1= t('.title')
 .content
   %main
     .charts
@@ -9,5 +8,3 @@
           %span{ id: "title#{num}" }
           %img{ id: "image#{num}", height: '40px' }
         %canvas{ id: "chart#{num}" }
-  %aside
-    bearsbearsbears
