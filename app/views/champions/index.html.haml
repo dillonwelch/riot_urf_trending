@@ -1,0 +1,12 @@
+.main
+  - @champions.each_slice(3) do |slice|
+    .row
+      - slice.each do |champion|
+        .col-md-1
+          = image_tag riot_image_link champion.name
+        .col-md-1
+          = champion.name
+        .col-md-1
+          = (champion.win_rate * 100).round(2)
+        .col-md-1
+          = (champion.pick_rate * 100).round(2)
