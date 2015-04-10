@@ -32,12 +32,18 @@ task :riot_seed_data do
   end
 end
 
-task get_urf_matches: [:environment] do
+task :get_urf_matches, %i(time) => [:environment] do |_t, args|
+  if args[:time].nil?
+    floor_time = ((Time.zone.now - 10.minutes).to_f / 5.minutes).floor * 5.minutes
+    time = (Time.at(floor_time)).to_i
+  else
+    time = args[:time]
+  end
+
   regions = %w(br eune euw kr lan las na oce ru tr)
-  floor_time = ((Time.zone.now - 10.minutes).to_f / 5.minutes).floor * 5.minutes
-  time = (Time.at(floor_time)).to_i
+
   regions.each do |region|
-    puts I18n.t('tasks.get_urf_matches.fetch_list', region: region)
+    puts I18n.t('tasks.get_urf_matches.fetch_list', region: region, time: time)
     begin
       service = ApiChallengeService.new(
         begin_date: time,
@@ -58,5 +64,20 @@ task get_urf_matches: [:environment] do
       puts 'Error in urf api'
       puts e
     end
+  end
+end
+
+task backfill_urf_matches: [:environment] do
+  # First time that has data
+  start_time = 1427865900
+  if ENV['BACKFILL_TIME'].nil?
+    ENV['BACKFILL_TIME'] = start_time.to_s
+  end
+
+  while true do
+    time = ENV['BACKFILL_TIME'].to_i
+    Rake::Task['get_urf_matches'].reenable
+    Rake::Task['get_urf_matches'].invoke(time)
+    ENV['BACKFILL_TIME'] = (Time.at(time) + 5.minutes).to_i.to_s
   end
 end
