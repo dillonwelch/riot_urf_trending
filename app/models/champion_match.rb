@@ -119,4 +119,16 @@ class ChampionMatch < ActiveRecord::Base
       group('champion_matches.champion_id, victories, losses').
       order('win_rate desc, victories desc').limit(n)
   end
+
+  def self.n_best_with_kda(n=5,
+                           start_time=Time.zone.now - 6.days,
+                           end_time=start_time + 1.hour)
+    select('sum(kills) as kills, sum(deaths) as deaths, sum(assists) as assists, champion_id').
+      joins(:match).where(
+        '( ( start_time + duration * 1000) >= :start_time )
+         and ( ( start_time + duration * 1000) < :end_time )',
+        start_time: start_time.to_i * 1000,
+        end_time: end_time.to_i * 1000).
+      group('champion_id').order(:champion_id).limit(n)
+  end
 end
