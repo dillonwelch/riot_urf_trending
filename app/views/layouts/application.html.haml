@@ -20,14 +20,13 @@
           BearApps
       .collapse.navbar-collapse#bs-example-navbar-collapse-1
         %ul.nav.navbar-nav
-          %li.active
+          %li{ class: current_page?(root_path) ? 'active' : '' }
             %a{ href: root_path }
               = t('.home')
               %span.sr-only
                 (current)
-          %li
-            %a{ href: '#' }
-              Index
+          %li{ class: current_page?(champions_path) ? 'active' : '' }
+            = link_to t('.champions_index'), champions_path
           %li.dropdown
             %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-expanded': 'false' }
               About bears
