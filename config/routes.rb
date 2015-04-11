@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'application#index'
 
   namespace :champions do
+    get '/', action: :index
     get '/by_win_rate', action: :by_win_rate
   end
 
