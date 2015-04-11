@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404105902) do
+ActiveRecord::Schema.define(version: 20150410221004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,20 @@ ActiveRecord::Schema.define(version: 20150404105902) do
   add_index "champion_matches", ["match_id", "victory"], name: "index_champion_matches_on_match_id_and_victory", using: :btree
   add_index "champion_matches", ["victory"], name: "index_champion_matches_on_victory_false", where: "(victory = false)", using: :btree
   add_index "champion_matches", ["victory"], name: "index_champion_matches_on_victory_true", where: "(victory = true)", using: :btree
+
+  create_table "champion_matches_stats", force: :cascade do |t|
+    t.integer  "champion_id"
+    t.integer  "victories"
+    t.integer  "losses"
+    t.integer  "kills"
+    t.integer  "deaths"
+    t.integer  "assists"
+    t.integer  "start_time",  limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "champion_matches_stats", ["champion_id", "start_time"], name: "index_champion_matches_stats_on_champion_id_and_start_time", using: :btree
 
   create_table "champions", force: :cascade do |t|
     t.integer  "riot_id"
@@ -84,5 +98,6 @@ ActiveRecord::Schema.define(version: 20150404105902) do
   add_foreign_key "champion_api_data", "champions", name: "fk_rails_champion_api_data_champions", on_delete: :cascade
   add_foreign_key "champion_matches", "champions", name: "fk_rails_champion_matches_champions", on_delete: :cascade
   add_foreign_key "champion_matches", "matches", name: "fk_rails_champion_matches_matches", on_delete: :cascade
+  add_foreign_key "champion_matches_stats", "champions", name: "fk_rails_champion_matches_stats_champions", on_delete: :cascade
   add_foreign_key "match_api_data", "matches", name: "fk_rails_match_api_data_matches", on_delete: :cascade
 end

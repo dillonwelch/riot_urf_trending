@@ -81,3 +81,42 @@ task backfill_urf_matches: [:environment] do
     ENV['BACKFILL_TIME'] = (Time.at(time) + 5.minutes).to_i.to_s
   end
 end
+
+task :calculate_stats, %i(time) => [:environment] do |_t, args|
+  # Time.zone.now = 2:08PM => 1:00PM
+  if args[:time].nil?
+    time = Time.at ( ((Time.zone.now - 1.hour).to_f / 1.hour).floor * 1.hour)
+  else
+    time = args[:time]
+  end
+
+  puts I18n.t('tasks.calculate_stats.calculating', time: time)
+
+  all_best = ChampionMatch.n_best(300, time).reorder(:champion_id)
+  kda = ChampionMatch.n_best_with_kda(300, time)
+  Champion.all.each do |champion|
+    champion_kda = kda[champion.id - 1]
+    champion_best = all_best[champion.id - 1]
+    ChampionMatchesStat.create!(
+      champion_id: champion.id,
+      victories:   champion_best.present? ? champion_best.victories : 0,
+      losses:      champion_best.present? ? champion_best.losses : 0,
+      kills:       champion_kda.present? ? champion_kda.kills : 0,
+      deaths:      champion_kda.present? ? champion_kda.deaths : 0,
+      assists:     champion_kda.present? ? champion_kda.assists : 0,
+      start_time:  time.to_i * 1000
+    )
+  end
+end
+
+task backfill_calculate_stats: [:environment] do
+  ChampionMatchesStat.delete_all
+  start_time = Time.at(1427865900) - 1.hour - 25.minutes
+  end_time = Time.parse('20 Apr 2015')
+  time = start_time
+  while time < end_time do
+    Rake::Task['calculate_stats'].reenable
+    Rake::Task['calculate_stats'].invoke(time)
+    time += 1.hour
+  end
+end

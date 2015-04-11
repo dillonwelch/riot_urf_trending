@@ -47,3 +47,4 @@ bin/*
 public/assets/*
 
 .rspec-local
+*.dump

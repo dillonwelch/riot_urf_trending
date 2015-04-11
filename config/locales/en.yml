@@ -10,6 +10,8 @@ en:
     get_urf_matches:
       fetch_list: Fetching match data for region %{region} at %{time}.
       fetch_matches: Fetching %{count} matches.
+    calculate_stats:
+      calculating: Calculating for %{time}
   services:
     rate_limit:
       one: Rate limit hit, waiting %{count} second.
