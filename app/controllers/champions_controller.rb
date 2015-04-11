@@ -41,6 +41,6 @@ class ChampionsController < ApplicationController
   private
 
   def champion
-    @champion ||= Champion.find_by_name(params[:name])
+    @champion ||= Champion.find_by_lower_name(params[:name]).first
   end
 end
