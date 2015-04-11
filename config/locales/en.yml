@@ -19,7 +19,8 @@ en:
   layouts:
     application:
       title: RiotNurfTrending
-      champions_index: Index
+      champions_index: All Champions
+      roles_index: All Roles
       champions_drop_down: Champions
       champion_win_rate: Top 5 by win rate
       home: Home
