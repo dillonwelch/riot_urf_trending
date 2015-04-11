@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :champions do
     get '/', action: :index
+    get '/roles', action: :primary_role
     get '/by_win_rate', action: :by_win_rate
   end
 
