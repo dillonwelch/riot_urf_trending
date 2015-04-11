@@ -32,5 +32,7 @@ en:
       total_deaths: Executions
       teemo_corpses: Teemo Corpses
   champions:
+    empty_search:
+      no_results: No champion by the name of %{name}.
     by_win_rate:
       title: Top 5 champions in the last hour for URF
