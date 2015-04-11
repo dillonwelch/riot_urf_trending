@@ -53,6 +53,10 @@ RSpec.describe ChampionHistoryQuery do
     end
   end
 
+  after do
+    Timecop.return
+  end
+
   it 'returns the expected result' do
     expect(result).to eq final_result
   end

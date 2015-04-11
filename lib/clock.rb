@@ -13,5 +13,7 @@ def execute_rake(task, file='riot_api_tasks.rake')
 end
 
 module Clockwork
-  every(5.minutes, 'get urf matches') { execute_rake('get_urf_matches') }
+  every(5.minutes, 'get urf matches', thread: true) { execute_rake('get_urf_matches') }
+  every(1.day, 'backfill_urf_matches', thread: true) { execute_rake('backfill_urf_matches') }
+  every(1.hour, 'calculate_stats', thread: true, at: '**:00') { execute_rake('calculate_stats') }
 end

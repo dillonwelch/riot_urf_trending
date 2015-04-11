@@ -189,4 +189,98 @@ RSpec.describe ChampionMatch do
       end
     end
   end
+
+  describe '.n_best_with_kda' do
+    let(:result) do
+      ChampionMatch.n_best_with_kda(5, Time.zone.now - 1.hour - 30.minutes)
+    end
+
+    describe 'victories and losses for one champion' do
+      let(:champion) { create(:champion) }
+      let(:match) do
+        create(:match, start_time: (Time.zone.now - 1.hour).to_i * 1000)
+      end
+      let!(:cm1) do
+        create(:champion_match, match: match, champion: champion, victory: true)
+      end
+      let!(:cm2) do
+        create(:champion_match,
+               match: match,
+               champion: champion,
+               victory: false)
+      end
+
+      it 'has the right kills' do
+        expect(result.first.kills).to eq cm1.kills + cm2.kills
+      end
+
+      it 'has the right deaths' do
+        expect(result.first.deaths).to eq cm1.deaths + cm2.deaths
+      end
+
+      it 'has the right assists' do
+        expect(result.first.assists).to eq cm1.assists + cm2.assists
+      end
+    end
+
+
+    describe 'multiple champions' do
+      let(:winner)  { create(:champion) }
+      let(:average) { create(:champion) }
+      let(:loser)   { create(:champion) }
+      let(:match) do
+        create(:match, start_time: (Time.zone.now - 1.hour).to_i * 1000)
+      end
+
+      before do
+        5.times do
+          create(:champion_match, champion: winner, match: match, kills: 1, deaths: 2, assists: 3)
+        end
+
+        3.times do
+          create(:champion_match, champion: average, match: match, kills: 2, deaths: 0, assists: 1)
+        end
+
+        1.times do
+          create(:champion_match, champion: loser, match: match, kills: 1, deaths: 1, assists: 1)
+        end
+      end
+
+      it 'calculates the first champion kills correctly' do
+        expect(result.first.kills).to eq 5
+      end
+
+      it 'calculates the first champion deaths correctly' do
+        expect(result.first.deaths).to eq 10
+      end
+
+      it 'calculates the first champion assists correctly' do
+        expect(result.first.assists).to eq 15
+      end
+
+      it 'calculates the second champion kills correctly' do
+        expect(result.second.kills).to eq 6
+      end
+
+      it 'calculates the second champion deaths correctly' do
+        expect(result.second.deaths).to eq 0
+      end
+
+      it 'calculates the second champion assists correctly' do
+        expect(result.second.assists).to eq 3
+      end
+
+      it 'calculates the third champion kills correctly' do
+        expect(result.third.kills).to eq 1
+      end
+
+      it 'calculates the third champion deaths correctly' do
+        expect(result.third.deaths).to eq 1
+      end
+
+      it 'calculates the third champion assists correctly' do
+        expect(result.third.assists).to eq 1
+      end
+    end
+  end
 end

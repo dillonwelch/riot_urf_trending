@@ -1,0 +1,5 @@
+.main
+  %h2= @champion.name
+  = image_tag riot_image_link @champion.name
+  = "Win rate: #{(@champion.win_rate * 100).round(2)}"
+  = "Pick rate: #{(@champion.pick_rate * 100).round(2)}"

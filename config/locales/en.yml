@@ -8,8 +8,10 @@ en:
       saved: Match data saved.
       not_found: Match %{match} not found.
     get_urf_matches:
-      fetch_list: Fetching match data for region %{region}.
+      fetch_list: Fetching match data for region %{region} at %{time}.
       fetch_matches: Fetching %{count} matches.
+    calculate_stats:
+      calculating: Calculating for %{time}
   services:
     rate_limit:
       one: Rate limit hit, waiting %{count} second.
@@ -17,6 +19,9 @@ en:
   layouts:
     application:
       title: RiotNurfTrending
+      champions_index: All Champions
+      roles_index: All Roles
+      champions_drop_down: Champions
       champion_win_rate: Top 5 by win rate
       home: Home
   application:
@@ -27,5 +32,7 @@ en:
       total_deaths: Executions
       teemo_corpses: Teemo Corpses
   champions:
+    empty_search:
+      no_results: No champion by the name of %{name}.
     by_win_rate:
       title: Top 5 champions in the last hour for URF
