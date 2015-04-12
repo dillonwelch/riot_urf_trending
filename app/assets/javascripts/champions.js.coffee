@@ -65,13 +65,12 @@ $(document).ready ->
       data = [
         {
           value: win_rate
-          color: 'red'
+          color: 'rgba(151,187,205,1)'
           highlight: 'black'
         },
         {
           value: 100 - win_rate
-          color: 'black'
-          highlight: 'red'
+          color: 'rgba(151,187,205,0.2)'
         }
       ]
       pie_chart = new Chart(chart).Pie(data)
