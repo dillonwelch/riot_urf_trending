@@ -6,7 +6,7 @@
         %tr
           - slice.each do |champion|
             - index += 1
-            %td 
+            %td
               = image_tag riot_image_link champion.name
               %dl.inline
                 %h1
@@ -16,3 +16,4 @@
                 %dd= (champion.win_rate * 100).round(2)
                 %dt= "Pick rate: "
                 %dd= (champion.pick_rate * 100).round(2)
+                %canvas{ data: { "champion-#{champion.id}"  } }
