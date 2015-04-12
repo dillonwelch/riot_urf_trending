@@ -1,5 +1,6 @@
 $prime: #114455
 $secondary: #406976
+$red: #990000
 
 .block
   margin: 10px
@@ -81,22 +82,42 @@ $secondary: #406976
         height: 50px
       img
         border-radius: 50%
+        float: left
       tr
         td
+          position: relative
           width: 500px
-          padding: 30px
+          padding: 25px
           background-color: $prime
+          border: solid 1px white
+          border-radius: 25px
           color: white
-          dl.inline
-            float: right
+          .name
+            width: 100%
+            background-color: $red
+            margin-left: -25px
+            margin-bottom: -20px
+            margin-top: -25px
+          .rank
+            position: absolute
+            top: 10px
+            left: 10px
+            height: 50px
+            width: 50px
+            border-radius: 50%
+            background-color: black
+            text-align: center
+            vertical-align: text-top
+            font-size: 200%
+          dl
             padding: 5px
-            width: 120px
+            width: 300px
             dd
-              display: inline
-              margin: 0
-              float: right
+              font-size: 125%
+              margin-left: 5px
+              float: left
             dt
-              display: inline-block
-            dd:after
-              display: block
-              content: ''
+              span
+              vertical-align: middle
+              opacity: .7
+              font-size: 75%

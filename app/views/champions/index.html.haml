@@ -2,20 +2,24 @@
   %main.index
     %table.center
       - index = 0
-      - @champions.each_slice(4) do |slice|
+      - @champions.each_slice(3) do |slice|
         %tr
           - slice.each do |champion|
             - index += 1
             %td
               = image_tag riot_image_link champion.name
-              %dl.inline
-                %h1
-                  = "#{index}: "
-                  = champion.name
-                -# %a{ href: champions_search_path(name: champion.name) }
+              .stats
                 - win_rate = (champion.win_rate).round(2)
-                %dt= "Win rate: "
-                %dd= win_rate
-                %dt= "Pick rate: "
-                %dd= (champion.pick_rate).round(2)
-                %canvas{ data: { "win-rate" => win_rate  } }
+                %dl
+                  %dd= "#{win_rate}%"
+                  %dt
+                    %span= "wins"
+                  %dd= "#{(champion.pick_rate).round(2)}%"
+                  %dt
+                    %span= "picks"
+                  %canvas{ data: { "win-rate" => win_rate  } }
+              .name
+                %h1
+                  = champion.name
+              .rank= index
+              -# %a{ href: champions_search_path(name: champion.name) }
