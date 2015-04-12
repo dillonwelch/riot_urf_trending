@@ -1,14 +1,16 @@
 .content
   %main.index
     %table
+      - index = 0
       - @champions.each_slice(5) do |slice|
         %tr
-          - slice.each_with_index do |champion, index| 
+          - slice.each do |champion|
+            - index += 1
             %td 
               = image_tag riot_image_link champion.name
+              = "#{index}: "
+              = champion.name
               %dl.inline
-                %dt= "#{index+1}: " 
-                %dd= champion.name
                 %dt= "Win rate: "
                 %dd= (champion.win_rate * 100).round(2)
                 %dt= "Pick rate: "
