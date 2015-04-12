@@ -12,15 +12,19 @@
                 .stats
                   - win_rate = (champion.win_rate).round(2)
                   - pick_rate = (champion.pick_rate).round(2)
+                  - average_win_rate = (((win_rate / @average_win_rate) - 1) * 100).round(2)
+                  - average_pick_rate = (((pick_rate / @average_pick_rate) - 1) * 100).round(2)
                   %dl
-                    %dd= "#{win_rate}%"
-                    %dt
-                      wins
-                    %dd= "#{pick_rate}%"
-                    %dt
-                      picks
+                    %dd= "#{"%.2f" % win_rate}%"
+                    %dt= t('.win_rate')
+                    %dd= "#{average_win_rate.abs}%"
+                    %dt= "#{ average_win_rate < 0 ? "below" : 'above'} average"
+                  %dl
+                    %dd= "#{"%.2f" % pick_rate}%"
+                    %dt.pick-rate= t('.pick_rate')
+                    %dd= "#{average_pick_rate.abs}%"
+                    %dt= "#{ average_pick_rate < 0 ? "below" : 'above'} average"
                   %canvas.js-win-rate{ data: { "win-rate" => win_rate  } }
-                  %canvas.js-pick-rate{ data: { "pick-rate" => pick_rate  } }
                 .name
                   %h1
                     = champion.name

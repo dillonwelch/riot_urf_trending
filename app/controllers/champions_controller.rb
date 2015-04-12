@@ -7,6 +7,10 @@ class ChampionsController < ApplicationController
       ) * 100 as pick_rate,
       champion_id, name'
     ).joins(:champion).group(:champion_id, :name).reorder('win_rate desc')
+
+    win_rates = @champions.map(&:win_rate)
+    @average_win_rate = win_rates.sum / win_rates.size
+    @average_pick_rate = 100.0 / @champions.size
   end
 
   def search
