@@ -11,14 +11,16 @@
                 = image_tag riot_image_link champion.name
                 .stats
                   - win_rate = (champion.win_rate).round(2)
+                  - pick_rate = (champion.pick_rate).round(2)
                   %dl
                     %dd= "#{win_rate}%"
                     %dt
                       wins
-                    %dd= "#{(champion.pick_rate).round(2)}%"
+                    %dd= "#{pick_rate}%"
                     %dt
                       picks
-                  %canvas{ data: { "win-rate" => win_rate  } }
+                  %canvas.js-win-rate{ data: { "win-rate" => win_rate  } }
+                  %canvas.js-pick-rate{ data: { "pick-rate" => pick_rate  } }
                 .name
                   %h1
                     = champion.name

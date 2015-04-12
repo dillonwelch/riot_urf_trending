@@ -57,7 +57,7 @@ $(document).ready ->
     )
 
   if $('.js-champions-index').length
-    canvases = $('canvas')
+    canvases = $('canvas.js-win-rate')
     $.each(canvases, () ->
       canvas = $(this)
       chart = canvas.get(0).getContext('2d')
@@ -70,6 +70,24 @@ $(document).ready ->
         },
         {
           value: 100 - win_rate
+          color: 'rgba(151,187,205,0.2)'
+        }
+      ]
+      pie_chart = new Chart(chart).Pie(data, { showTooltips: false })
+    )
+    canvases = $('canvas.js-pick-rate')
+    $.each(canvases, () ->
+      canvas = $(this)
+      chart = canvas.get(0).getContext('2d')
+      pick_rate = canvas.data('pick-rate')
+      data = [
+        {
+          value: pick_rate
+          color: 'rgba(151,187,205,1)'
+          highlight: 'black'
+        },
+        {
+          value: 100 - pick_rate
           color: 'rgba(151,187,205,0.2)'
         }
       ]
