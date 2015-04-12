@@ -7,13 +7,12 @@
           - slice.each do |champion|
             - index += 1
             %td
-              = image_tag riot_image_link champion.name
               %dl.inline
                 %h1
                   = "#{index}: "
-                  = champion.name
+                  %a{ href: champions_search_path(name: champion.name) }
                 %dt= "Win rate: "
-                %dd= (champion.win_rate * 100).round(2)
+                %dd= (champion.win_rate).round(2)
                 %dt= "Pick rate: "
-                %dd= (champion.pick_rate * 100).round(2)
+                %dd= (champion.pick_rate).round(2)
                 %canvas{ data: { "champion-#{champion.id}"  } }
