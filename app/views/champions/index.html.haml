@@ -6,13 +6,14 @@
         %tr
           - slice.each do |champion|
             - index += 1
-            %td 
+            %td
               %div.text-center
                 = "#{index}: "
-                = champion.name
-              = image_tag riot_image_link champion.name
+                %a{ href: champions_search_path(name: champion.name) }
+                  =  champion.name
+              %img{ src: riot_image_link(champion.name) }
               %dl.inline
                 %dt= "Win rate: "
-                %dd= (champion.win_rate * 100).round(2)
+                %dd= (champion.win_rate).round(2)
                 %dt= "Pick rate: "
-                %dd= (champion.pick_rate * 100).round(2)
+                %dd= (champion.pick_rate).round(2)
