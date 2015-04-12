@@ -6,8 +6,8 @@ module ApplicationHelper
 
   private
 
-  def transform_display_name(display_name)
-    display_name.gsub!(/ /, '')
+  def transform_display_name(raw_name)
+    display_name = raw_name.gsub(/ /, '')
 
     hash = {
       "Kog'Maw"      => 'KogMaw',
