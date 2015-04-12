@@ -1,5 +1,6 @@
 $prime: #114455
 $secondary: #406976
+$red: #990000
 
 .block
   margin: 10px
@@ -59,7 +60,7 @@ $secondary: #406976
     width: 80%
     min-width: 600px
     height: 250px
-    font-size: 120px 
+    font-size: 120px
     text-align: center
     small
       font-size: 30px
@@ -76,17 +77,53 @@ $secondary: #406976
   margin: auto
   main.index
     table
+      canvas
+        width: 100px
+        height: 50px
+      img
+        border-radius: 50%
+        float: left
       tr
         td
-          padding: 30px
-          dl.inline
-            width: 120px
+          a
+            color: white
+            text-decoration: none
+          position: relative
+          width: 500px
+          padding: 25px
+          border: solid 2px white
+          background-color: $prime
+          border-radius: 25px
+          .name
+            width: 100%
+            background-color: $red
+            margin-left: -25px
+            margin-bottom: -20px
+            margin-top: -25px
+          .rank
+            position: absolute
+            top: 10px
+            left: 10px
+            height: 50px
+            width: 50px
+            border-radius: 50%
+            background-color: black
+            text-align: center
+            vertical-align: text-top
+            color: white
+            font-size: 200%
+            padding-top: 5px
+          dl
+            padding: 5px
+            width: 400px
             dd
-              display: inline
-              margin: 0
-              float: right
+              font-size: 125%
+              margin-left: 5px
+              float: left
             dt
-              display: inline-block
-            dd:after
-              display: block
-              content: ''
+              vertical-align: middle
+              opacity: .7
+              font-size: 75%
+              float: left
+            dt.pick-rate
+              padding-right: 7px

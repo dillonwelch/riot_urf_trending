@@ -32,6 +32,9 @@ en:
       total_deaths: Executions
       teemo_corpses: Teemo Corpses
   champions:
+    index:
+      win_rate: win rate
+      pick_rate: pick rate
     empty_search:
       no_results: No champion by the name of %{name}.
     by_win_rate:
