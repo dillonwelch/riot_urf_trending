@@ -7,19 +7,19 @@
           - slice.each do |champion|
             - index += 1
             %td
-              = image_tag riot_image_link champion.name
-              .stats
-                - win_rate = (champion.win_rate).round(2)
-                %dl
-                  %dd= "#{win_rate}%"
-                  %dt
-                    wins
-                  %dd= "#{(champion.pick_rate).round(2)}%"
-                  %dt
-                    picks
-                %canvas{ data: { "win-rate" => win_rate  } }
-              .name
-                %h1
-                  = champion.name
-              .rank= index
-              -# %a{ href: champions_search_path(name: champion.name) }
+              %a{ href: champions_search_path(name: champion.name) }
+                = image_tag riot_image_link champion.name
+                .stats
+                  - win_rate = (champion.win_rate).round(2)
+                  %dl
+                    %dd= "#{win_rate}%"
+                    %dt
+                      wins
+                    %dd= "#{(champion.pick_rate).round(2)}%"
+                    %dt
+                      picks
+                  %canvas{ data: { "win-rate" => win_rate  } }
+                .name
+                  %h1
+                    = champion.name
+                .rank= index

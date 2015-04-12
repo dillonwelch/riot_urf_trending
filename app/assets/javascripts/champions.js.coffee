@@ -73,5 +73,5 @@ $(document).ready ->
           color: 'rgba(151,187,205,0.2)'
         }
       ]
-      pie_chart = new Chart(chart).Pie(data)
+      pie_chart = new Chart(chart).Pie(data, { showTooltips: false })
     )
