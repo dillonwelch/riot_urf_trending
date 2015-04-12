@@ -13,11 +13,11 @@
                 %dl
                   %dd= "#{win_rate}%"
                   %dt
-                    %span= "wins"
+                    wins
                   %dd= "#{(champion.pick_rate).round(2)}%"
                   %dt
-                    %span= "picks"
-                  %canvas{ data: { "win-rate" => win_rate  } }
+                    picks
+                %canvas{ data: { "win-rate" => win_rate  } }
               .name
                 %h1
                   = champion.name
