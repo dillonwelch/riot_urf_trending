@@ -55,3 +55,24 @@ $(document).ready ->
           myLineChart = new Chart(ctx).Line(data, options)
           position += 1
     )
+
+  if $('.js-champions-index').length
+    canvases = $('canvas')
+    $.each(canvases, () ->
+      canvas = $(this)
+      chart = canvas.get(0).getContext('2d')
+      win_rate = canvas.data('win-rate')
+      data = [
+        {
+          value: win_rate
+          color: 'red'
+          highlight: 'black'
+        },
+        {
+          value: 100 - win_rate
+          color: 'black'
+          highlight: 'red'
+        }
+      ]
+      pie_chart = new Chart(chart).Pie(data)
+    )

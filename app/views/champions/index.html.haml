@@ -1,4 +1,4 @@
-.content
+.content.js-champions-index
   %main.index
     %table.center
       - index = 0
@@ -13,8 +13,9 @@
                   = "#{index}: "
                   = champion.name
                 -# %a{ href: champions_search_path(name: champion.name) }
+                - win_rate = (champion.win_rate).round(2)
                 %dt= "Win rate: "
-                %dd= (champion.win_rate).round(2)
+                %dd= win_rate
                 %dt= "Pick rate: "
                 %dd= (champion.pick_rate).round(2)
-                -# %canvas{ data: { "champion-#{champion.id}" => 1  } }
+                %canvas{ data: { "win-rate" => win_rate  } }
