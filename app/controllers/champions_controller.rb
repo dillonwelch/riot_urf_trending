@@ -38,7 +38,7 @@ class ChampionsController < ApplicationController
     end
   end
 
-  def search
+  def show
     begin
       @champion = ChampionMatchesStat.select(
         '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
