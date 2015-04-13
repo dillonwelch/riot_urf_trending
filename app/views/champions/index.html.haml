@@ -1,14 +1,13 @@
 .content.js-champions-index
-  %ul
-    %li.dropdown
-      %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-expanded': 'false' }
-        Sort by
-        %span.caret
-      %ul.js-sort-champions.dropdown-menu{ role: 'menu' }
-        %li{ value: 'win_rate' }
-          = link_to 'Win rate', '#'
-        %li{ value: 'pick_rate' }
-          = link_to 'Pick rate', '#'
-        %li{ value: 'name' }
-          = link_to 'Name', '#'
+  .btn-group.js-sort-champions{ role: 'group' }
+    %button.js-win-rate.btn.btn-default.active{ type: 'button', value: 'win_rate' }
+      %span.glyphicon.glyphicon-chevron-down
+      = 'Win rate'
+    %button.js-pick-rate.btn.btn-default{ type: 'button', value: 'pick_rate' }
+      %span.glyphicon
+      = 'Pick rate'
+    %button.js-name.btn.btn-default{ type: 'button', value: 'name' }
+      %span.glyphicon
+      = 'Name'
+  .js-loading
   = render 'all_champions'

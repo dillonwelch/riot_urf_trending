@@ -56,12 +56,26 @@ $(document).ready ->
           position += 1
     )
 
-  $('.js-sort-champions li').on 'click', ->
-    val = $(this).attr('value')
+  $('.js-sort-champions button').on 'click', ->
+    button = $(this)
+    order = button.attr('value')
+    span = button.find('span')
+    asc = false
+    if span.hasClass('glyphicon-chevron-down')
+      asc = true
+    $('.content main').css('opacity', 0.5)
+    $('.js-loading').text('loading...')
     $.ajax(
-      url: "/champions?order=#{val}"
+      url: "/champions?order=#{order}&asc=#{asc}"
       dataType: 'text'
       type: 'GET'
       success: (html) ->
-        $('.content main').html(html)
+        $('.content main').replaceWith(html)
+        $('.js-loading').text('')
+        if asc == true
+          span.addClass('glyphicon-chevron-up')
+          span.removeClass('glyphicon-chevron-down')
+        else
+          span.removeClass('glyphicon-chevron-up')
+          span.addClass('glyphicon-chevron-down')
     )

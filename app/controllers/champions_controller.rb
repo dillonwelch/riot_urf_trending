@@ -20,7 +20,7 @@ class ChampionsController < ApplicationController
       else
         @champions = @champions.reorder('pick_rate desc')
       end
-    elsif params[:order] = 'name'
+    elsif params[:order] == 'name'
       if params[:asc] == 'true'
         @champions = @champions.reorder('name asc')
       else
