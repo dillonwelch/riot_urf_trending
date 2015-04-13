@@ -1,7 +1,8 @@
+.bg-blur
+  = image_tag riot_splash_link @champion.name
 .content
   %main.show
     %aside
-      = image_tag riot_splash_link @champion.name
       %h1= @champion.name
       %ul
         - win_rate = (@champion.win_rate).round(2)
