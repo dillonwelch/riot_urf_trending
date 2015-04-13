@@ -5,7 +5,9 @@
   %main.show
     %canvas
     %aside
-      %h1= @champion.name
+      %h1
+        = @champion.name
+        = image_tag riot_image_link @champion.name
       %ul
         - win_rate = (@champion.win_rate).round(2)
         - pick_rate = (@champion.pick_rate).round(2)
