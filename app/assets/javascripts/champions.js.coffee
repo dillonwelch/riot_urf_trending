@@ -56,40 +56,43 @@ $(document).ready ->
           position += 1
     )
 
-  # if $('.js-champions-index').length
-    # canvases = $('canvas.js-win-rate')
-    # $.each(canvases, () ->
-    #   canvas = $(this)
-    #   chart = canvas.get(0).getContext('2d')
-    #   win_rate = canvas.data('win-rate')
-    #   data = [
-    #     {
-    #       value: win_rate
-    #       color: 'rgba(151,187,205,1)'
-    #       highlight: 'black'
-    #     },
-    #     {
-    #       value: 100 - win_rate
-    #       color: 'rgba(151,187,205,0.2)'
-    #     }
-    #   ]
-    #   pie_chart = new Chart(chart).Pie(data, { showTooltips: false })
-    # )
-    # canvases = $('canvas.js-pick-rate')
-    # $.each(canvases, () ->
-    #   canvas = $(this)
-    #   chart = canvas.get(0).getContext('2d')
-    #   pick_rate = canvas.data('pick-rate')
-    #   data = [
-    #     {
-    #       value: pick_rate
-    #       color: 'rgba(151,187,205,1)'
-    #       highlight: 'black'
-    #     },
-    #     {
-    #       value: 100 - pick_rate
-    #       color: 'rgba(151,187,205,0.2)'
-    #     }
-    #   ]
-    #   pie_chart = new Chart(chart).Pie(data, { showTooltips: false })
-    # )
+  $('.js-sort-champions button').on 'click', ->
+    button = $(this)
+    button.attr('disabled', true)
+    buttons = $('.js-sort-champions button')
+    $.each buttons.not(button), (_key, button) ->
+      button = $(button)
+      span = button.find('span')
+      button.attr('disabled', true)
+      button.removeClass('active')
+      span.removeClass('glyphicon-chevron-down')
+      span.removeClass('glyphicon-chevron-up')
+
+    order = button.attr('value')
+    span = button.find('span')
+    button.addClass('active')
+
+    asc = false
+    if span.hasClass('glyphicon-chevron-down')
+      asc = true
+
+    if asc == true
+      span.addClass('glyphicon-chevron-up')
+      span.removeClass('glyphicon-chevron-down')
+    else
+      span.removeClass('glyphicon-chevron-up')
+      span.addClass('glyphicon-chevron-down')
+
+
+    $('.content main').css('opacity', 0.5)
+    $('.js-loading').toggleClass('hidden')
+    $.ajax(
+      url: "/champions?order=#{order}&asc=#{asc}"
+      dataType: 'text'
+      type: 'GET'
+      success: (html) ->
+        $('.content main').replaceWith(html)
+        $('.js-loading').toggleClass('hidden')
+        $.each buttons, (_key, button) ->
+          $(button).removeAttr('disabled')
+    )
