@@ -108,9 +108,6 @@ class ChampionsController < ApplicationController
     ).joins(:champion).group(:primary_role).reorder('win_rate desc')
   end
 
-  def by_win_rate
-  end
-
   private
 
   def rounded_previous_hour
