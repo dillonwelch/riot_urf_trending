@@ -33,6 +33,7 @@ en:
       teemo_corpses: Teemo Corpses
   champions:
     index:
+      title: All Champion Statistics
       buttons:
         win_rate: Win Rate
         pick_rate: Pick Rate
