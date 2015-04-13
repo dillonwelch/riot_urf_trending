@@ -66,22 +66,16 @@ class ChampionsController < ApplicationController
 
   def last_day
     @last_day_data = ChampionMatchesStat.select('
-      case losses
-      when 0 then
-        case victories
-          when 0 then 0.00
-          else 100.00
-        end
-      else
-        (sum(victories)::float / sum(victories + losses)) * 100
-      end as win_rate,
-      case total_picks
-      when 0 then 0
-      else sum(victories + losses)::float / total_picks * 100
-      end as pick_rate,
-      victories, losses
-      '
-    ).joins('
+      (sum(victories)::float / (case sum(victories + losses) when 0 then 1 else sum(victories + losses) end )) * 100 as win_rate,
+          case sum(total_picks)
+          when 0 then 0
+          else sum(victories + losses)::float / sum(total_picks) * 100
+          end as pick_rate,
+          sum(victories) as total_victories,
+          sum(losses) as total_losses,
+      extract(month from to_timestamp(champion_matches_stats.start_time / 1000)) as month,
+      extract(day from to_timestamp(champion_matches_stats.start_time / 1000)) as day
+    ').joins('
       inner join (
         select sum(victories + losses) as total_picks, start_time
         from champion_matches_stats
@@ -89,11 +83,8 @@ class ChampionsController < ApplicationController
       ) as pick_rate_table on pick_rate_table.start_time =
                               champion_matches_stats.start_time'
     ).joins(:champion).where(champion_id: champion.id).
-    where('champion_matches_stats.start_time > ?', (rounded_previous_hour - 1.day).to_i * 1000).
-    where('champion_matches_stats.start_time <= ?', rounded_previous_hour.to_i * 1000).
-    group('champion_matches_stats.champion_id, name,
-          champion_matches_stats.start_time, victories, losses, total_picks').
-    reorder('champion_matches_stats.start_time')
+    group('champion_matches_stats.champion_id, name, month, day').
+    reorder('month, day')
 
     render json: @last_day_data.to_json
   end
