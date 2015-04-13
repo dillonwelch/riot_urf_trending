@@ -1,19 +1,22 @@
 $(document).ready ->
   if $('.show canvas').length
     $.ajax(
-      url: "#{$('h1').text()}/last_day"
+      url: "/api/champions/#{$('h1').text().trim()}/overall"
       type: 'GET'
       success: (result) ->
         canvas = $('.show canvas').get(0).getContext('2d')
         win_rates = []
         pick_rates = []
+        total = []
         labels = []
         $.each result, (key, value) ->
-          win_rates.push(value.win_rate)
-          pick_rates.push(value.pick_rate)
-          labels.push(key)
+          win_rates.push(value.win_rate.toFixed(2))
+          pick_rates.push(value.pick_rate.toFixed(2))
+          total.push(value.total_victories + value.total_losses)
+          labels.push("#{value.month}/#{value.day}")
 
         options = {
+          multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>"
           scaleOverride: true
           scaleStartValue: 0
           scaleSteps: 10
@@ -44,7 +47,17 @@ $(document).ready ->
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(151,187,205,1)",
                     data: pick_rates
-                }
+                },
+                {
+                    label: "Total wins and losses",
+                    fillColor: "rgba(0,0,0,0)",
+                    strokeColor: "rgba(0,0,0,0)",
+                    pointColor: "rgba(0,0,0,0)",
+                    pointStrokeColor: "rgba(0,0,0,0)",
+                    pointHighlightFill: "rgba(0,0,0,0)",
+                    pointHighlightStroke: "rgba(0,0,0,0)",
+                    data: total
+                },
             ]
         }
         chart = new Chart(canvas).Line(data, options)

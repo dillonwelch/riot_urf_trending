@@ -5,8 +5,6 @@ Rails.application.routes.draw do
     get '/', action: :index
     get '/search', action: :search
     get '/roles', action: :primary_role
-
-    get '/:name/last_day', action: :last_day
   end
 
   namespace :api do
@@ -16,7 +14,7 @@ Rails.application.routes.draw do
       get '/:name/kills',  action: :kills
       get '/:name/deaths', action: :deaths
 
-      get '/best_win_rate_with_history', action: :best_win_rate_with_history
+      get '/:name/overall', action: :overall
     end
 
     namespace :matches do

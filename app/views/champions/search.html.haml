@@ -17,4 +17,6 @@
         %li= "Pick rate: #{"%.2f" % pick_rate}"
         %li= "Average pick rate: #{average_pick_rate.abs}% #{ average_pick_rate < 0 ? "below" : 'above'} average"
     %main
-      %canvas
+      %h1 Charts
+      .charts
+        %canvas
