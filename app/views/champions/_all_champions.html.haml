@@ -1,0 +1,30 @@
+%main.index
+  %table.center
+    - index = 0
+    - @champions.each_slice(3) do |slice|
+      %tr
+        - slice.each do |champion|
+          - index += 1
+          %td
+            %a{ href: champions_search_path(name: champion.name) }
+              = image_tag riot_image_link champion.name
+              .stats
+                - win_rate = (champion.win_rate).round(2)
+                - pick_rate = (champion.pick_rate).round(2)
+                - average_win_rate = (((win_rate / @average_win_rate) - 1) * 100).round(2)
+                - average_pick_rate = (((pick_rate / @average_pick_rate) - 1) * 100).round(2)
+                %dl
+                  %dd= "#{"%.2f" % win_rate}%"
+                  %dt= t('.win_rate')
+                  %dd= "#{average_win_rate.abs}%"
+                  %dt= "#{ average_win_rate < 0 ? "below" : 'above'} average"
+                %dl
+                  %dd= "#{"%.2f" % pick_rate}%"
+                  %dt.pick-rate= t('.pick_rate')
+                  %dd= "#{average_pick_rate.abs}%"
+                  %dt= "#{ average_pick_rate < 0 ? "below" : 'above'} average"
+                %canvas.js-win-rate{ data: { "win-rate" => win_rate  } }
+              .name
+                %h1
+                  = champion.name
+              .rank= index

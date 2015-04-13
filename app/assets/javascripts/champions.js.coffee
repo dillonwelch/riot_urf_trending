@@ -56,6 +56,17 @@ $(document).ready ->
           position += 1
     )
 
+  $('.js-sort-champions li').on 'click', ->
+    val = $(this).attr('value')
+    $.ajax(
+      url: "/champions?order=#{val}"
+      dataType: 'text'
+      type: 'GET'
+      success: (html) ->
+        $('.content main').html(html)
+    )
+
+
   # if $('.js-champions-index').length
     # canvases = $('canvas.js-win-rate')
     # $.each(canvases, () ->
