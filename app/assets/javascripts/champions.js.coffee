@@ -56,6 +56,57 @@ $(document).ready ->
           position += 1
     )
 
+  if $('.show canvas').length
+    $.ajax(
+      url: "#{$('h1').text()}/last_day"
+      type: 'GET'
+      success: (result) ->
+        canvas = $('.show canvas').get(0).getContext('2d')
+        win_rates = []
+        pick_rates = []
+        labels = []
+        $.each result, (key, value) ->
+          win_rates.push(value.win_rate)
+          pick_rates.push(value.pick_rate)
+          labels.push(key)
+
+        options = {
+          scaleOverride: true
+          scaleStartValue: 0
+          scaleSteps: 10
+          scaleStepWidth: 10
+          scaleFontColor: "#fff"
+          scaleGridLineColor: "#406976"
+        }
+
+        data = {
+            labels: labels
+            datasets: [
+                {
+                    label: "Win Rate",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: win_rates
+                },
+                {
+                    label: "Pick Rate",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: pick_rates
+                }
+            ]
+        }
+        chart = new Chart(canvas).Line(data, options)
+    )
+
   $('.js-sort-champions button').on 'click', ->
     button = $(this)
     button.attr('disabled', true)

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get '/search', action: :search
     get '/roles', action: :primary_role
     get '/by_win_rate', action: :by_win_rate
+
+    get '/:name/last_day', action: :last_day
   end
 
   namespace :api do
