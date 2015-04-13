@@ -2,7 +2,7 @@
   %h1= t('.title')
 .content
   %nav.subnav.js-champions-index
-    = fa_icon 'spinner spin', class: 'js-loading hidden'
+    = fa_icon 'spinner spin', class: 'js-loading hideme'
     .btn-group.js-sort-champions{ role: 'group' }
       - t('.buttons').each do |value, text|
         - active = button_is_active?(value)
