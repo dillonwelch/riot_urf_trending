@@ -1,11 +1,18 @@
 $prime: #114455
+$blue-tint: rgba(17,68,85,.5)
 $secondary: #406976
 $red: #990000
 $background: #333333
 $white: #fff
+$white-tint: rgba(255,255,255,.7)
 
 body
   background-color: $background
+  background-image: url(image_path('riot_urf_background.jpg'))
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-position: center
+  background-size: 100%
 
 .hidden
   opacity: 0
@@ -28,7 +35,7 @@ body
 
 .header
   @extend .wide
-  background-color: $white
+  background-color: $white-tint
   color: black
   h1
     font-size: 60px
@@ -83,6 +90,7 @@ body
 .bg-blur
   position: fixed
   width: 100%
+  opacity: .5
   z-index: -1
   -webkit-filter: blur(15px)
   -moz-filter: blur(15px)
@@ -104,7 +112,6 @@ body
     aside
       font-size: 200%
       width: 300px
-      background-color: $white
       border-radius: 25px
       .name
         width: 90%
@@ -116,7 +123,7 @@ body
         color: white
       ul
         margin-top: 10px
-        background-color: $prime
+        background-color: $blue-tint
         color: $white
         padding: none
         li
@@ -140,8 +147,8 @@ body
           position: relative
           width: 500px
           padding: 25px
-          border: solid 10px $background
-          background-color: white
+          border: solid 10px transparent
+          background-color: $white-tint
           border-radius: 25px
           .name
             width: 100%
