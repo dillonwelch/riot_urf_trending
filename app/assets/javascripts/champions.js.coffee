@@ -84,15 +84,15 @@ $(document).ready ->
       span.addClass('glyphicon-chevron-down')
 
 
-    $('.content main').css('opacity', 0.5)
-    $('.js-loading').toggleClass('hidden')
+    $('.content table').css('opacity', 0.5)
+    $('.js-loading').removeClass('hidden')
     $.ajax(
       url: "/champions?order=#{order}&asc=#{asc}"
       dataType: 'text'
       type: 'GET'
       success: (html) ->
         $('.content main').replaceWith(html)
-        $('.js-loading').toggleClass('hidden')
+        $('.js-loading').addClass('hidden')
         $.each buttons, (_key, button) ->
           $(button).removeAttr('disabled')
     )
