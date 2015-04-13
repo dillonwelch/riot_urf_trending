@@ -2,9 +2,11 @@ $prime: #114455
 $blue-tint: rgba(17,68,85,.5)
 $secondary: #406976
 $red: #990000
+$red-tint: rgba(153,0,0,.5)
 $background: #333333
 $white: #fff
 $white-tint: rgba(255,255,255,.7)
+$black-tint: rgba(0,0,0,.7)
 
 body
   background-color: $background
@@ -37,8 +39,8 @@ body
 
 .header
   @extend .wide
-  background-color: $white-tint
-  color: black
+  background-color: $black-tint
+  color: white
   h1
     font-size: 60px
 .stats-bg
@@ -46,7 +48,7 @@ body
   height: 400px
   margin-bottom: 50px
   margin-top: 50px
-  background-image: url(image_path('riot_urf_background.jpg'))
+  background-color: $black-tint
   .statsbox
     margin: auto
     table.stats_table
@@ -69,7 +71,7 @@ body
   @extend .wide
   height: 400px
   padding: 30px
-  background-image: url(image_path('teemo.jpg'))
+  background-color: $black-tint
   .well
     margin-left: auto
     margin-right: auto
