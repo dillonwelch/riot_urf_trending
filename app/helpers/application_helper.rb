@@ -4,6 +4,20 @@ module ApplicationHelper
     "#{transform_display_name(display_name)}.png"
   end
 
+  def button_is_active?(value, order_param = params[:order])
+    order = (order_param.nil? ? 'win_rate' : order_param)
+    order == value.to_s
+  end
+
+  def button_active_class(is_active)
+    is_active == true ? 'active' : ''
+  end
+
+  def button_glyph_class(is_active, is_asc = params[:asc])
+    return '' unless is_active
+    is_asc == 'true' ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'
+  end
+
   private
 
   def transform_display_name(raw_name)

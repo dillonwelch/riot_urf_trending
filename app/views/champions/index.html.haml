@@ -3,10 +3,9 @@
     = fa_icon 'spinner spin', class: 'js-loading hidden'
     .btn-group.js-sort-champions{ role: 'group' }
       - t('.buttons').each do |value, text|
-        - order = (params[:order].nil? ? 'win_rate' : params[:order])
-        - active = (order == value.to_s)
-        - active_class = (active == true ? 'active' : '')
-        - span_class = active ? (params[:asc] == 'true' ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : ''
+        - active = button_is_active?(value)
+        - active_class = button_active_class(active)
+        - span_class = button_glyph_class(active)
         %button.btn.btn-default{ class: active_class, type: 'button', value: value.to_s }
           %span.glyphicon{ class: span_class }
           = text
