@@ -58,11 +58,30 @@ $(document).ready ->
 
   $('.js-sort-champions button').on 'click', ->
     button = $(this)
+    buttons = $('.js-sort-champions button').not(button)
+    $.each buttons, (_key, button) ->
+      button = $(button)
+      span = button.find('span')
+      button.removeClass('active')
+      span.removeClass('glyphicon-chevron-down')
+      span.removeClass('glyphicon-chevron-up')
+
     order = button.attr('value')
     span = button.find('span')
+    button.addClass('active')
+
     asc = false
     if span.hasClass('glyphicon-chevron-down')
       asc = true
+
+    if asc == true
+      span.addClass('glyphicon-chevron-up')
+      span.removeClass('glyphicon-chevron-down')
+    else
+      span.removeClass('glyphicon-chevron-up')
+      span.addClass('glyphicon-chevron-down')
+
+
     $('.content main').css('opacity', 0.5)
     $('.js-loading').text('loading...')
     $.ajax(
@@ -72,10 +91,4 @@ $(document).ready ->
       success: (html) ->
         $('.content main').replaceWith(html)
         $('.js-loading').text('')
-        if asc == true
-          span.addClass('glyphicon-chevron-up')
-          span.removeClass('glyphicon-chevron-down')
-        else
-          span.removeClass('glyphicon-chevron-up')
-          span.addClass('glyphicon-chevron-down')
     )
