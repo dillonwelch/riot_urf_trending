@@ -79,18 +79,25 @@ body
     small
       font-size: 30px
 
-.bg-blur
-  position: fixed
+.bg-fix
+  background-color: $prime
   width: 100%
-  opacity: .5
-  z-index: -1
-  -webkit-filter: blur(15px)
-  -moz-filter: blur(15px)
-  -o-filter: blur(15px)
-  -ms-filter: blur(15px)
-  filter: blur(15px)
-  img
+  height: 100%
+  position: fixed
+  top: 50px
+  left: 0px
+  .bg-blur
+    position: fixed
     width: 100%
+    opacity: .5
+    z-index: -1
+    -webkit-filter: blur(15px)
+    -moz-filter: blur(15px)
+    -o-filter: blur(15px)
+    -ms-filter: blur(15px)
+    filter: blur(15px)
+    img
+      width: 100%
 .content
   position: relative
   width: 95%
