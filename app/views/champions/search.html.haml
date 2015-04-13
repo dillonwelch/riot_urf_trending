@@ -4,5 +4,11 @@
       = image_tag riot_splash_link @champion.name
       %h1= @champion.name
       %ul
-        %li= "Win rate: #{(@champion.win_rate * 100).round(2)}"
-        %li= "Pick rate: #{(@champion.pick_rate * 100).round(2)}"
+        - win_rate = (@champion.win_rate).round(2)
+        - pick_rate = (@champion.pick_rate).round(2)
+        - average_win_rate = (((win_rate / @average_win_rate) - 1) * 100).round(2)
+        - average_pick_rate = (((pick_rate / @average_pick_rate) - 1) * 100).round(2)
+        %li= "Win rate: #{"%.2f" % win_rate}"
+        %li= "Average win rate: #{average_win_rate.abs}% #{ average_win_rate < 0 ? "below" : 'above'} average"
+        %li= "Pick rate: #{"%.2f" % pick_rate}"
+        %li= "Average pick rate: #{average_pick_rate.abs}% #{ average_pick_rate < 0 ? "below" : 'above'} average"
