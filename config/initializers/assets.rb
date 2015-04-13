@@ -11,4 +11,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(
   riot_urf_background.jpg
   riot_urf_background_2.jpg
+  riot_urf_background_3.jpg
+  teemo.jpg
 )
