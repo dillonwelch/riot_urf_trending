@@ -6,7 +6,7 @@
         - slice.each do |champion|
           - index += 1
           %td
-            %a{ href: champions_search_path(name: champion.name) }
+            %a{ href: champion_path(name: champion.name) }
               = image_tag riot_image_link champion.name
               .stats
                 - win_rate = (champion.win_rate).round(2)

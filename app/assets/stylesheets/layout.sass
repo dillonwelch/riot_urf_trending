@@ -1,14 +1,27 @@
 $prime: #114455
+$blue-tint: rgba(17,68,85,.5)
 $secondary: #406976
 $red: #990000
+$red-tint: rgba(153,0,0,.5)
 $background: #333333
 $white: #fff
+$white-tint: rgba(255,255,255,.7)
+$black-tint: rgba(0,0,0,.7)
 
 body
   background-color: $background
+  background-image: url(image_path('riot_urf_background.jpg'))
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-position: center
+  background-size: 100%
 
-.hidden
-  opacity: 0
+.loading
+  opacity: 0.5
+
+.hideme
+  position: absolute
+  top: -9999px
 
 .block
   margin: 10px
@@ -21,15 +34,11 @@ body
   width: 100%
   height: 200px
   background-size: cover
-.banner
-  @extend .wide
-  color: white
-  background-image: url(image_path('riot_urf_background.jpg'))
 
 .header
   @extend .wide
-  background-color: $white
-  color: black
+  background-color: $black-tint
+  color: white
   h1
     font-size: 60px
 .stats-bg
@@ -37,7 +46,7 @@ body
   height: 400px
   margin-bottom: 50px
   margin-top: 50px
-  background-image: url(image_path('riot_urf_background.jpg'))
+  background-color: $black-tint
   .statsbox
     margin: auto
     table.stats_table
@@ -60,7 +69,7 @@ body
   @extend .wide
   height: 400px
   padding: 30px
-  background-image: url(image_path('teemo.jpg'))
+  background-color: $black-tint
   .well
     margin-left: auto
     margin-right: auto
@@ -73,59 +82,64 @@ body
     small
       font-size: 30px
 
-.center
-  margin-left: auto
-  margin-right: auto
-
-.text-center
-  text-align: center
-
-.bg-blur
-  position: fixed
+.bg-fix
+  background-color: $prime
   width: 100%
-  z-index: -1
-  -webkit-filter: blur(15px)
-  -moz-filter: blur(15px)
-  -o-filter: blur(15px)
-  -ms-filter: blur(15px)
-  filter: blur(15px)
-  img
+  height: 100%
+  position: fixed
+  z-index: -2
+  top: 0
+  left: 0
+  .bg-blur
+    position: fixed
     width: 100%
+    opacity: .5
+    z-index: -1
+    -webkit-filter: blur(15px)
+    -moz-filter: blur(15px)
+    -o-filter: blur(15px)
+    -ms-filter: blur(15px)
+    filter: blur(15px)
+    img
+      width: 100%
 .content
   position: relative
   width: 95%
   margin: auto
   nav.subnav
     float: right
-    margin-right: -10px
+    margin-right: 10px
     i
       color: white
-  main.show
+  .show
     aside
+      float: left
       font-size: 200%
-      width: 300px
-      background-color: $white
+      width: 400px
       border-radius: 25px
-      .name
-        width: 90%
-        float: left
-        font-size: 200%
-        background-color: $red
-        margin-top: -25px
-        margin-bottom: 20px
-        color: white
+      h1
+        background-color: $white
+        color: black
+        font-size: 150%
+        padding: 10px
+        border-radius: 25px 25px 0 0
+        height: 100px
+        img
+          float: right
       ul
-        margin-top: 10px
-        background-color: $prime
+        border-radius: 0 0 25px 25px
+        background-color: $blue-tint
         color: $white
         padding: none
         li
           list-style-type: none
           padding: 5px
       img
+        border: solid 3px $white
         border-radius: 50%
   main.index
     table
+      width: 100%
       canvas
         width: 100px
         height: 50px
@@ -140,8 +154,8 @@ body
           position: relative
           width: 500px
           padding: 25px
-          border: solid 10px $background
-          background-color: white
+          border: solid 10px transparent
+          background-color: $white-tint
           border-radius: 25px
           .name
             width: 100%
@@ -165,7 +179,7 @@ body
             padding-top: 5px
           dl
             padding: 5px
-            width: 400px
+            width: 385px
             dd
               font-size: 125%
               margin-left: 5px

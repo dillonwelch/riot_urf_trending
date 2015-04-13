@@ -1,76 +1,22 @@
 $(document).ready ->
-  if $(".charts").length
-    $.ajax(
-      url: '/api/champions/best_win_rate_with_history'
-      type: 'GET'
-      success: (result) ->
-        position = 1
-        $.each result, (name, hours) ->
-          display_name = name.replace(" ", '')
-          bad_images = ['Fiddlesticks', 'Bard', 'Wukong']
-          if display_name == "Kog'Maw"
-            display_name = "KogMaw"
-          else if display_name == "Kha'Zix"
-            display_name = "Khazix"
-          else if display_name == "Rek'Sai"
-            display_name = "RekSai"
-          else if display_name == "Dr.Mundo"
-            display_name = "DrMundo"
-          else if display_name == "Cho'Gath"
-            display_name = "Chogath"
-          else if display_name == "LeBlanc"
-            display_name = "Leblanc"
-          else if display_name == "Vel'Koz"
-            display_name = "Velkoz"
-          else if $.inArray(display_name, bad_images) != -1
-            display_name = "Teemo"
-
-          $("#title#{position}").text("##{position}: #{name}")
-          $("#image#{position}").attr('src', "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/#{display_name}.png")
-          ctx = $("#chart#{position}").get(0).getContext('2d')
-          options = {
-            multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>%"
-            scaleOverride: true
-            scaleStartValue: 0
-            scaleSteps: 10
-            scaleStepWidth: 10
-            scaleFontColor: "#fff"
-            scaleGridLineColor : "#406976"
-          }
-          data = {
-              labels: ["6 hours", "5 hours", "4 hours", "3 hours", "2 hours", "1 hour"],
-              datasets: [
-                  {
-                      label: "Win Rate",
-                      fillColor: "rgba(151,187,205,0.2)",
-                      strokeColor: "rgba(151,187,205,1)",
-                      pointColor: "rgba(151,187,205,1)",
-                      pointStrokeColor: "#fff",
-                      pointHighlightFill: "#fff",
-                      pointHighlightStroke: "rgba(151,187,205,1)",
-                      data: [hours[6], hours[5], hours[4], hours[3], hours[2], hours[1]]
-                  }
-              ]
-          }
-          myLineChart = new Chart(ctx).Line(data, options)
-          position += 1
-    )
-
   if $('.show canvas').length
     $.ajax(
-      url: "#{$('h1').text()}/last_day"
+      url: "/api/champions/#{$('h1').text().trim()}/overall"
       type: 'GET'
       success: (result) ->
         canvas = $('.show canvas').get(0).getContext('2d')
         win_rates = []
         pick_rates = []
+        total = []
         labels = []
         $.each result, (key, value) ->
-          win_rates.push(value.win_rate)
-          pick_rates.push(value.pick_rate)
-          labels.push(key)
+          win_rates.push(value.win_rate.toFixed(2))
+          pick_rates.push(value.pick_rate.toFixed(2))
+          total.push(value.total_victories + value.total_losses)
+          labels.push("#{value.month}/#{value.day}")
 
         options = {
+          multiTooltipTemplate: "<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>"
           scaleOverride: true
           scaleStartValue: 0
           scaleSteps: 10
@@ -101,7 +47,17 @@ $(document).ready ->
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(151,187,205,1)",
                     data: pick_rates
-                }
+                },
+                {
+                    label: "Total wins and losses",
+                    fillColor: "rgba(0,0,0,0)",
+                    strokeColor: "rgba(0,0,0,0)",
+                    pointColor: "rgba(0,0,0,0)",
+                    pointStrokeColor: "rgba(0,0,0,0)",
+                    pointHighlightFill: "rgba(0,0,0,0)",
+                    pointHighlightStroke: "rgba(0,0,0,0)",
+                    data: total
+                },
             ]
         }
         chart = new Chart(canvas).Line(data, options)
@@ -136,14 +92,14 @@ $(document).ready ->
 
 
     $('.content table').css('opacity', 0.5)
-    $('.js-loading').removeClass('hidden')
+    $('.js-loading').removeClass('hideme')
     $.ajax(
       url: "/champions?order=#{order}&asc=#{asc}"
       dataType: 'text'
       type: 'GET'
       success: (html) ->
         $('.content main').replaceWith(html)
-        $('.js-loading').addClass('hidden')
+        $('.js-loading').addClass('hideme')
         $.each buttons, (_key, button) ->
           $(button).removeAttr('disabled')
     )

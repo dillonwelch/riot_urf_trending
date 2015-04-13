@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   root 'application#index'
 
+  get '/champions/:name', to: 'champions#show', as: :champion
+
   namespace :champions do
     get '/', action: :index
-    get '/search', action: :search
+    get '/search', action: :show
     get '/roles', action: :primary_role
-    get '/by_win_rate', action: :by_win_rate
-
-    get '/:name/last_day', action: :last_day
   end
 
   namespace :api do
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
       get '/:name/kills',  action: :kills
       get '/:name/deaths', action: :deaths
 
-      get '/best_win_rate_with_history', action: :best_win_rate_with_history
+      get '/:name/overall', action: :overall
     end
 
     namespace :matches do
