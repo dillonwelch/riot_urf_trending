@@ -4,6 +4,11 @@ module ApplicationHelper
     "#{transform_display_name(display_name)}.png"
   end
 
+  def riot_splash_link(display_name)
+    'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/'\
+    "#{transform_display_name(display_name)}_0.jpg"
+  end
+
   def button_is_active?(value, order_param = params[:order])
     order = (order_param.nil? ? 'win_rate' : order_param)
     order == value.to_s

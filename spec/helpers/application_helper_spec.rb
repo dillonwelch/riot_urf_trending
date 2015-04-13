@@ -28,6 +28,35 @@ RSpec.describe ApplicationHelper do
     end
   end
 
+  describe '#riot_splash_link' do
+    def link(name)
+      "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{name}_0.jpg"
+    end
+
+    describe 'special names' do
+      { "Kog'Maw": 'KogMaw', "Kha'Zix": 'Khazix', "Cho'Gath": 'Chogath',
+        "Vel'Koz": 'Velkoz', 'Dr.Mundo': 'DrMundo', 'LeBlanc': 'Leblanc',
+        'Fiddlesticks': 'FiddleSticks',
+        'Wukong': 'MonkeyKing' }.each do |key, value|
+        describe "#{key}" do
+          it "returns #{value}" do
+            expect(riot_splash_link(key.to_s)).to eq link value
+          end
+        end
+      end
+    end
+
+    describe 'regular names' do
+      %w(Sona Teemo Amumu).each do |name|
+        describe "#{name}" do
+          it "returns #{name}" do
+            expect(riot_splash_link(name)).to eq link name
+          end
+        end
+      end
+    end
+  end
+
   describe '#button_is_active?' do
     context 'order_param is nil' do
       context 'value matches default' do

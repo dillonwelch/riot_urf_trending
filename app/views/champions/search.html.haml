@@ -1,7 +1,7 @@
 .content
   %main.show
     %aside
-      = image_tag riot_image_link @champion.name
+      = image_tag riot_splash_link @champion.name
       %h1= @champion.name
       %ul
         %li= "Win rate: #{(@champion.win_rate * 100).round(2)}"
