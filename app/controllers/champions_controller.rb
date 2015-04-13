@@ -6,7 +6,7 @@ class ChampionsController < ApplicationController
         select sum(victories + losses) from champion_matches_stats
       ) * 100 as pick_rate,
       champion_id, name'
-    ).joins(:champion).group(:champion_id, :name)
+    ).joins(:champion).group(:champion_id, :name).reorder('win_rate desc')
 
     if params[:order] == 'win_rate'
       if params[:asc] == 'true'
