@@ -58,10 +58,12 @@ $(document).ready ->
 
   $('.js-sort-champions button').on 'click', ->
     button = $(this)
-    buttons = $('.js-sort-champions button').not(button)
-    $.each buttons, (_key, button) ->
+    button.attr('disabled', true)
+    buttons = $('.js-sort-champions button')
+    $.each buttons.not(button), (_key, button) ->
       button = $(button)
       span = button.find('span')
+      button.attr('disabled', true)
       button.removeClass('active')
       span.removeClass('glyphicon-chevron-down')
       span.removeClass('glyphicon-chevron-up')
@@ -91,4 +93,6 @@ $(document).ready ->
       success: (html) ->
         $('.content main').replaceWith(html)
         $('.js-loading').text('')
+        $.each buttons, (_key, button) ->
+          $(button).removeAttr('disabled')
     )
