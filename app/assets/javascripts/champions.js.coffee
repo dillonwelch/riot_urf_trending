@@ -1,7 +1,7 @@
 $(document).ready ->
   if $('.show canvas').length
     $.ajax(
-      url: "#{$('h1').text()}/last_day"
+      url: "/api/champions/#{$('h1').text()}/overall"
       type: 'GET'
       success: (result) ->
         canvas = $('.show canvas').get(0).getContext('2d')
