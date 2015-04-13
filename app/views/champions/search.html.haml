@@ -3,7 +3,6 @@
     = image_tag riot_splash_link @champion.name
 .content
   %main.show
-    %canvas
     %aside
       %h1
         = @champion.name
@@ -17,3 +16,5 @@
         %li= "Average win rate: #{average_win_rate.abs}% #{ average_win_rate < 0 ? "below" : 'above'} average"
         %li= "Pick rate: #{"%.2f" % pick_rate}"
         %li= "Average pick rate: #{average_pick_rate.abs}% #{ average_pick_rate < 0 ? "below" : 'above'} average"
+    %main
+      %canvas
