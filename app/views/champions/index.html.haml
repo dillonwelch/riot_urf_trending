@@ -1,14 +1,15 @@
-.content.js-champions-index
-  .btn-group.js-sort-champions{ role: 'group' }
-    %button.js-win-rate.btn.btn-default.active{ type: 'button', value: 'win_rate' }
-      %span.glyphicon.glyphicon-chevron-down
-      = 'Win rate'
-    %button.js-pick-rate.btn.btn-default{ type: 'button', value: 'pick_rate' }
-      %span.glyphicon
-      = 'Pick rate'
-    %button.js-name.btn.btn-default{ type: 'button', value: 'name' }
-      %span.glyphicon
-      = 'Name'
-  -# %span.js-loading
-  = fa_icon 'spinner spin', class: 'js-loading hidden'
+.content
+  %nav.subnav.js-champions-index
+    = fa_icon 'spinner spin', class: 'js-loading hidden'
+    .btn-group.js-sort-champions{ role: 'group' }
+      %button.js-win-rate.btn.btn-default.active{ type: 'button', value: 'win_rate' }
+        %span.glyphicon.glyphicon-chevron-down
+        = 'Win rate'
+      %button.js-pick-rate.btn.btn-default{ type: 'button', value: 'pick_rate' }
+        %span.glyphicon
+        = 'Pick rate'
+      %button.js-name.btn.btn-default{ type: 'button', value: 'name' }
+        %span.glyphicon
+        = 'Name'
+    -# %span.js-loading
   = render 'all_champions'
