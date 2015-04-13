@@ -2,14 +2,12 @@
   %nav.subnav.js-champions-index
     = fa_icon 'spinner spin', class: 'js-loading hidden'
     .btn-group.js-sort-champions{ role: 'group' }
-      %button.js-win-rate.btn.btn-default.active{ type: 'button', value: 'win_rate' }
-        %span.glyphicon.glyphicon-chevron-down
-        = 'Win rate'
-      %button.js-pick-rate.btn.btn-default{ type: 'button', value: 'pick_rate' }
-        %span.glyphicon
-        = 'Pick rate'
-      %button.js-name.btn.btn-default{ type: 'button', value: 'name' }
-        %span.glyphicon
-        = 'Name'
-    -# %span.js-loading
+      - t('.buttons').each do |value, text|
+        - order = (params[:order].nil? ? 'win_rate' : params[:order])
+        - active = (order == value.to_s)
+        - active_class = (active == true ? 'active' : '')
+        - span_class = active ? (params[:asc] == 'true' ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down') : ''
+        %button.btn.btn-default{ class: active_class, type: 'button', value: value.to_s }
+          %span.glyphicon{ class: span_class }
+          = text
   = render 'all_champions'
