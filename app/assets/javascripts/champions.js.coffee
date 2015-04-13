@@ -85,14 +85,14 @@ $(document).ready ->
 
 
     $('.content main').css('opacity', 0.5)
-    $('.js-loading').text('loading...')
+    $('.js-loading').toggleClass('hidden')
     $.ajax(
       url: "/champions?order=#{order}&asc=#{asc}"
       dataType: 'text'
       type: 'GET'
       success: (html) ->
         $('.content main').replaceWith(html)
-        $('.js-loading').text('')
+        $('.js-loading').toggleClass('hidden')
         $.each buttons, (_key, button) ->
           $(button).removeAttr('disabled')
     )

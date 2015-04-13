@@ -9,5 +9,6 @@
     %button.js-name.btn.btn-default{ type: 'button', value: 'name' }
       %span.glyphicon
       = 'Name'
-  %span.js-loading
+  -# %span.js-loading
+  = fa_icon 'spinner spin', class: 'js-loading hidden'
   = render 'all_champions'
