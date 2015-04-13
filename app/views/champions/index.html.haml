@@ -1,31 +1,12 @@
-.content.js-champions-index
-  %main.index
-    %table.center
-      - index = 0
-      - @champions.each_slice(3) do |slice|
-        %tr
-          - slice.each do |champion|
-            - index += 1
-            %td
-              %a{ href: champions_search_path(name: champion.name) }
-                = image_tag riot_image_link champion.name
-                .stats
-                  - win_rate = (champion.win_rate).round(2)
-                  - pick_rate = (champion.pick_rate).round(2)
-                  - average_win_rate = (((win_rate / @average_win_rate) - 1) * 100).round(2)
-                  - average_pick_rate = (((pick_rate / @average_pick_rate) - 1) * 100).round(2)
-                  %dl
-                    %dd= "#{"%.2f" % win_rate}%"
-                    %dt= t('.win_rate')
-                    %dd= "#{average_win_rate.abs}%"
-                    %dt= "#{ average_win_rate < 0 ? "below" : 'above'} average"
-                  %dl
-                    %dd= "#{"%.2f" % pick_rate}%"
-                    %dt.pick-rate= t('.pick_rate')
-                    %dd= "#{average_pick_rate.abs}%"
-                    %dt= "#{ average_pick_rate < 0 ? "below" : 'above'} average"
-                  %canvas.js-win-rate{ data: { "win-rate" => win_rate  } }
-                .name
-                  %h1
-                    = champion.name
-                .rank= index
+.header
+  %h1= t('.title')
+.content
+  %nav.subnav.js-champions-index
+    = fa_icon 'spinner spin', class: 'js-loading hidden'
+    .btn-group.js-sort-champions{ role: 'group' }
+      - t('.buttons').each do |value, text|
+        - active = button_is_active?(value)
+        %button.btn.btn-default{ class: button_active_class(active), type: 'button', value: value.to_s }
+          %span.glyphicon{ class: button_glyph_class(active) }
+          = text
+  = render 'all_champions'

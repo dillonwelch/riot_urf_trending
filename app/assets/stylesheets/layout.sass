@@ -1,6 +1,14 @@
 $prime: #114455
 $secondary: #406976
 $red: #990000
+$background: #333333
+$white: #fff
+
+body
+  background-color: $background
+
+.hidden
+  opacity: 0
 
 .block
   margin: 10px
@@ -20,8 +28,8 @@ $red: #990000
 
 .header
   @extend .wide
-  background-color: $prime
-  color: white
+  background-color: $white
+  color: black
   h1
     font-size: 60px
 .stats-bg
@@ -72,9 +80,50 @@ $red: #990000
 .text-center
   text-align: center
 
+.bg-blur
+  position: fixed
+  width: 100%
+  z-index: -1
+  -webkit-filter: blur(15px)
+  -moz-filter: blur(15px)
+  -o-filter: blur(15px)
+  -ms-filter: blur(15px)
+  filter: blur(15px)
+  img
+    width: 100%
 .content
+  position: relative
   width: 95%
   margin: auto
+  nav.subnav
+    float: right
+    margin-right: -10px
+    i
+      color: white
+  main.show
+    aside
+      font-size: 200%
+      width: 300px
+      background-color: $white
+      border-radius: 25px
+      .name
+        width: 90%
+        float: left
+        font-size: 200%
+        background-color: $red
+        margin-top: -25px
+        margin-bottom: 20px
+        color: white
+      ul
+        margin-top: 10px
+        background-color: $prime
+        color: $white
+        padding: none
+        li
+          list-style-type: none
+          padding: 5px
+      img
+        border-radius: 50%
   main.index
     table
       canvas
@@ -86,13 +135,13 @@ $red: #990000
       tr
         td
           a
-            color: white
+            color: $prime
             text-decoration: none
           position: relative
           width: 500px
           padding: 25px
-          border: solid 2px white
-          background-color: $prime
+          border: solid 10px $background
+          background-color: white
           border-radius: 25px
           .name
             width: 100%
@@ -100,6 +149,7 @@ $red: #990000
             margin-left: -25px
             margin-bottom: -20px
             margin-top: -25px
+            color: white
           .rank
             position: absolute
             top: 10px
