@@ -74,7 +74,9 @@ task backfill_urf_matches: [:environment] do
     ENV['BACKFILL_TIME'] = start_time.to_s
   end
 
-  while true do
+  end_time = Time.parse('13 Apr 2015 08:00').to_i
+
+  while ENV['BACKFILL_TIME'].to_i < end_time do
     time = ENV['BACKFILL_TIME'].to_i
     Rake::Task['get_urf_matches'].reenable
     Rake::Task['get_urf_matches'].invoke(time)
@@ -112,7 +114,7 @@ end
 task backfill_calculate_stats: [:environment] do
   ChampionMatchesStat.delete_all
   start_time = Time.at(1427865900) - 1.hour - 25.minutes
-  end_time = Time.parse('20 Apr 2015')
+  end_time = Time.parse('13 Apr 2015 08:00')
   time = start_time
   while time < end_time do
     Rake::Task['calculate_stats'].reenable
