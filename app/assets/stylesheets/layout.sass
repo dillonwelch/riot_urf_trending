@@ -2,7 +2,7 @@ $prime: #114455
 $blue-tint: rgba(17,68,85,.5)
 $secondary: #406976
 $red: #990000
-$red-tint: rgba(153,0,0,.5)
+$red-tint: rgba(153,0,0,.7)
 $background: #333333
 $white: #fff
 $white-tint: rgba(255,255,255,.7)
@@ -191,17 +191,18 @@ body
             margin-bottom: -40px
             margin-top: 0px
           a
-            color: $prime
+            color: $white
             text-decoration: none
+          color: $white
           position: relative
           width: 500px
           padding: 20px
           border: solid 10px transparent
-          background-color: $white-tint
+          background-color: $black-tint
           border-radius: 25px
           .name
             width: 100%
-            background-color: $red
+            background-color: $red-tint
             margin-left: -20px
             margin-bottom: -20px
             margin-top: 20px
@@ -214,7 +215,7 @@ body
             height: 50px
             width: 50px
             border-radius: 50%
-            background-color: black
+            background-color: $prime
             text-align: center
             vertical-align: text-top
             color: white
