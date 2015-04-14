@@ -43,6 +43,7 @@ en:
     tooltips:
       win_rate: Win Rate
       pick_rate: Pick Rate
+      games_played: Games Played
       below_avg: Below Average
       above_avg: Above Average
     show:

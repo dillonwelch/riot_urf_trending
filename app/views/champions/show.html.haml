@@ -11,6 +11,21 @@
         champion: @champion,
         average_win_rate: @average_win_rate,
         average_pick_rate: @average_pick_rate
+      - kills = round_rate(@champion.per_game_kills)
+      - deaths = round_rate(@champion.per_game_deaths)
+      - assists = round_rate(@champion.per_game_assists)
+      - average_kills = normalize_average_rate(kills, @champion.average_kills)
+      - average_deaths = normalize_average_rate(deaths, @champion.average_deaths)
+      - average_assists = normalize_average_rate(assists, @champion.average_assists)
+      %ul
+        - [[kills, average_kills, 'kills'],
+          [deaths, average_deaths, 'deaths',],
+          [assists, average_assists, 'assists']].each do |(k, avg, key)|
+          %li.kda
+            = "#{k} Avg #{key}"
+          %li{ class: rate_class(avg), 'data-toggle': 'tooltip', title: rate_tooltip(avg) }
+            = "#{avg.abs}% "
+            = fa_icon(rate_glyph_class(avg))
     %main
       %h1= t('.chart_title')
       .charts
