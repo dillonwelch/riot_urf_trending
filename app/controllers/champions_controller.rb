@@ -74,7 +74,7 @@ class ChampionsController < ApplicationController
 
   rescue NoMethodError
     @name = params[:name]
-    render 'empty_search' && return
+    render 'empty_search' and return
   end
 
   def primary_role

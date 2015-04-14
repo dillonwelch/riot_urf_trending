@@ -48,7 +48,8 @@ en:
       above_avg: Above Average
     show:
       chart_title: URF Progression
-    primary_role:
-      title: All Primary Role Statistics
     empty_search:
       no_results: No champion by the name of %{name}.
+  roles:
+    index:
+      title: All Primary Role Statistics

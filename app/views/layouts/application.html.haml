@@ -17,8 +17,8 @@
                 (current)
           %li{ class: current_page?(champions_path) ? 'active' : '' }
             = link_to t('.champions_index'), champions_path
-          %li{ class: current_page?(champions_roles_path) ? 'active' : '' }
-            = link_to t('.roles_index'), champions_roles_path
+          %li{ class: current_page?(roles_path) ? 'active' : '' }
+            = link_to t('.roles_index'), roles_path
         = form_tag champions_search_path, method: :get, enforce_utf8: false, class:'navbar-form navbar-left' do
           = text_field_tag :name, nil, placeholder: 'Search by champion', class: 'form-control'
           %button.btn.btn-default{ type: 'submit' }= t('.search')
