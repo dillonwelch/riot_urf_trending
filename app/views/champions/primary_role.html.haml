@@ -1,10 +1,11 @@
 .content
-  - @roles.each_slice(3) do |slice|
-    .row
-      - slice.each do |role|
-        .col-md-1
-          = role.primary_role
-        .col-md-1
-          = (role.win_rate * 100).round(2)
-        .col-md-1
-          = (role.pick_rate * 100).round(2)
+  %main.misc
+    - @roles.each_slice(3) do |slice|
+      .row
+        - slice.each do |role|
+          .col-md-1
+            = role.primary_role
+          .col-md-1
+            = (role.win_rate * 100).round(2)
+          .col-md-1
+            = (role.pick_rate * 100).round(2)
