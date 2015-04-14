@@ -202,21 +202,21 @@ RSpec.describe ApplicationHelper do
     context 'rate below 0' do
       it 'returns below average' do
         expect(rate_tooltip(-0.12)).
-          to eq I18n.t('champions.all_champions.below_avg')
+          to eq I18n.t('champions.tooltips.below_avg')
       end
     end
 
     context 'rate at 0' do
       it 'returns above average' do
         expect(rate_tooltip(0)).
-          to eq I18n.t('champions.all_champions.above_avg')
+          to eq I18n.t('champions.tooltips.above_avg')
       end
     end
 
     context 'rate above 0' do
       it 'returns above average' do
         expect(rate_tooltip(0.12)).
-          to eq I18n.t('champions.all_champions.above_avg')
+          to eq I18n.t('champions.tooltips.above_avg')
       end
     end
   end

@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   def rate_tooltip(rate)
-    base_key = 'champions.all_champions'
+    base_key = 'champions.tooltips'
     rate < 0 ? I18n.t("#{base_key}.below_avg") : I18n.t("#{base_key}.above_avg")
   end
 
