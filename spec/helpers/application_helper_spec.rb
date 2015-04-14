@@ -104,19 +104,19 @@ RSpec.describe ApplicationHelper do
     context 'is active' do
       context 'ascending' do
         it 'returns the up icon class' do
-          expect(button_glyph_class(true, 'true')).to eq 'glyphicon-chevron-up'
+          expect(button_glyph_class(true, 'true')).to eq 'fa-caret-up'
         end
       end
 
       context 'descending' do
         it 'returns the down icon class' do
-          expect(button_glyph_class(true, 'false')).to eq 'glyphicon-chevron-down'
+          expect(button_glyph_class(true, 'false')).to eq 'fa-caret-down'
         end
       end
 
       context 'no ascending param' do
         it 'returns the down icon class' do
-          expect(button_glyph_class(true)).to eq 'glyphicon-chevron-down'
+          expect(button_glyph_class(true)).to eq 'fa-caret-down'
         end
       end
     end

@@ -20,7 +20,7 @@ module ApplicationHelper
 
   def button_glyph_class(is_active, is_asc=params[:asc])
     return '' unless is_active
-    is_asc == 'true' ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'
+    is_asc == 'true' ? 'fa-caret-up' : 'fa-caret-down'
   end
 
   def round_rate(rate, decimals=2)
