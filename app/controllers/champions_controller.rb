@@ -91,6 +91,7 @@ class ChampionsController < ApplicationController
       sum(victories + losses)::float / (
         select sum(victories + losses) from champion_matches_stats
       ) * 100 as pick_rate,
+      sum(victories + losses) as total_picks,
       primary_role'
     ).joins(:champion).group(:primary_role).reorder('win_rate desc')
   end

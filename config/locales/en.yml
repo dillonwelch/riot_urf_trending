@@ -20,7 +20,7 @@ en:
     application:
       title: RiotNurfTrending
       champions_index: All Champions
-      roles_index: All Roles
+      roles_index: All Primary Roles
       home: Home
       search: Search
   application:
@@ -49,6 +49,6 @@ en:
     show:
       chart_title: URF Progression
     primary_role:
-      title: All Role Statistics
+      title: All Primary Role Statistics
     empty_search:
       no_results: No champion by the name of %{name}.

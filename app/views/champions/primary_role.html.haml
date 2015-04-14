@@ -9,13 +9,20 @@
           - slice.each do |role|
             - index += 1
             %td
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/profileicon/657.png'
+              = image_tag riot_role_link role.primary_role
               .stats
                 %ul
-                  %li
+                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
+                    = number_with_delimiter role.total_picks
+                    = fa_icon('gamepad')
+                %ul
+                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
                     = round_rate(role.win_rate)
-                  %li
+                    = fa_icon('trophy')
+                %ul
+                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
                     = round_rate(role.pick_rate)
+                    = fa_icon('users')
               .name
                 %h1= role.primary_role
               .rank= index
