@@ -2,9 +2,9 @@
   .bg-blur
     = image_tag riot_splash_link @champion.name
 .content
-  %main.show
+  .show
     %aside
-      %h1
+      %h1#js-champion-name
         = @champion.name
         = image_tag riot_image_link @champion.name
       %ul
@@ -25,6 +25,6 @@
             = "#{average_pick_rate.abs}% "
           %span= "#{ average_pick_rate < 0 ? "below" : 'above'} average"
     %main
-      %h1 Charts
+      %h1 URF Progression
       .charts
         %canvas
