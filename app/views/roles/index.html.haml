@@ -16,6 +16,8 @@
                     %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
                       = number_with_delimiter role.total_picks
                       = fa_icon('gamepad')
+                    %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
+                      = fa_icon 'line-chart'
                   %ul
                     %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
                       = "#{round_rate(role.win_rate)}%"

@@ -46,6 +46,7 @@ en:
       games_played: Games Played
       below_avg: Below Average
       above_avg: Above Average
+      more_info: Click for more info
     show:
       chart_title: URF Progression
     empty_search:
