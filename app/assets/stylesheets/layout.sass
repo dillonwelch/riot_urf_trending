@@ -8,6 +8,12 @@ $white: #fff
 $white-tint: rgba(255,255,255,.7)
 $black-tint: rgba(0,0,0,.7)
 
+// Font Smoothing
+// http://www.icondeposit.com/blog:how-to-properly-smooth-font-using-css3
+html, html a
+  -webkit-font-smoothing: antialiased
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004)
+
 body
   background-color: $background
   background-image: url(image_path('riot_urf_background.jpg'))
@@ -204,3 +210,6 @@ body
   canvas
     width: 1200px
     height: 300px
+
+.urf
+  color: white
