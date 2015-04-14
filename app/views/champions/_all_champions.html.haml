@@ -9,24 +9,10 @@
             %a{ href: champion_path(name: champion.name) }
               = image_tag riot_image_link champion.name
               .stats
-                - win_rate = round_rate(champion.win_rate)
-                - pick_rate = round_rate(champion.pick_rate)
-                - average_win_rate = normalize_average_rate(win_rate,  @average_win_rate)
-                - average_pick_rate = normalize_average_rate(pick_rate, @average_pick_rate)
-                %ul
-                  %li
-                    = "#{"%.2f" % win_rate}% "
-                    %i.fa.fa-trophy{ 'data-toggle': 'tooltip', title: t('.win_rate') }
-                  %li{ class: rate_class(average_win_rate) }
-                    = "#{average_win_rate.abs}% "
-                    %i.fa{ class: rate_glyph_class(average_win_rate), 'data-toggle': 'tooltip', title: rate_tooltip(average_win_rate) }
-                %ul
-                  %li
-                    = "#{"%.2f" % pick_rate}%"
-                    %i.fa.fa-users{ 'data-toggle': 'tooltip', title: t('.pick_rate') }
-                  %li{ class: rate_class(average_pick_rate) }
-                    = "#{average_pick_rate.abs}% "
-                    %i.fa{ class: rate_glyph_class(average_pick_rate), 'data-toggle': 'tooltip', title: rate_tooltip(average_pick_rate) }
+                = render 'champion_stats',
+                  champion: champion,
+                  average_win_rate: @average_win_rate,
+                  average_pick_rate: @average_pick_rate
                 -# %ul
                 -#   %li
                 -#     = "#{champion.total_picks}"
