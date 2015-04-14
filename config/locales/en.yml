@@ -43,8 +43,10 @@ en:
         pick_rate: Pick Rate
         name: Name
     all_champions:
-      win_rate: win rate
-      pick_rate: pick rate
+      win_rate: Win Rate
+      pick_rate: Pick Rate
+      below_avg: Below Average
+      above_avg: Above Average
     empty_search:
       no_results: No champion by the name of %{name}.
     by_win_rate:
