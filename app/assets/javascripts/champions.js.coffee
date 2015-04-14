@@ -1,7 +1,7 @@
 $(document).ready ->
   if $('.show canvas').length
     $.ajax(
-      url: "/api/champions/#{$('h1').text().trim()}/overall"
+      url: "/api/champions/#{$('#js-champion-name').text().trim()}/overall"
       type: 'GET'
       success: (result) ->
         canvas = $('.show canvas').get(0).getContext('2d')
@@ -63,32 +63,35 @@ $(document).ready ->
         chart = new Chart(canvas).Line(data, options)
     )
 
+  upIcon = 'fa-caret-up'
+  downIcon = 'fa-caret-down'
+
   $('.js-sort-champions button').on 'click', ->
     button = $(this)
     button.attr('disabled', true)
     buttons = $('.js-sort-champions button')
     $.each buttons.not(button), (_key, button) ->
       button = $(button)
-      span = button.find('span')
+      icon = button.find('i')
       button.attr('disabled', true)
       button.removeClass('active')
-      span.removeClass('glyphicon-chevron-down')
-      span.removeClass('glyphicon-chevron-up')
+      icon.removeClass(downIcon)
+      icon.removeClass(upIcon)
 
     order = button.attr('value')
-    span = button.find('span')
+    icon = button.find('i')
     button.addClass('active')
 
     asc = false
-    if span.hasClass('glyphicon-chevron-down')
+    if icon.hasClass(downIcon)
       asc = true
 
     if asc == true
-      span.addClass('glyphicon-chevron-up')
-      span.removeClass('glyphicon-chevron-down')
+      icon.addClass(upIcon)
+      icon.removeClass(downIcon)
     else
-      span.removeClass('glyphicon-chevron-up')
-      span.addClass('glyphicon-chevron-down')
+      icon.removeClass(upIcon)
+      icon.addClass(downIcon)
 
 
     $('.content table').css('opacity', 0.5)

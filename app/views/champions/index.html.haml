@@ -7,6 +7,6 @@
       - t('.buttons').each do |value, text|
         - active = button_is_active?(value)
         %button.btn.btn-default{ class: button_active_class(active), type: 'button', value: value.to_s }
-          %span.glyphicon{ class: button_glyph_class(active) }
+          = fa_icon button_glyph_class(active)
           = text
   = render 'all_champions'
