@@ -74,7 +74,7 @@ class ChampionsController < ApplicationController
 
   rescue NoMethodError
     @name = params[:name]
-    render 'empty_search' and return
+    render 'empty_search' and return # rubocop:disable Style/AndOr
   end
 
   def primary_role

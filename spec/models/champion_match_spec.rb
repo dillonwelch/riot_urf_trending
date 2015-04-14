@@ -223,7 +223,6 @@ RSpec.describe ChampionMatch do
       end
     end
 
-
     describe 'multiple champions' do
       let(:winner)  { create(:champion) }
       let(:average) { create(:champion) }
@@ -234,15 +233,30 @@ RSpec.describe ChampionMatch do
 
       before do
         5.times do
-          create(:champion_match, champion: winner, match: match, kills: 1, deaths: 2, assists: 3)
+          create(:champion_match,
+                 champion: winner,
+                 match: match,
+                 kills: 1,
+                 deaths: 2,
+                 assists: 3)
         end
 
         3.times do
-          create(:champion_match, champion: average, match: match, kills: 2, deaths: 0, assists: 1)
+          create(:champion_match,
+                 champion: average,
+                 match: match,
+                 kills: 2,
+                 deaths: 0,
+                 assists: 1)
         end
 
         1.times do
-          create(:champion_match, champion: loser, match: match, kills: 1, deaths: 1, assists: 1)
+          create(:champion_match,
+                 champion: loser,
+                 match: match,
+                 kills: 1,
+                 deaths: 1,
+                 assists: 1)
         end
       end
 

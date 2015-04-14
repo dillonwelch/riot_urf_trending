@@ -6,6 +6,6 @@ class Champion < ActiveRecord::Base
   has_one :champion_api_data
 
   def self.find_by_lower_name(name)
-    where("lower(name) = lower(?)", name)
+    where('lower(name) = lower(?)', name)
   end
 end
