@@ -27,7 +27,7 @@
                   %li{ class: rate_class(average_pick_rate) }
                     = "#{average_pick_rate.abs}% "
                     %i.fa{ class: rate_glyph_class(average_pick_rate), 'data-toggle': 'tooltip', title: rate_tooltip(average_pick_rate) }
-                -# %div= "Picked #{champion.total_picks} times"
+                %h3= "Picked #{champion.total_picks} times"
               .name
                 %h1
                   = champion.name
