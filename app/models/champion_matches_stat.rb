@@ -22,7 +22,7 @@ class ChampionMatchesStat < ActiveRecord::Base
     ).joins(:champion)
   end
 
-  def self.individual_champion_stats(champion)
+  def self.individual_stats
     select(
       '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
       sum(victories + losses)::float / (
@@ -48,7 +48,17 @@ class ChampionMatchesStat < ActiveRecord::Base
           ( select sum(victories + losses) from champion_matches_stats )
         from champion_matches_stats
       ) as average_assists'
-    ).joins(:champion).where(champion_id: champion.id).reorder('')
+    ).reorder('')
+  end
+
+  def self.individual_champion_stats(champion)
+    individual_stats.joins(:champion).where(champion_id: champion.id).
+      select('champion_id, name').group(:champion_id, :name).first
+  end
+
+  def self.individual_role_stats(role)
+    individual_stats.joins(:champion).where('primary_role = ?', role).
+      select(:primary_role).group(:primary_role).first
   end
 
   def self.overall_for_champion(champion)

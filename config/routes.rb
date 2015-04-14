@@ -8,12 +8,12 @@ Rails.application.routes.draw do
     get '/', action: :index
     get '/search', action: :show
   end
-
   get '/champions/:name', to: 'champions#show', as: :champion
 
   namespace :roles do
     get '/', action: :index
   end
+  get '/roles/:name', to: 'roles#show', as: :role
 
   namespace :api do
     namespace :champions do

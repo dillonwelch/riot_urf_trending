@@ -34,8 +34,7 @@ class ChampionsController < ApplicationController
   end
 
   def show
-    @champion = ChampionMatchesStat.individual_champion_stats(champion).
-      select('champion_id, name').group(:champion_id, :name).first
+    @champion = ChampionMatchesStat.individual_champion_stats(champion)
 
     @champions = ChampionMatchesStat.select(
       '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
