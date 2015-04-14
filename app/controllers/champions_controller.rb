@@ -34,34 +34,8 @@ class ChampionsController < ApplicationController
   end
 
   def show
-    @champion = ChampionMatchesStat.select(
-      '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
-      sum(victories + losses)::float / (
-        select sum(victories + losses) from champion_matches_stats
-      ) * 100 as pick_rate,
-      sum(victories + losses) as total_picks,
-      sum(kills)::float / sum(victories + losses) as per_game_kills,
-      sum(deaths)::float / sum(victories + losses) as per_game_deaths,
-      sum(assists)::float / sum(victories + losses) as per_game_assists,
-
-      (
-        select sum(kills)::float /
-          ( select sum(victories + losses) from champion_matches_stats )
-        from champion_matches_stats
-      ) as average_kills,
-      (
-        select sum(deaths)::float /
-          ( select sum(victories + losses) from champion_matches_stats )
-        from champion_matches_stats
-      ) as average_deaths,
-      (
-        select sum(assists)::float /
-          ( select sum(victories + losses) from champion_matches_stats )
-        from champion_matches_stats
-      ) as average_assists,
-      champion_id, name'
-    ).joins(:champion).where(champion_id: champion.id).
-                group(:champion_id, :name).reorder('').first
+    @champion = ChampionMatchesStat.individual_champion_stats(champion).
+      select('champion_id, name').group(:champion_id, :name).first
 
     @champions = ChampionMatchesStat.select(
       '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
