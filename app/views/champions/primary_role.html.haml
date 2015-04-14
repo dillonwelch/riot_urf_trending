@@ -1,11 +1,28 @@
+.header
+  %h1= t('.title')
 .content
-  %main.misc
-    - @roles.each_slice(3) do |slice|
-      .row
-        - slice.each do |role|
-          .col-md-1
-            = role.primary_role
-          .col-md-1
-            = (role.win_rate * 100).round(2)
-          .col-md-1
-            = (role.pick_rate * 100).round(2)
+  %main.index.role-index
+    %table.center
+      - index = 0
+      - @roles.each_slice(3) do |slice|
+        %tr
+          - slice.each do |role|
+            - index += 1
+            %td
+              = image_tag riot_role_link role.primary_role
+              .stats
+                %ul
+                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
+                    = number_with_delimiter role.total_picks
+                    = fa_icon('gamepad')
+                %ul
+                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
+                    = round_rate(role.win_rate)
+                    = fa_icon('trophy')
+                %ul
+                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
+                    = round_rate(role.pick_rate)
+                    = fa_icon('users')
+              .name
+                %h1= role.primary_role
+              .rank= index

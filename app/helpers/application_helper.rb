@@ -9,6 +9,10 @@ module ApplicationHelper
     "#{transform_display_name(display_name)}_0.jpg"
   end
 
+  def riot_role_link(display_name)
+    "http://ddragon.leagueoflegends.com/cdn/5.7.1/img/profileicon/#{role_image_id(display_name)}.png"
+  end
+
   def button_is_active?(value, order_param=params[:order])
     order = (order_param.nil? ? 'win_rate' : order_param)
     order == value.to_s
@@ -49,18 +53,20 @@ module ApplicationHelper
   def transform_display_name(raw_name)
     display_name = raw_name.gsub(/ /, '')
 
-    hash = {
-      "Kog'Maw" => 'KogMaw',    "Kha'Zix"      => 'Khazix',
-      "Rek'Sai" => 'RekSai',    "Cho'Gath"     => 'Chogath',
-      "Vel'Koz" => 'Velkoz',    'Dr.Mundo'     => 'DrMundo',
-      'LeBlanc' => 'Leblanc',   'Fiddlesticks' => 'FiddleSticks',
-      'Wukong'  => 'MonkeyKing'
-    }
-
     begin
-      hash.fetch(display_name)
+      { "Kog'Maw" => 'KogMaw',    "Kha'Zix"      => 'Khazix',
+        "Rek'Sai" => 'RekSai',    "Cho'Gath"     => 'Chogath',
+        "Vel'Koz" => 'Velkoz',    'Dr.Mundo'     => 'DrMundo',
+        'LeBlanc' => 'Leblanc',   'Fiddlesticks' => 'FiddleSticks',
+        'Wukong'  => 'MonkeyKing' }.fetch(display_name)
     rescue KeyError
       return display_name
     end
+  end
+
+  def role_image_id(role)
+    { 'Assassin' => 657, 'Fighter'  => 658,
+      'Mage'     => 659, 'Marksman' => 660,
+      'Support'  => 661, 'Tank'     => 662 }.fetch(role)
   end
 end

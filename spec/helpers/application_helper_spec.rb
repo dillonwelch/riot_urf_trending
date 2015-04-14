@@ -57,6 +57,22 @@ RSpec.describe ApplicationHelper do
     end
   end
 
+  describe '#riot_role_link' do
+    def link(id)
+      "http://ddragon.leagueoflegends.com/cdn/5.7.1/img/profileicon/#{id}.png"
+    end
+
+    { 'Assassin' => 657, 'Fighter'  => 658,
+      'Mage'     => 659, 'Marksman' => 660,
+      'Support'  => 661, 'Tank'     => 662 }.each do |name, id|
+      describe "#{name}" do
+        it 'returns the right link' do
+          expect(riot_role_link(name)).to eq link id
+        end
+      end
+    end
+  end
+
   describe '#button_is_active?' do
     context 'order_param is nil' do
       context 'value matches default' do
