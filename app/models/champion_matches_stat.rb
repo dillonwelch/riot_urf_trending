@@ -28,6 +28,7 @@ class ChampionMatchesStat < ActiveRecord::Base
         select sum(victories + losses) as total_picks, start_time
         from champion_matches_stats
         group by start_time
+        order by start_time
       ) as pick_rate_table on pick_rate_table.start_time =
                               champion_matches_stats.start_time'
     ).joins(:champion).where(champion_id: champion.id).

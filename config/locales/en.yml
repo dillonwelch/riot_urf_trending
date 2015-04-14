@@ -32,6 +32,9 @@ en:
       total_kills: Champions Slain
       total_deaths: Executions
       teemo_corpses: Teemo Corpses
+    about:
+      title: About
+      page_title: Lol Urf History
   champions:
     index:
       title: All Champion Statistics

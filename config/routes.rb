@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
   root 'application#index'
 
+  get '/about', to: 'application#about'
+  get '/urf', to: 'application#urf'
+
   namespace :champions do
     get '/', action: :index
-    get '/search', action: :search
+    get '/search', action: :show
     get '/roles', action: :primary_role
   end
+
+  get '/champions/:name', to: 'champions#show', as: :champion
 
   namespace :api do
     namespace :champions do

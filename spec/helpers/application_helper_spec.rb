@@ -104,19 +104,19 @@ RSpec.describe ApplicationHelper do
     context 'is active' do
       context 'ascending' do
         it 'returns the up icon class' do
-          expect(button_glyph_class(true, 'true')).to eq 'glyphicon-chevron-up'
+          expect(button_glyph_class(true, 'true')).to eq 'fa-caret-up'
         end
       end
 
       context 'descending' do
         it 'returns the down icon class' do
-          expect(button_glyph_class(true, 'false')).to eq 'glyphicon-chevron-down'
+          expect(button_glyph_class(true, 'false')).to eq 'fa-caret-down'
         end
       end
 
       context 'no ascending param' do
         it 'returns the down icon class' do
-          expect(button_glyph_class(true)).to eq 'glyphicon-chevron-down'
+          expect(button_glyph_class(true)).to eq 'fa-caret-down'
         end
       end
     end
@@ -138,6 +138,42 @@ RSpec.describe ApplicationHelper do
         it 'returns empty string' do
           expect(button_glyph_class(false)).to eq ''
         end
+      end
+    end
+  end
+
+  describe '#normalize_average_rate' do
+    it 'normalizes the rate' do
+      expect(normalize_average_rate(1.23, 4.56)).to eq -73.03
+    end
+  end
+
+  describe '#round_rate' do
+    it 'rounds by default to 2 places' do
+      expect(round_rate(12.345678)).to eq 12.35
+    end
+
+    it 'accepts a decimal param' do
+      expect(round_rate(12.345678, 4)).to eq 12.3457
+    end
+  end
+
+  describe '#rate_class' do
+    context 'rate below 0' do
+      it 'returns below-average' do
+        expect(rate_class(-0.234)).to eq 'below-average'
+      end
+    end
+
+    context 'rate at 0' do
+      it 'returns above-average' do
+        expect(rate_class(0)).to eq 'above-average'
+      end
+    end
+
+    context 'rate above 0' do
+      it 'returns above-average' do
+        expect(rate_class(0.345)).to eq 'above-average'
       end
     end
   end
