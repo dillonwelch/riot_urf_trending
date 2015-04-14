@@ -20,7 +20,7 @@ module ApplicationHelper
 
   def button_glyph_class(is_active, is_asc=params[:asc])
     return '' unless is_active
-    is_asc == 'true' ? 'fa-caret-up' : 'fa-caret-down'
+    is_asc == 'true' ? 'caret-up' : 'caret-down'
   end
 
   def round_rate(rate, decimals=2)
@@ -35,14 +35,12 @@ module ApplicationHelper
     rate < 0 ? 'below-average' : 'above-average'
   end
 
-  # TODO specs
   def rate_glyph_class(rate)
-    rate < 0 ? 'fa-arrow-down' : 'fa-arrow-up'
+    rate < 0 ? 'arrow-down' : 'arrow-up'
   end
 
-  # TODO specs
   def rate_tooltip(rate)
-    base_key = 'champions.all_champions'
+    base_key = 'champions.tooltips'
     rate < 0 ? I18n.t("#{base_key}.below_avg") : I18n.t("#{base_key}.above_avg")
   end
 
