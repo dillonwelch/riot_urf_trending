@@ -5,14 +5,22 @@
 %ul
   %li
     = "#{"%.2f" % win_rate}% "
-    %i.fa.fa-trophy{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
+    = fa_icon('trophy',
+              'data-toggle': 'tooltip',
+              title: t('champions.tooltips.win_rate'))
   %li{ class: rate_class(average_win_rate) }
     = "#{average_win_rate.abs}% "
-    %i.fa{ class: rate_glyph_class(average_win_rate), 'data-toggle': 'tooltip', title: rate_tooltip(average_win_rate) }
+    = fa_icon(rate_glyph_class(average_win_rate),
+              'data-toggle': 'tooltip',
+              title: rate_tooltip(average_win_rate))
 %ul
   %li
     = "#{"%.2f" % pick_rate}%"
-    %i.fa.fa-users{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
+    = fa_icon('users',
+              'data-toggle': 'tooltip',
+              title: t('champions.tooltips.pick_rate'))
   %li{ class: rate_class(average_pick_rate) }
     = "#{average_pick_rate.abs}% "
-    %i.fa{ class: rate_glyph_class(average_pick_rate), 'data-toggle': 'tooltip', title: rate_tooltip(average_pick_rate) }
+    = fa_icon(rate_glyph_class(average_pick_rate),
+              'data-toggle': 'tooltip',
+              title: rate_tooltip(average_pick_rate))

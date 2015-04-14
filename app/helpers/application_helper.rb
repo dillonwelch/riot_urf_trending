@@ -20,7 +20,7 @@ module ApplicationHelper
 
   def button_glyph_class(is_active, is_asc=params[:asc])
     return '' unless is_active
-    is_asc == 'true' ? 'fa-caret-up' : 'fa-caret-down'
+    is_asc == 'true' ? 'caret-up' : 'caret-down'
   end
 
   def round_rate(rate, decimals=2)
@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def rate_glyph_class(rate)
-    rate < 0 ? 'fa-arrow-down' : 'fa-arrow-up'
+    rate < 0 ? 'arrow-down' : 'arrow-up'
   end
 
   def rate_tooltip(rate)

@@ -104,19 +104,19 @@ RSpec.describe ApplicationHelper do
     context 'is active' do
       context 'ascending' do
         it 'returns the up icon class' do
-          expect(button_glyph_class(true, 'true')).to eq 'fa-caret-up'
+          expect(button_glyph_class(true, 'true')).to eq 'caret-up'
         end
       end
 
       context 'descending' do
         it 'returns the down icon class' do
-          expect(button_glyph_class(true, 'false')).to eq 'fa-caret-down'
+          expect(button_glyph_class(true, 'false')).to eq 'caret-down'
         end
       end
 
       context 'no ascending param' do
         it 'returns the down icon class' do
-          expect(button_glyph_class(true)).to eq 'fa-caret-down'
+          expect(button_glyph_class(true)).to eq 'caret-down'
         end
       end
     end
@@ -180,20 +180,20 @@ RSpec.describe ApplicationHelper do
 
   describe '#rate_glyph_class' do
     context 'rate below 0' do
-      it 'returns fa-arrow-down' do
-        expect(rate_glyph_class(-0.12)).to eq 'fa-arrow-down'
+      it 'returns arrow-down' do
+        expect(rate_glyph_class(-0.12)).to eq 'arrow-down'
       end
     end
 
     context 'rate at 0' do
-      it 'returns fa-arrow-up' do
-        expect(rate_glyph_class(0)).to eq 'fa-arrow-up'
+      it 'returns arrow-up' do
+        expect(rate_glyph_class(0)).to eq 'arrow-up'
       end
     end
 
     context 'rate above 0' do
-      it 'returns fa-arrow-up' do
-        expect(rate_glyph_class(0.12)).to eq 'fa-arrow-up'
+      it 'returns arrow-up' do
+        expect(rate_glyph_class(0.12)).to eq 'arrow-up'
       end
     end
   end
