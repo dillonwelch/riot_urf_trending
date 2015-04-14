@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'application#index'
 
+  get '/about', to: 'application#about'
+
   namespace :champions do
     get '/', action: :index
     get '/search', action: :show

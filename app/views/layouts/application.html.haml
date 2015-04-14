@@ -22,5 +22,8 @@
         = form_tag champions_search_path, method: :get, enforce_utf8: false, class:'navbar-form navbar-left' do
           = text_field_tag :name, nil, placeholder: 'Search by champion', class: 'form-control'
           %button.btn.btn-default{ type: 'submit' }= t('.search')
+        %ul.nav.navbar-nav.navbar-right
+          %li{ class: current_page?(about_path) ? 'active' : '' }
+            = link_to 'About', about_path
   %body
     = yield
