@@ -1,10 +1,19 @@
 $(document).ready ->
-  if $('.show canvas').length
+  show = $('.show')
+  canvas = show.find('canvas')
+
+  if canvas.length
+    page = show.data('page')
+    if page == 'champion'
+      url = "/api/champions/#{$('#js-champion-name').text().trim()}/overall"
+    else if page == 'role'
+      url = "/api/roles/#{$('#js-role-name').text().trim()}/overall"
+
     $.ajax(
-      url: "/api/champions/#{$('#js-champion-name').text().trim()}/overall"
+      url: url
       type: 'GET'
       success: (result) ->
-        canvas = $('.show canvas').get(0).getContext('2d')
+        canvas = canvas.get(0).getContext('2d')
         win_rates = []
         pick_rates = []
         total = []

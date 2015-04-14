@@ -61,7 +61,7 @@ class ChampionMatchesStat < ActiveRecord::Base
       select(:primary_role).group(:primary_role).first
   end
 
-  def self.overall_for_champion(champion)
+  def self.overall
     select('
       (sum(victories)::float / (
         case sum(victories + losses)
@@ -87,8 +87,16 @@ class ChampionMatchesStat < ActiveRecord::Base
         order by start_time
       ) as pick_rate_table on pick_rate_table.start_time =
                               champion_matches_stats.start_time'
-    ).joins(:champion).where(champion_id: champion.id).
-      group('champion_matches_stats.champion_id, name, month, day').
-      reorder('month, day')
+    ).reorder('month, day')
+  end
+
+  def self.overall_for_champion(champion)
+    overall.joins(:champion).where(champion_id: champion.id).
+      group('champion_matches_stats.champion_id, month, day')
+  end
+
+  def self.overall_for_role(role)
+    overall.joins(:champion).where('primary_role = ?', role).
+      group('primary_role, month, day')
   end
 end

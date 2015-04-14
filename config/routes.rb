@@ -28,5 +28,9 @@ Rails.application.routes.draw do
     namespace :matches do
       get '/total', action: :total
     end
+
+    namespace :roles do
+      get '/:name/overall', action: :overall
+    end
   end
 end

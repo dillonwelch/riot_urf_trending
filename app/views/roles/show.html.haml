@@ -1,7 +1,7 @@
 .content
-  .show
+  .show{ 'data-page': 'role' }
     %aside
-      %h1
+      %h1#js-role-name
         = @role.primary_role
         = image_tag riot_role_link @role.primary_role
       %ul
@@ -19,4 +19,4 @@
     %main
       %h1= t('champions.show.chart_title')
       .charts
-        -# %canvas
+        %canvas
