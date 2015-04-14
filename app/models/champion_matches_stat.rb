@@ -12,6 +12,16 @@ class ChampionMatchesStat < ActiveRecord::Base
 
   delegate :riot_id, to: :champion
 
+  def self.all_champion_stats
+    select(
+      '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
+      sum(victories + losses)::float / (
+        select sum(victories + losses) from champion_matches_stats
+      ) * 100 as pick_rate,
+      sum(victories + losses) as total_picks'
+    ).joins(:champion)
+  end
+
   def self.overall_for_champion(champion)
     select('
       (sum(victories)::float / (case sum(victories + losses) when 0 then 1 else sum(victories + losses) end )) * 100 as win_rate,

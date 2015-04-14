@@ -1,13 +1,7 @@
 class ChampionsController < ApplicationController
   def index
-    @champions = ChampionMatchesStat.select(
-      '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
-      sum(victories + losses)::float / (
-        select sum(victories + losses) from champion_matches_stats
-      ) * 100 as pick_rate,
-      sum(victories + losses) as total_picks,
-      champion_id, name'
-    ).joins(:champion).group(:champion_id, :name)
+    @champions = ChampionMatchesStat.all_champion_stats.
+                 select('champion_id, name').group(:champion_id, :name)
 
     if params[:order] == 'win_rate' || params[:order].nil?
       if params[:asc] == 'true'
@@ -40,60 +34,52 @@ class ChampionsController < ApplicationController
   end
 
   def show
-    begin
-      @champion = ChampionMatchesStat.select(
-        '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
-        sum(victories + losses)::float / (
-          select sum(victories + losses) from champion_matches_stats
-        ) * 100 as pick_rate,
-        sum(victories + losses) as total_picks,
-        sum(kills)::float / sum(victories + losses) as per_game_kills,
-        sum(deaths)::float / sum(victories + losses) as per_game_deaths,
-        sum(assists)::float / sum(victories + losses) as per_game_assists,
-
-        (
-          select sum(kills)::float /
-            ( select sum(victories + losses) from champion_matches_stats )
-          from champion_matches_stats
-        ) as average_kills,
-        (
-          select sum(deaths)::float /
-            ( select sum(victories + losses) from champion_matches_stats )
-          from champion_matches_stats
-        ) as average_deaths,
-        (
-          select sum(assists)::float /
-            ( select sum(victories + losses) from champion_matches_stats )
-          from champion_matches_stats
-        ) as average_assists,
-        champion_id, name'
-      ).joins(:champion).where(champion_id: champion.id).
-      group(:champion_id, :name).reorder('').first
-
-      @champions = ChampionMatchesStat.select(
-        '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
-        champion_id'
-      ).joins(:champion).group(:champion_id)
-
-      win_rates = @champions.map(&:win_rate)
-      @average_win_rate = win_rates.sum / win_rates.size
-      @average_pick_rate = 100.0 / @champions.size
-
-    rescue NoMethodError
-      @name = params[:name]
-      render 'empty_search' and return
-    end
-  end
-
-  def primary_role
-    @roles = ChampionMatchesStat.select(
+    @champion = ChampionMatchesStat.select(
       '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
       sum(victories + losses)::float / (
         select sum(victories + losses) from champion_matches_stats
       ) * 100 as pick_rate,
       sum(victories + losses) as total_picks,
-      primary_role'
-    ).joins(:champion).group(:primary_role).reorder('win_rate desc')
+      sum(kills)::float / sum(victories + losses) as per_game_kills,
+      sum(deaths)::float / sum(victories + losses) as per_game_deaths,
+      sum(assists)::float / sum(victories + losses) as per_game_assists,
+
+      (
+        select sum(kills)::float /
+          ( select sum(victories + losses) from champion_matches_stats )
+        from champion_matches_stats
+      ) as average_kills,
+      (
+        select sum(deaths)::float /
+          ( select sum(victories + losses) from champion_matches_stats )
+        from champion_matches_stats
+      ) as average_deaths,
+      (
+        select sum(assists)::float /
+          ( select sum(victories + losses) from champion_matches_stats )
+        from champion_matches_stats
+      ) as average_assists,
+      champion_id, name'
+    ).joins(:champion).where(champion_id: champion.id).
+                group(:champion_id, :name).reorder('').first
+
+    @champions = ChampionMatchesStat.select(
+      '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
+      champion_id'
+    ).joins(:champion).group(:champion_id)
+
+    win_rates = @champions.map(&:win_rate)
+    @average_win_rate = win_rates.sum / win_rates.size
+    @average_pick_rate = 100.0 / @champions.size
+
+  rescue NoMethodError
+    @name = params[:name]
+    render 'empty_search' && return
+  end
+
+  def primary_role
+    @roles = ChampionMatchesStat.all_champion_stats.select('primary_role').
+             group(:primary_role).reorder('win_rate desc')
   end
 
   private
