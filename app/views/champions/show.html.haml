@@ -11,6 +11,29 @@
         champion: @champion,
         average_win_rate: @average_win_rate,
         average_pick_rate: @average_pick_rate
+      - kills = round_rate(@champion.per_game_kills)
+      - deaths = round_rate(@champion.per_game_deaths)
+      - assists = round_rate(@champion.per_game_assists)
+      - average_kills = normalize_average_rate(kills, @champion.average_kills)
+      - average_deaths = normalize_average_rate(deaths, @champion.average_deaths)
+      - average_assists = normalize_average_rate(assists, @champion.average_assists)
+      %ul
+        %li.kda
+          = "#{kills} Avg Kills"
+        %li{ class: rate_class(average_kills), 'data-toggle': 'tooltip', title: rate_tooltip(average_kills) }
+          = "#{average_kills.abs}% "
+          = fa_icon(rate_glyph_class(average_kills))
+        %li.kda
+          = "#{deaths} Avg Deaths"
+        %li{ class: rate_class(average_deaths), 'data-toggle': 'tooltip', title: rate_tooltip(average_deaths) }
+          = "#{average_deaths.abs}% "
+          = fa_icon(rate_glyph_class(average_deaths))
+        %li.kda
+          = "#{assists} Avg Assists"
+        %li{ class: rate_class(average_assists), 'data-toggle': 'tooltip', title: rate_tooltip(average_assists) }
+          = "#{average_assists.abs}% "
+          = fa_icon(rate_glyph_class(average_assists))
+
     %main
       %h1= t('.chart_title')
       .charts
