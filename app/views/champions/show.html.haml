@@ -9,11 +9,19 @@
         = @champion.name
         = image_tag riot_image_link @champion.name
       %ul
-        - win_rate = (@champion.win_rate).round(2)
-        - pick_rate = (@champion.pick_rate).round(2)
-        - average_win_rate = (((win_rate / @average_win_rate) - 1) * 100).round(2)
-        - average_pick_rate = (((pick_rate / @average_pick_rate) - 1) * 100).round(2)
+        - win_rate = round_rate(@champion.win_rate)
+        - pick_rate = round_rate(@champion.pick_rate)
+        - average_win_rate = normalize_average_rate(win_rate,  @average_win_rate)
+        - average_pick_rate = normalize_average_rate(pick_rate, @average_pick_rate)
         %li= "Win rate: #{"%.2f" % win_rate}"
-        %li= "Average win rate: #{average_win_rate.abs}% #{ average_win_rate < 0 ? "below" : 'above'} average"
+        %li
+          = "Average win rate: "
+          %span{ class: rate_class(average_win_rate) }
+            = "#{average_win_rate.abs}% "
+          %span= "#{ average_win_rate < 0 ? "below" : 'above'} average"
         %li= "Pick rate: #{"%.2f" % pick_rate}"
-        %li= "Average pick rate: #{average_pick_rate.abs}% #{ average_pick_rate < 0 ? "below" : 'above'} average"
+        %li
+          = "Average pick rate: "
+          %span{ class: rate_class(average_pick_rate) }
+            = "#{average_pick_rate.abs}% "
+          %span= "#{ average_pick_rate < 0 ? "below" : 'above'} average"

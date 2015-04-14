@@ -23,6 +23,18 @@ module ApplicationHelper
     is_asc == 'true' ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'
   end
 
+  def round_rate(rate, decimals=2)
+    rate.round(decimals)
+  end
+
+  def normalize_average_rate(rate, average_rate)
+    round_rate((((rate / average_rate) - 1) * 100))
+  end
+
+  def rate_class(rate)
+    rate < 0 ? 'below-average' : 'above-average'
+  end
+
   private
 
   def transform_display_name(raw_name)
