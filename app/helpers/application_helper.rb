@@ -35,12 +35,10 @@ module ApplicationHelper
     rate < 0 ? 'below-average' : 'above-average'
   end
 
-  # TODO specs
   def rate_glyph_class(rate)
     rate < 0 ? 'fa-arrow-down' : 'fa-arrow-up'
   end
 
-  # TODO specs
   def rate_tooltip(rate)
     base_key = 'champions.all_champions'
     rate < 0 ? I18n.t("#{base_key}.below_avg") : I18n.t("#{base_key}.above_avg")
