@@ -21,8 +21,6 @@ en:
       title: RiotNurfTrending
       champions_index: All Champions
       roles_index: All Roles
-      champions_drop_down: Champions
-      champion_win_rate: Top 5 by win rate
       home: Home
       search: Search
   application:
@@ -51,5 +49,3 @@ en:
       chart_title: URF Progression
     empty_search:
       no_results: No champion by the name of %{name}.
-    by_win_rate:
-      title: Top 5 champions in the last hour for URF
