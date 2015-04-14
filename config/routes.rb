@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'application#index'
 
   get '/about', to: 'application#about'
+  get '/urf', to: 'application#urf'
 
   namespace :champions do
     get '/', action: :index
