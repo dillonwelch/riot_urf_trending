@@ -2,9 +2,6 @@
 - pick_rate = round_rate(champion.pick_rate)
 - average_win_rate = normalize_average_rate(win_rate,  average_win_rate)
 - average_pick_rate = normalize_average_rate(pick_rate, average_pick_rate)
--# - kills = round_rate(champion.average_kills)
--# - deaths = round_rate(champion.average_deaths)
--# - assists = round_rate(champion.average_assists)
 %ul
   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
     = number_with_delimiter champion.total_picks
