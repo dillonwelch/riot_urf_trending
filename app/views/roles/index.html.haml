@@ -17,11 +17,11 @@
                     = fa_icon('gamepad')
                 %ul
                   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
-                    = round_rate(role.win_rate)
+                    = "#{round_rate(role.win_rate)}%"
                     = fa_icon('trophy')
                 %ul
                   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
-                    = round_rate(role.pick_rate)
+                    = "#{round_rate(role.pick_rate)}%"
                     = fa_icon('users')
               .name
                 %h1= role.primary_role
