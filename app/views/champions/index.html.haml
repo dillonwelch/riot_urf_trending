@@ -1,7 +1,9 @@
 .header
   %h1= t('.title')
+  %h2= index_subtitle(params)
 .js-data-hidden
   .js-role{ 'data-role': params[:role] }
+  .js-rated{ 'data-rated': params[:rated] }
 .content
   %nav.subnav.js-champions-index
     = fa_icon 'spinner spin', class: 'js-loading hideme'
