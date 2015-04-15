@@ -49,6 +49,7 @@ en:
         pick_rate: Pick Rate
         name: Name
     tooltips:
+      all: All %{role}
       win_rate: Win Rate
       pick_rate: Pick Rate
       games_played: Games Played
