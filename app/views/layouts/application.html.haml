@@ -10,7 +10,7 @@
     .container-fluid
       .collapse.navbar-collapse#bs-example-navbar-collapse-1
         %ul.nav.navbar-nav
-          %li{ class: current_page?(root_path) ? 'active' : '' }
+          %li
             %a{ href: root_path }
               = t('.home')
               %span.sr-only
@@ -37,7 +37,9 @@
           = text_field_tag :name, nil, placeholder: 'Search by champion', class: 'form-control'
           %button.btn.btn-default{ type: 'submit' }= t('.search')
         %ul.nav.navbar-nav.navbar-right
-          %li{ class: current_page?(about_path) ? 'active' : '' }
+          %li
+            = mail_to 'urfstatistics@gmail.com', t('.contact')
+          %li
             = link_to 'About', about_path
   %body
     = yield

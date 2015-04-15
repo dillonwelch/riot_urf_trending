@@ -246,9 +246,10 @@ RSpec.describe ApplicationHelper do
 
     context 'rated' do
       it 'displayed capitalized rated champions text' do
-        expect(index_subtitle(rated: 'rawr')).
+        expect(index_subtitle(rated: 'over')).
           to eq I18n.t('champions.index.rated_champions_subtitle',
-                       rated: 'rawr').capitalize
+                       rated: 'over').capitalize << ' - ' <<
+            I18n.t('champions.index.over')
       end
     end
 

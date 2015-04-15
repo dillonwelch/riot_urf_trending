@@ -54,7 +54,9 @@ module ApplicationHelper
       options[:role].pluralize
     elsif options[:rated].present?
       I18n.t('champions.index.rated_champions_subtitle',
-             rated: options[:rated]).capitalize
+             rated: options[:rated]).capitalize << ' - ' <<
+        I18n.t("champions.index.#{options[:rated]}")
+
     else
       I18n.t('champions.index.subtitle')
     end

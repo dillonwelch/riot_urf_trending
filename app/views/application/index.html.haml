@@ -6,20 +6,20 @@
       %tr
         %td
           .well
-            %span#totalMatches.odometer
+            %span#totalMatches.odometer{ 'data-val': ENV['TOTAL_MATCHES'] }
             %small
               %p= t('.matches_sampled')
         %td
           .well
-            %span#totalKills.odometer
+            %span#totalKills.odometer{ 'data-val': ENV['TOTAL_KILLS'] }
             %small
               %p= t('.total_kills')
         %td
           .well
-            %span#totalDeaths.odometer
+            %span#totalDeaths.odometer{ 'data-val': ENV['TOTAL_DEATHS'] }
             %small
               %p= t('.total_deaths')
 .teemo-bg
   .well
-    %span#teemoKills.odometer
+    %span#teemoKills.odometer{ 'data-val': ENV['TOTAL_TEEMO_KILLS'] }
     %small= t('.teemo_corpses')
