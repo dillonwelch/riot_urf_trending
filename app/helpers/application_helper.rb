@@ -55,6 +55,8 @@ module ApplicationHelper
     elsif options[:rated].present?
       I18n.t('champions.index.rated_champions_subtitle',
              rated: options[:rated]).capitalize
+    else
+      I18n.t('champions.index.subtitle')
     end
   end
 

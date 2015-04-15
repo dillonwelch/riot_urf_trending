@@ -251,5 +251,12 @@ RSpec.describe ApplicationHelper do
                        rated: 'rawr').capitalize
       end
     end
+
+    context 'default' do
+      it 'returns the default subtitle' do
+        expect(index_subtitle(rawr: 'rawr')).
+          to eq I18n.t('champions.index.subtitle')
+      end
+    end
   end
 end
