@@ -11,14 +11,12 @@
             %td
               %ul.links
                 %li
-                  %a{ href: role_path(name: role.primary_role) }
+                  %a{ href: role_path(name: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
                     = image_tag riot_role_link role.primary_role
-                    { 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
-                      = fa_icon 'line-chart'
+                    = fa_icon 'line-chart'
                 %li
-                  %a{ href: champions_path(role: role.primary_role) }
-                    { 'data-toggle': 'tooltip', title: t('champions.tooltips.all', role: 'rawr') }
-                      = fa_icon 'filter'
+                  %a{ href: champions_path(role: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.all', role: 'rawr') }
+                    = fa_icon 'filter'
               .stats
                 %ul
                   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
