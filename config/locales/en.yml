@@ -53,6 +53,8 @@ en:
         pick_rate: Pick Rate
         name: Name
       rated_champions_subtitle: "%{rated}rated champions"
+      over: above average pick rate, below average win rate
+      under: below average pick rate, above average win rate
       subtitle: Showing all
     tooltips:
       all: All %{role}
@@ -68,4 +70,4 @@ en:
       no_results: No champion by the name of %{name}.
   roles:
     index:
-      title: All Primary Role Statistics
+      title: Primary Role Statistics
