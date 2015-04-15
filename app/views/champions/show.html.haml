@@ -21,21 +21,10 @@
         - [[kills, average_kills, 'kills'],
           [deaths, average_deaths, 'deaths',],
           [assists, average_assists, 'assists']].each do |(k, avg, key)|
-          - if key == 'kills'
-            %li{ 'data-toggle': 'tooltip', title: 'Average kills' }
-              = "#{k}"
-              %span.kills
-                = image_tag 'http://ddragon.leagueoflegends.com/cdn/5.2.1/img/ui/score.png'
-          - elsif key == 'deaths'
-            %li{ 'data-toggle': 'tooltip', title: 'Average deaths' }
-              = "#{k}"
-              %span.skull
-                &#9760;
-          - else
-            %li{ 'data-toggle': 'tooltip', title: 'Average assists' }
-              = "#{k}"
-              %span.assists
-                = image_tag 'assist.png'
+          %li{ 'data-toggle': 'tooltip', title: t("champions.tooltips.#{key}") }
+            = "#{k}"
+            %span{ class: key }
+              = kda_image(key)
           %li{ class: rate_class(avg), 'data-toggle': 'tooltip', title: rate_tooltip(avg) }
             = "#{avg.abs}% "
             = fa_icon(rate_glyph_class(avg))

@@ -62,6 +62,17 @@ module ApplicationHelper
     end
   end
 
+  def kda_image(key)
+    case key
+    when 'kills'
+      image_tag 'http://ddragon.leagueoflegends.com/cdn/5.2.1/img/ui/score.png'
+    when 'deaths'
+      raw '&#9760;'
+    when 'assists'
+      image_tag 'assist.png'
+    end
+  end
+
   private
 
   def transform_display_name(raw_name)
