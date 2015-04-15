@@ -19,10 +19,18 @@ en:
   layouts:
     application:
       title: RiotNurfTrending
+      champions_menu: Champions
       champions_index: All Champions
       roles_index: All Primary Roles
       home: Home
       search: Search
+      roles:
+        Assassin: Assassins
+        Fighter: Fighters
+        Mage: Mage
+        Marksman: Marksmen
+        Support: Supports
+        Tank: Tanks
   application:
     index:
       title: URF Sampling
