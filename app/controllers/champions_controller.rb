@@ -27,6 +27,14 @@ class ChampionsController < ApplicationController
       @champions = @champions.where('primary_role = ?', params[:role])
     end
 
+    latest = ChampionMatchesStat.select('max(created_at) as created_at').
+      reorder('').first.created_at
+    my_params = "#{params[:role]}_#{params[:order]}_#{params[:asc]}"
+
+    @champions = Rails.cache.fetch("stats_index_#{latest}_#{my_params}") do
+      @champions.to_a
+    end
+
     win_rates = @champions.map(&:win_rate)
     @average_win_rate = win_rates.sum / win_rates.size
     @average_pick_rate = 100.0 / @champions.size
