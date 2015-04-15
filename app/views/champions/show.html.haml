@@ -17,6 +17,7 @@
       - average_kills = normalize_average_rate(kills, @champion.average_kills)
       - average_deaths = normalize_average_rate(deaths, @champion.average_deaths)
       - average_assists = normalize_average_rate(assists, @champion.average_assists)
+      %h2 Average K/D/A
       %ul
         - [[kills, average_kills, 'kills'],
           [deaths, average_deaths, 'deaths',],
