@@ -21,6 +21,9 @@ $(document).ready ->
     role = $('.js-role').data('role')
     if role == undefined
       role = ''
+    rated = $('.js-rated').data('rated')
+    if rated == undefined
+      rated = ''
 
     asc = false
     if icon.hasClass(downIcon)
@@ -36,7 +39,7 @@ $(document).ready ->
     $('.content table').css('opacity', 0.5)
     $('.js-loading').removeClass('hideme')
     $.ajax(
-      url: "/champions?order=#{order}&asc=#{asc}&role=#{role}"
+      url: "/champions?order=#{order}&asc=#{asc}&role=#{role}&rated=#{rated}"
       dataType: 'text'
       type: 'GET'
       success: (html) ->

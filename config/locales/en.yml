@@ -20,6 +20,7 @@ en:
     application:
       title: RiotNurfTrending
       champions_menu: Champions
+      roles_menu: Roles
       champions_index: All Champions
       roles_index: All Primary Roles
       home: Home
@@ -31,6 +32,9 @@ en:
         Marksman: Marksmen
         Support: Supports
         Tank: Tanks
+      overunder:
+        over: Overrated Champions
+        under: Underrated Champions
   application:
     index:
       title: URF Sampling
