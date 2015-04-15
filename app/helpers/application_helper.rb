@@ -10,7 +10,8 @@ module ApplicationHelper
   end
 
   def riot_role_link(display_name)
-    "http://ddragon.leagueoflegends.com/cdn/5.7.1/img/profileicon/#{role_image_id(display_name)}.png"
+    'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/profileicon/'\
+    "#{role_image_id(display_name)}.png"
   end
 
   def button_is_active?(value, order_param=params[:order])

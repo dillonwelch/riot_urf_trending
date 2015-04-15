@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   namespace :champions do
     get '/', action: :index
     get '/search', action: :show
-    get '/roles', action: :primary_role
   end
-
   get '/champions/:name', to: 'champions#show', as: :champion
+
+  namespace :roles do
+    get '/', action: :index
+  end
+  get '/roles/:name', to: 'roles#show', as: :role
 
   namespace :api do
     namespace :champions do
@@ -24,6 +27,10 @@ Rails.application.routes.draw do
 
     namespace :matches do
       get '/total', action: :total
+    end
+
+    namespace :roles do
+      get '/:name/overall', action: :overall
     end
   end
 end

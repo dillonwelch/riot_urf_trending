@@ -69,7 +69,7 @@ RSpec.describe Api::ChampionsController do
     end
 
     it 'returns the overall stats for the champion' do
-      get:overall, name: champion.name
+      get :overall, name: champion.name
       expect(response.body).to eq result.to_json
     end
   end

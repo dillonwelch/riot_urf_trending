@@ -2,7 +2,7 @@
   .bg-blur
     = image_tag riot_splash_link @champion.name
 .content
-  .show
+  .show{ 'data-page': 'champion' }
     %aside
       %h1#js-champion-name
         = @champion.name

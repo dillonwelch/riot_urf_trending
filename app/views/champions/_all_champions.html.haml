@@ -12,7 +12,8 @@
                 = render 'champion_stats',
                   champion: champion,
                   average_win_rate: @average_win_rate,
-                  average_pick_rate: @average_pick_rate
+                  average_pick_rate: @average_pick_rate,
+                  show_link_helper: true
               .name
                 %h1= champion.name
               .rank= index

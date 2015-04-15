@@ -19,10 +19,18 @@ en:
   layouts:
     application:
       title: RiotNurfTrending
+      champions_menu: Champions
       champions_index: All Champions
       roles_index: All Primary Roles
       home: Home
       search: Search
+      roles:
+        Assassin: Assassins
+        Fighter: Fighters
+        Mage: Mage
+        Marksman: Marksmen
+        Support: Supports
+        Tank: Tanks
   application:
     index:
       title: URF Sampling
@@ -46,9 +54,11 @@ en:
       games_played: Games Played
       below_avg: Below Average
       above_avg: Above Average
+      more_info: Click for more info
     show:
       chart_title: URF Progression
-    primary_role:
-      title: All Primary Role Statistics
     empty_search:
       no_results: No champion by the name of %{name}.
+  roles:
+    index:
+      title: All Primary Role Statistics
