@@ -28,7 +28,7 @@ class ChampionsController < ApplicationController
     end
 
     latest = ChampionMatchesStat.select('max(created_at) as created_at').
-      reorder('').first.created_at
+             reorder('').first.created_at
     my_params = "#{params[:role]}_#{params[:order]}_#{params[:asc]}"
 
     @champions = Rails.cache.fetch("stats_index_#{latest}_#{my_params}") do
@@ -38,6 +38,20 @@ class ChampionsController < ApplicationController
     win_rates = @champions.map(&:win_rate)
     @average_win_rate = win_rates.sum / win_rates.size
     @average_pick_rate = 100.0 / @champions.size
+
+    if params[:rated].present?
+      if params[:rated] == 'over'
+        @champions.select! do |champion|
+          champion.win_rate < @average_win_rate &&
+            champion.pick_rate > @average_pick_rate
+        end
+      elsif params[:rated] == 'under'
+        @champions.select! do |champion|
+          champion.win_rate > @average_win_rate &&
+            champion.pick_rate < @average_pick_rate
+        end
+      end
+    end
 
     respond_to do |format|
       format.js { render '_all_champions', layout: false }

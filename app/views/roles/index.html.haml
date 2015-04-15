@@ -15,7 +15,7 @@
                     = image_tag riot_role_link role.primary_role
                     = fa_icon 'line-chart'
                 %li
-                  %a{ href: champions_path(role: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.all', role: 'rawr') }
+                  %a{ href: champions_path(role: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.all', role: t("layouts.application.roles.#{role.primary_role}")) }
                     = fa_icon 'filter'
               .stats
                 %ul
