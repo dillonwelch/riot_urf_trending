@@ -6,10 +6,11 @@
         - slice.each do |champion|
           - index += 1
           %td
-            %a{ href: champion_path(name: champion.name) }
-              = image_tag riot_image_link champion.name
-              .profile_link{ 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
-                = fa_icon 'line-chart'
+            = image_tag riot_image_link champion.name
+            %ul.links
+              %li
+                %a{ href: champion_path(name: champion.name), 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
+                  = fa_icon 'line-chart'
             .stats
               = render 'champion_stats',
                 champion: champion,
