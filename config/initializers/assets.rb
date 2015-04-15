@@ -9,6 +9,9 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w(
+  assist.ico
+  assist.png
+  assist.svg
   riot_urf_background.jpg
   riot_urf_background_2.jpg
   riot_urf_background_3.jpg

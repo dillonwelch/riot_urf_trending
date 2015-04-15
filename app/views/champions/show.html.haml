@@ -6,7 +6,7 @@
     %aside
       %h1#js-champion-name
         = @champion.name
-        = image_tag riot_image_link @champion.name
+        = image_tag riot_image_link(@champion.name), class: 'profile'
       = render 'champion_stats',
         champion: @champion,
         average_win_rate: @average_win_rate,
@@ -21,8 +21,21 @@
         - [[kills, average_kills, 'kills'],
           [deaths, average_deaths, 'deaths',],
           [assists, average_assists, 'assists']].each do |(k, avg, key)|
-          %li.kda
-            = "#{k} Avg #{key}"
+          - if key == 'kills'
+            %li{ 'data-toggle': 'tooltip', title: 'Average kills' }
+              = "#{k}"
+              %span.kills
+                = image_tag 'http://ddragon.leagueoflegends.com/cdn/5.2.1/img/ui/score.png'
+          - elsif key == 'deaths'
+            %li{ 'data-toggle': 'tooltip', title: 'Average deaths' }
+              = "#{k}"
+              %span.skull
+                &#9760;
+          - else
+            %li{ 'data-toggle': 'tooltip', title: 'Average assists' }
+              = "#{k}"
+              %span.assists
+                = image_tag 'assist.svg'
           %li{ class: rate_class(avg), 'data-toggle': 'tooltip', title: rate_tooltip(avg) }
             = "#{avg.abs}% "
             = fa_icon(rate_glyph_class(avg))
