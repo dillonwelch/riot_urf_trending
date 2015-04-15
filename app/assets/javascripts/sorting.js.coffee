@@ -18,6 +18,10 @@ $(document).ready ->
     icon = button.find('i')
     button.addClass('active')
 
+    role = $('.js-role').data('role')
+    if role == undefined
+      role = ''
+
     asc = false
     if icon.hasClass(downIcon)
       asc = true
@@ -29,11 +33,10 @@ $(document).ready ->
       icon.removeClass(upIcon)
       icon.addClass(downIcon)
 
-
     $('.content table').css('opacity', 0.5)
     $('.js-loading').removeClass('hideme')
     $.ajax(
-      url: "/champions?order=#{order}&asc=#{asc}"
+      url: "/champions?order=#{order}&asc=#{asc}&role=#{role}"
       dataType: 'text'
       type: 'GET'
       success: (html) ->
