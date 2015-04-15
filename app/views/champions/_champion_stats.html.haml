@@ -3,13 +3,13 @@
 - average_win_rate = normalize_average_rate(win_rate,  average_win_rate)
 - average_pick_rate = normalize_average_rate(pick_rate, average_pick_rate)
 - show_link_helper ||= false
+- if show_link_helper
+  .profile_link{ 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
+    = fa_icon 'line-chart'
 %ul
   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
     = number_with_delimiter champion.total_picks
     = fa_icon('gamepad')
-  - if show_link_helper
-    %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
-      = fa_icon 'line-chart'
 %ul
   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
     = "#{"%.2f" % win_rate}% "
