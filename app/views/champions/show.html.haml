@@ -35,7 +35,7 @@
             %li{ 'data-toggle': 'tooltip', title: 'Average assists' }
               = "#{k}"
               %span.assists
-                = image_tag 'assist.svg'
+                = image_tag 'assist.png'
           %li{ class: rate_class(avg), 'data-toggle': 'tooltip', title: rate_tooltip(avg) }
             = "#{avg.abs}% "
             = fa_icon(rate_glyph_class(avg))
