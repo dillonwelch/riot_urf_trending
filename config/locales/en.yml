@@ -18,7 +18,7 @@ en:
       other: Rate limit hit, waiting %{count} seconds.
   layouts:
     application:
-      title: RiotNurfTrending
+      title: RiotUrfTrending
       champions_menu: Champions
       roles_menu: Roles
       champions_index: All Champions
