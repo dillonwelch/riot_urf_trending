@@ -23,6 +23,10 @@ class ChampionsController < ApplicationController
       end
     end
 
+    if params[:role].present?
+      @champions = @champions.where('primary_role = ?', params[:role])
+    end
+
     win_rates = @champions.map(&:win_rate)
     @average_win_rate = win_rates.sum / win_rates.size
     @average_pick_rate = 100.0 / @champions.size
