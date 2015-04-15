@@ -52,6 +52,7 @@ en:
         win_rate: Win Rate
         pick_rate: Pick Rate
         name: Name
+      rated_champions_subtitle: "%{rated}rated champions"
     tooltips:
       all: All %{role}
       win_rate: Win Rate

@@ -214,7 +214,7 @@ RSpec.describe ApplicationHelper do
     end
   end
 
-  describe '#rate_tooltip ' do
+  describe '#rate_tooltip' do
     context 'rate below 0' do
       it 'returns below average' do
         expect(rate_tooltip(-0.12)).
@@ -233,6 +233,22 @@ RSpec.describe ApplicationHelper do
       it 'returns above average' do
         expect(rate_tooltip(0.12)).
           to eq I18n.t('champions.tooltips.above_avg')
+      end
+    end
+  end
+
+  describe '#index_subtitle' do
+    context 'roles' do
+      it 'pluralizes the role' do
+        expect(index_subtitle(role: 'rawr')).to eq 'rawrs'
+      end
+    end
+
+    context 'rated' do
+      it 'displayed capitalized rated champions text' do
+        expect(index_subtitle(rated: 'rawr')).
+          to eq I18n.t('champions.index.rated_champions_subtitle',
+                       rated: 'rawr').capitalize
       end
     end
   end
