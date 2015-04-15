@@ -260,4 +260,33 @@ RSpec.describe ApplicationHelper do
       end
     end
   end
+
+  describe '#kda_image' do
+    describe 'kills' do
+      it 'returns an image link to riot swords' do
+        image = image_tag(
+          'http://ddragon.leagueoflegends.com/cdn/5.2.1/img/ui/score.png'
+        )
+        expect(kda_image('kills')).to eq image
+      end
+    end
+
+    describe 'deaths' do
+      it 'returns the html entity for the crossbones' do
+        expect(kda_image('deaths')).to eq raw '&#9760;'
+      end
+    end
+
+    describe 'assists' do
+      it 'returns assist.png image' do
+        expect(kda_image('assists')).to eq image_tag 'assist.png'
+      end
+    end
+
+    describe 'other input' do
+      it 'returns nil' do
+        expect(kda_image('rawr')).to eq nil
+      end
+    end
+  end
 end

@@ -65,6 +65,9 @@ en:
       below_avg: Below Average
       above_avg: Above Average
       more_info: Click for more info
+      kills: Average kills
+      deaths: Average deaths
+      assists: Average assists
     show:
       chart_title: URF Progression
     empty_search:

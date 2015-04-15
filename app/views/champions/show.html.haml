@@ -6,7 +6,7 @@
     %aside
       %h1#js-champion-name
         = @champion.name
-        = image_tag riot_image_link @champion.name
+        = image_tag riot_image_link(@champion.name), class: 'profile'
       = render 'champion_stats',
         champion: @champion,
         average_win_rate: @average_win_rate,
@@ -21,8 +21,10 @@
         - [[kills, average_kills, 'kills'],
           [deaths, average_deaths, 'deaths',],
           [assists, average_assists, 'assists']].each do |(k, avg, key)|
-          %li.kda
-            = "#{k} Avg #{key}"
+          %li{ 'data-toggle': 'tooltip', title: t("champions.tooltips.#{key}") }
+            = "#{k}"
+            %span{ class: key }
+              = kda_image(key)
           %li{ class: rate_class(avg), 'data-toggle': 'tooltip', title: rate_tooltip(avg) }
             = "#{avg.abs}% "
             = fa_icon(rate_glyph_class(avg))
