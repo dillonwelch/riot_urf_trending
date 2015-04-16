@@ -3,7 +3,7 @@
     %aside
       %h1#js-role-name
         = @role.primary_role
-        = image_tag riot_role_link @role.primary_role
+        = image_tag riot_role_link(@role.primary_role), class: 'profile'
       %ul
         %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
           = number_with_delimiter @role.total_picks
