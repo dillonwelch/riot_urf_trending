@@ -73,6 +73,10 @@ module ApplicationHelper
     end
   end
 
+  def cachebuster
+    ENV['CACHE_COUNTER']
+  end
+
   private
 
   def transform_display_name(raw_name)

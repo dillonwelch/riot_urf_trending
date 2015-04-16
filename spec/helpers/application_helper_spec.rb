@@ -289,4 +289,11 @@ RSpec.describe ApplicationHelper do
       end
     end
   end
+
+  describe '#cachebuster' do
+    it 'returns the cachebuster' do
+      ENV['CACHE_COUNTER'] = 'I am a cache'
+      expect(cachebuster).to eq ENV['CACHE_COUNTER']
+    end
+  end
 end
