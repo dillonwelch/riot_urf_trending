@@ -9,27 +9,28 @@
           - slice.each do |role|
             - index += 1
             %td
-              = image_tag riot_role_link role.primary_role
-              %ul.links
-                %li
-                  %a{ href: role_path(name: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
-                    = fa_icon 'line-chart'
-                %li
-                  %a{ href: champions_path(role: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.all', role: t("layouts.application.roles.#{role.primary_role}")) }
-                    = fa_icon 'filter'
-              .stats
-                %ul
-                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
-                    = number_with_delimiter role.total_picks
-                    = fa_icon('gamepad')
-                %ul
-                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
-                    = "#{round_rate(role.win_rate)}%"
-                    = fa_icon('trophy')
-                %ul
-                  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
-                    = "#{round_rate(role.pick_rate)}%"
-                    = fa_icon('users')
-              .name
-                %h1= role.primary_role
+              = cache("view_role_index_#{role.primary_role}_#{cachebuster}") do
+                = image_tag riot_role_link role.primary_role
+                %ul.links
+                  %li
+                    %a{ href: role_path(name: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
+                      = fa_icon 'line-chart'
+                  %li
+                    %a{ href: champions_path(role: role.primary_role), 'data-toggle': 'tooltip', title: t('champions.tooltips.all', role: t("layouts.application.roles.#{role.primary_role}")) }
+                      = fa_icon 'filter'
+                .stats
+                  %ul
+                    %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
+                      = number_with_delimiter role.total_picks
+                      = fa_icon('gamepad')
+                  %ul
+                    %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
+                      = "#{round_rate(role.win_rate)}%"
+                      = fa_icon('trophy')
+                  %ul
+                    %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
+                      = "#{round_rate(role.pick_rate)}%"
+                      = fa_icon('users')
+                .name
+                  %h1= role.primary_role
               .rank= index

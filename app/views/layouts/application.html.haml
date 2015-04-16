@@ -4,42 +4,45 @@
     %title= t('.title')
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
+    - if Rails.env.production?
+      = javascript_include_tag 'google_analytics'
     = csrf_meta_tags
-  %header
-  %nav.navbar.navbar-inverse
-    .container-fluid
-      .collapse.navbar-collapse#bs-example-navbar-collapse-1
-        %ul.nav.navbar-nav
-          %li
-            %a{ href: root_path }
-              = t('.home')
-              %span.sr-only
-                (current)
-        %ul.dropdown.nav.navbar-nav
-          %li.dropdown
-            %a{ href: '#', class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button'}
-              = t('.roles_menu')
-              %span.caret
-            %ul.dropdown-menu{ role: 'menu' }
-              %li= link_to t('.roles_index'), roles_path
-              - t('.roles').each do |param, display_name|
-                %li{ role: 'presentation' }= link_to display_name, champions_path(role: param)
-        %ul.dropdown.nav.navbar-nav
-          %li.dropdown
-            %a{ href: '#', class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button'}
-              = t('.champions_menu')
-              %span.caret
-            %ul.dropdown-menu{ role: 'menu' }
-              %li= link_to t('.champions_index'), champions_path
-              - t('.overunder').each do |param, display_name|
-                %li{ role: 'presentation' }= link_to display_name, champions_path(rated: param)
-        = form_tag champions_search_path, method: :get, enforce_utf8: false, class:'navbar-form navbar-left' do
-          = text_field_tag :name, nil, placeholder: 'Search by champion', class: 'form-control'
-          %button.btn.btn-default{ type: 'submit' }= t('.search')
-        %ul.nav.navbar-nav.navbar-right
-          %li
-            = mail_to 'urfstatistics@gmail.com', t('.contact')
-          %li
-            = link_to 'About', about_path
+  = cache("view_layout_application_#{ENV['CACHE_LAYOUT']}") do
+    %header
+    %nav.navbar.navbar-inverse
+      .container-fluid
+        .collapse.navbar-collapse#bs-example-navbar-collapse-1
+          %ul.nav.navbar-nav
+            %li
+              %a{ href: root_path }
+                = t('.home')
+                %span.sr-only
+                  (current)
+          %ul.dropdown.nav.navbar-nav
+            %li.dropdown
+              %a{ href: '#', class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button'}
+                = t('.roles_menu')
+                %span.caret
+              %ul.dropdown-menu{ role: 'menu' }
+                %li= link_to t('.roles_index'), roles_path
+                - t('.roles').each do |param, display_name|
+                  %li{ role: 'presentation' }= link_to display_name, champions_path(role: param)
+          %ul.dropdown.nav.navbar-nav
+            %li.dropdown
+              %a{ href: '#', class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button'}
+                = t('.champions_menu')
+                %span.caret
+              %ul.dropdown-menu{ role: 'menu' }
+                %li= link_to t('.champions_index'), champions_path
+                - t('.overunder').each do |param, display_name|
+                  %li{ role: 'presentation' }= link_to display_name, champions_path(rated: param)
+          = form_tag champions_search_path, method: :get, enforce_utf8: false, class:'navbar-form navbar-left' do
+            = text_field_tag :name, nil, placeholder: 'Search by champion', class: 'form-control'
+            %button.btn.btn-default{ type: 'submit' }= t('.search')
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              = mail_to 'urfstatistics@gmail.com', t('.contact')
+            %li
+              = link_to 'About', about_path
   %body
     = yield

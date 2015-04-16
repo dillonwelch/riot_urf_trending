@@ -1,25 +1,26 @@
-.header
-  %h1= t('.title')
-.stats-bg
-  .statsbox
-    %table.stats_table
-      %tr
-        %td
-          .well
-            %span#totalMatches.odometer{ 'data-val': ENV['TOTAL_MATCHES'] }
-            %small
-              %p= t('.matches_sampled')
-        %td
-          .well
-            %span#totalKills.odometer{ 'data-val': ENV['TOTAL_KILLS'] }
-            %small
-              %p= t('.total_kills')
-        %td
-          .well
-            %span#totalDeaths.odometer{ 'data-val': ENV['TOTAL_DEATHS'] }
-            %small
-              %p= t('.total_deaths')
-.teemo-bg
-  .well
-    %span#teemoKills.odometer{ 'data-val': ENV['TOTAL_TEEMO_KILLS'] }
-    %small= t('.teemo_corpses')
+= cache("view_application_index_#{cachebuster}") do
+  .header
+    %h1= t('.title')
+  .stats-bg
+    .statsbox
+      %table.stats_table
+        %tr
+          %td
+            .well
+              %span#totalMatches.odometer{ 'data-val': ENV['TOTAL_MATCHES'] }
+              %small
+                %p= t('.matches_sampled')
+          %td
+            .well
+              %span#totalKills.odometer{ 'data-val': ENV['TOTAL_KILLS'] }
+              %small
+                %p= t('.total_kills')
+          %td
+            .well
+              %span#totalDeaths.odometer{ 'data-val': ENV['TOTAL_DEATHS'] }
+              %small
+                %p= t('.total_deaths')
+  .teemo-bg
+    .well
+      %span#teemoKills.odometer{ 'data-val': ENV['TOTAL_TEEMO_KILLS'] }
+      %small= t('.teemo_corpses')
