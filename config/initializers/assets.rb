@@ -13,9 +13,3 @@ Rails.application.config.assets.precompile += %w(
   riot_urf_background.jpg
   teemo.jpg
 )
-
-if Rails.env.production?
-  Rails.application.config.assets.precompile += %w(
-    google_analytics.js
-  )
-end
