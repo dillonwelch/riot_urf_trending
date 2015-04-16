@@ -17,13 +17,10 @@ module Api
     end
 
     def overall
-      render json: ChampionMatchesStat.overall_for_champion(champion).to_json
-    end
-
-    private
-
-    def champion
-      @_champion ||= Champion.find_by_name(params[:name])
+      result = Rails.cache.fetch("api_champions_overall_#{champion.name}") do
+        ChampionMatchesStat.overall_for_champion(champion).to_json
+      end
+      render json: result
     end
   end
 end

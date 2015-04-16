@@ -27,8 +27,10 @@ class ChampionsController < ApplicationController
       @champions = @champions.where('primary_role = ?', params[:role])
     end
 
-    latest = ChampionMatchesStat.select('max(created_at) as created_at').
-             reorder('').first.created_at
+    latest = Rails.cache.fetch("max_created_at_#{ENV['CACHE_COUNTER']}") do
+      ChampionMatchesStat.select('max(created_at) as created_at').
+       reorder('').first.created_at
+    end
     my_params = "#{params[:role]}_#{params[:order]}_#{params[:asc]}"
 
     @champions = Rails.cache.fetch("stats_index_#{latest}_#{my_params}") do
@@ -60,12 +62,16 @@ class ChampionsController < ApplicationController
   end
 
   def show
-    @champion = ChampionMatchesStat.individual_champion_stats(champion)
+    @champion = Rails.cache.fetch("stats_show_#{champion.name}") do
+      ChampionMatchesStat.individual_champion_stats(champion)
+    end
 
-    @champions = ChampionMatchesStat.select(
-      '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
-      champion_id'
-    ).joins(:champion).group(:champion_id)
+    @champions = Rails.cache.fetch('stats_show_all_champions') do
+      ChampionMatchesStat.select(
+        '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
+        champion_id'
+      ).joins(:champion).group(:champion_id).to_a
+    end
 
     win_rates = @champions.map(&:win_rate)
     @average_win_rate = win_rates.sum / win_rates.size
@@ -86,9 +92,5 @@ class ChampionsController < ApplicationController
   def rounded_previous_hour
     # Time.zone.now = 2:08PM => 1:00PM
     Time.at ( ((Time.zone.now - 1.hour).to_f / 1.hour).floor * 1.hour)
-  end
-
-  def champion
-    @_champion ||= Champion.find_by_lower_name(params[:name]).first
   end
 end
