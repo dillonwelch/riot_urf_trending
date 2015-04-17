@@ -25,6 +25,10 @@ or you can run `rake backfill_urf_matches` to get all URF match data directly.
 Once you've collected all the data, run `rake backfill_calculate_stats` to populate the stats tables 
 used to calculate the numbers on site.
 
+#Participant Info
+* Bumblingbear, NA Server, California, USA
+* Harley, NA Server, California, USA
+
 #Legal
 
 riot_urf_trending/urfstatistics.net isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of
