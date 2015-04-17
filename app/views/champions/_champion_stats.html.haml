@@ -2,27 +2,28 @@
 - pick_rate = round_rate(champion.pick_rate)
 - average_win_rate = normalize_average_rate(win_rate,  average_win_rate)
 - average_pick_rate = normalize_average_rate(pick_rate, average_pick_rate)
-%ul
-  = tooltip_helper(title: t('champions.tooltips.games_played')) do
-    = number_with_delimiter champion.total_picks
-    = fa_icon('gamepad')
-  = tooltip_helper(title: t('champions.tooltips.bans')) do
-    = number_with_delimiter @bans.empty? ? 0 : @bans[champion.champion_id - 1].total_bans
-    = fa_icon('ban')
-%ul
-  = tooltip_helper(title: t('champions.tooltips.win_rate')) do
-    = "#{"%.2f" % win_rate}% "
-    = fa_icon('trophy')
-  = tooltip_helper(title: rate_tooltip(average_win_rate), class_name: rate_class(average_win_rate)) do
-    = "#{average_win_rate.abs}% "
-    = fa_icon(rate_glyph_class(average_win_rate))
-%ul
-  = tooltip_helper(title: t('champions.tooltips.pick_rate')) do
-    = "#{"%.2f" % pick_rate}%"
-    - if pick_rate < 10.0
-      = fa_icon('users', class: 'extra-padding')
-    - else
-      = fa_icon('users')
-  = tooltip_helper(title: rate_tooltip(average_pick_rate), class_name: rate_class(average_pick_rate)) do
-    = "#{average_pick_rate.abs}% "
-    = fa_icon(rate_glyph_class(average_pick_rate))
+%table
+  %tr
+    = tooltip_helper(tag_type: :td, title: t('champions.tooltips.games_played')) do
+      = number_with_delimiter champion.total_picks
+      = fa_icon('gamepad')
+    = tooltip_helper(tag_type: :td, title: t('champions.tooltips.bans')) do
+      = number_with_delimiter @bans.empty? ? 0 : @bans[champion.champion_id - 1].total_bans
+      = fa_icon('ban')
+  %tr
+    = tooltip_helper(tag_type: :td, title: t('champions.tooltips.win_rate')) do
+      = "#{"%.2f" % win_rate}% "
+      = fa_icon('trophy')
+    = tooltip_helper(tag_type: :td, title: rate_tooltip(average_win_rate), class_name: rate_class(average_win_rate)) do
+      = "#{average_win_rate.abs}% "
+      = fa_icon(rate_glyph_class(average_win_rate))
+  %tr
+    = tooltip_helper(tag_type: :td, title: t('champions.tooltips.pick_rate')) do
+      = "#{"%.2f" % pick_rate}%"
+      - if pick_rate < 10.0
+        = fa_icon('users', class: 'extra-padding')
+      - else
+        = fa_icon('users')
+    = tooltip_helper(tag_type: :td, title: rate_tooltip(average_pick_rate), class_name: rate_class(average_pick_rate)) do
+      = "#{average_pick_rate.abs}% "
+      = fa_icon(rate_glyph_class(average_pick_rate))
