@@ -55,15 +55,47 @@ class MatchService < RiotApiService
     end
   end
 
+  def bans
+    bans = []
+    teams.each do |_team|
+      _team.fetch('bans').each do |ban|
+        bans << {
+         champion_id: ban.fetch('championId'),
+         team_id: _team.fetch('teamId'),
+         pick_turn: ban.fetch('pickTurn')
+        }
+      end
+    end
+    bans
+  end
+
+  def champion_mapping
+    return @c unless @c.nil?
+    @c = {}
+    Champion.find_each do |champion|
+      @c[champion.riot_id] = champion.id
+    end
+    @c
+  end
+
   def populate_database
     match_model = Match.create!(game_id: match_id,
                                 champion_data: champion_data,
                                 region: match.fetch('region'),
                                 start_time: match.fetch('matchCreation'),
                                 duration: match.fetch('matchDuration'))
-    MatchApiData.create!(match: match_model, raw_api_data: match)
+
+    bans.each do |ban|
+      MatchBan.create!(
+        match_id: match_model.id,
+        champion_id: champion_mapping.fetch(ban[:champion_id]),
+        team_id: ban[:team_id],
+        pick_turn: ban[:pick_turn])
+    end
+
+    MatchApiData.create!(match_id: match_model.id, raw_api_data: match)
     champion_data.each do |data|
-      champion_id = Champion.where(riot_id: data[:champion_id]).pluck(:id).first
+      champion_id = champion_mapping.fetch(data[:champion_id])
       ChampionMatch.create!(champion_id: champion_id,
                             match_id: match_model.id,
                             team_id: data[:team_id],
