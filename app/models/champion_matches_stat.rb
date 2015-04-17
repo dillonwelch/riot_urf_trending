@@ -17,7 +17,7 @@ class ChampionMatchesStat < ActiveRecord::Base
       '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
       sum(victories + losses)::float / (
         select sum(victories + losses) from champion_matches_stats
-      ) * 100 as pick_rate,
+      ) * 1000 as pick_rate,
       sum(victories + losses) as total_picks'
     ).joins(:champion)
   end
@@ -27,7 +27,7 @@ class ChampionMatchesStat < ActiveRecord::Base
       '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
       sum(victories + losses)::float / (
         select sum(victories + losses) from champion_matches_stats
-      ) * 100 as pick_rate,
+      ) * 1000 as pick_rate,
       sum(victories + losses) as total_picks,
       sum(kills)::float / sum(victories + losses) as per_game_kills,
       sum(deaths)::float / sum(victories + losses) as per_game_deaths,
@@ -71,7 +71,7 @@ class ChampionMatchesStat < ActiveRecord::Base
       ) * 100 as win_rate,
       case sum(total_picks)
         when 0 then 0
-        else sum(victories + losses)::float / sum(total_picks) * 100
+        else sum(victories + losses)::float / sum(total_picks) * 1000
       end as pick_rate,
       sum(victories) as total_victories,
       sum(losses) as total_losses,

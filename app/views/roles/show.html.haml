@@ -15,7 +15,7 @@
             = fa_icon('trophy')
         %ul
           %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
-            = round_rate(@role.pick_rate)
+            = round_rate(@role.pick_rate / 10)
             = fa_icon('users')
       %main
         %h1= t('champions.show.chart_title')

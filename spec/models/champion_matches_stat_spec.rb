@@ -42,7 +42,7 @@ RSpec.describe ChampionMatchesStat do
       let(:pick_rate) do
         ((stat1.victories + stat1.losses +
           stat2.victories + stat2.losses).to_f) /
-          total_picks * 100
+          total_picks * 1000
       end
       let(:total_picks) do
         stat1.victories + stat1.losses + stat2.victories + stat2.losses +
@@ -76,7 +76,7 @@ RSpec.describe ChampionMatchesStat do
       end
 
       it 'calculates pick rates for the second month' do
-        expect(result.second.pick_rate).to eq 100.0
+        expect(result.second.pick_rate).to eq 1000.0
       end
 
       it 'extracts the month for the second month' do

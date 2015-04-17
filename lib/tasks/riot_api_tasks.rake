@@ -113,7 +113,7 @@ end
 
 task backfill_calculate_stats: [:environment] do
   ChampionMatchesStat.delete_all
-  start_time = Time.at(1427865900) - 1.hour - 25.minutes
+  start_time = Time.at(1427865900) - 12.hours
   end_time = Time.parse('13 Apr 2015 08:00')
   time = start_time
   while time < end_time do
