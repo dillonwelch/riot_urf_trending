@@ -18,7 +18,7 @@ en:
       other: Rate limit hit, waiting %{count} seconds.
   layouts:
     application:
-      title: RiotUrfTrending
+      title: URF Statistics
       champions_menu: Champions
       roles_menu: Roles
       champions_index: All Champions
@@ -35,7 +35,10 @@ en:
       overunder:
         over: Overrated Champions
         under: Underrated Champions
+      download: Download
       contact: Contact
+      about: About
+
   application:
     index:
       title: URF Sampling
@@ -45,7 +48,7 @@ en:
       teemo_corpses: Teemo Corpses
     about:
       title: About
-      page_title: Lol Urf History
+      page_title: URF Statistics
   champions:
     index:
       title: Champion Statistics
