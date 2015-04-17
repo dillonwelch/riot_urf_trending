@@ -37,6 +37,8 @@ class ChampionsController < ApplicationController
       @champions.to_a
     end
 
+    @bans = bans
+
     average_win_and_pick_rates
 
     if params[:rated].present?
@@ -74,6 +76,8 @@ class ChampionsController < ApplicationController
       ).joins(:champion).group(:champion_id).to_a
     end
 
+    @bans = bans
+
     average_win_and_pick_rates
 
   rescue NoMethodError
@@ -87,6 +91,18 @@ class ChampionsController < ApplicationController
   end
 
   private
+
+  def bans
+    Rails.cache.fetch('stats_total_bans') do
+      MatchBan.select(
+        'count(champion_id) as total_bans,
+         champion_id,
+         count(match_bans.champion_id)::float / (
+           select count(match_bans.id) from match_bans
+         ) * 100 as ban_rate').
+        group(:champion_id).order(:champion_id)
+    end
+  end
 
   def average_win_and_pick_rates
     win_rates = @champions.map(&:win_rate)

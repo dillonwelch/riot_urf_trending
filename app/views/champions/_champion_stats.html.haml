@@ -6,6 +6,9 @@
   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
     = number_with_delimiter champion.total_picks
     = fa_icon('gamepad')
+  %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.bans') }
+    = number_with_delimiter @bans[champion.champion_id - 1].total_bans
+    = fa_icon('exclamation-circle')
 %ul
   %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
     = "#{"%.2f" % win_rate}% "

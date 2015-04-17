@@ -68,6 +68,7 @@ en:
       kills: Average kills
       deaths: Average deaths
       assists: Average assists
+      bans: Games Banned
     show:
       chart_title: URF Progression
     empty_search:
