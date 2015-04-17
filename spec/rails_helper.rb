@@ -12,10 +12,10 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
-  [:view, :helper].each do |_type|
+  %i(view, helper).each do |_type|
     config.include Haml,        type: _type
     config.include Haml::Helpers, type: _type
-    config.before(:each, type: _type) do |config|
+    config.before(:each, type: _type) do
       init_haml_helpers
     end
   end
