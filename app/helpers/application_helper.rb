@@ -77,6 +77,17 @@ module ApplicationHelper
     ENV['CACHE_COUNTER']
   end
 
+  def tooltip_helper(title:, tag_type: :li, class_name: '')
+    capture_haml do
+      haml_tag(tag_type,
+               'data-toggle': 'tooltip',
+               title: title,
+               class: class_name) do
+        yield
+      end
+    end
+  end
+
   private
 
   def transform_display_name(raw_name)

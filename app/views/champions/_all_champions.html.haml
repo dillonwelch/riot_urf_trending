@@ -9,8 +9,8 @@
             = cache("view_champion_index_#{champion.name}_#{cachebuster}") do
               = image_tag riot_image_link champion.name
               %ul.links
-                %li
-                  %a{ href: champion_path(name: champion.name), 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
+                = tooltip_helper(title: t('champions.tooltips.more_info')) do
+                  %a{ href: champion_path(name: champion.name) }
                     = fa_icon 'line-chart'
               .stats
                 = render 'champion_stats',

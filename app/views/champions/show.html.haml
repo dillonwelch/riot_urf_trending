@@ -23,11 +23,11 @@
           - [[kills, average_kills, 'kills'],
             [deaths, average_deaths, 'deaths',],
             [assists, average_assists, 'assists']].each do |(k, avg, key)|
-            %li{ 'data-toggle': 'tooltip', title: t("champions.tooltips.#{key}") }
+            = tooltip_helper(title: t("champions.tooltips.#{key}")) do
               = "#{k}"
               %span{ class: key }
                 = kda_image(key)
-            %li{ class: rate_class(avg), 'data-toggle': 'tooltip', title: rate_tooltip(avg) }
+            = tooltip_helper(title: rate_tooltip(avg), class_name: rate_class(avg)) do
               = "#{avg.abs}% "
               = fa_icon(rate_glyph_class(avg))
       %main

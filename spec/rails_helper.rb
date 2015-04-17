@@ -11,4 +11,12 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.infer_spec_type_from_file_location!
+
+  [:view, :helper].each do |_type|
+    config.include Haml,        type: _type
+    config.include Haml::Helpers, type: _type
+    config.before(:each, type: _type) do |config|
+      init_haml_helpers
+    end
+  end
 end

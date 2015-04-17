@@ -296,4 +296,42 @@ RSpec.describe ApplicationHelper do
       expect(cachebuster).to eq ENV['CACHE_COUNTER']
     end
   end
+
+  describe '#tooltip_helper' do
+    let(:title)  { 'rawr' }
+    let(:tag)    { 'li' }
+    let(:_class) { '' }
+    let(:result) do
+      tooltip_helper(title: title, class_name: _class, tag_type: tag) do
+        haml_tag(:div)
+      end
+    end
+
+    def expected(title:, _class: '', tag: 'li')
+      "<#{tag} class='#{_class}' data-toggle='tooltip' title='#{title}'>\n  "\
+      "<div></div>\n</#{tag}>\n"
+    end
+
+    describe 'default' do
+      it 'returns the default tag with a tooltip' do
+        expect(result).to eq expected(title: title)
+      end
+    end
+
+    describe 'tag option' do
+      let(:tag) { 'div' }
+
+      it 'returns the passed tag with a tooltip' do
+        expect(result).to eq expected(title: title, tag: tag)
+      end
+    end
+
+    describe 'class option' do
+      let(:_class) { 'active' }
+
+      it 'returns the tag with a tooltip and class' do
+        expect(result).to eq expected(title: title, _class: _class)
+      end
+    end
+  end
 end

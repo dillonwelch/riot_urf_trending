@@ -6,15 +6,15 @@
           = @role.primary_role
           = image_tag riot_role_link(@role.primary_role), class: 'profile'
         %ul
-          %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.games_played') }
+          = tooltip_helper(title: t('champions.tooltips.games_played')) do
             = number_with_delimiter @role.total_picks
             = fa_icon('gamepad')
         %ul
-          %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.win_rate') }
+          = tooltip_helper(title: t('champions.tooltips.win_rate')) do
             = round_rate(@role.win_rate)
             = fa_icon('trophy')
         %ul
-          %li{ 'data-toggle': 'tooltip', title: t('champions.tooltips.pick_rate') }
+          = tooltip_helper(title: t('champions.tooltips.pick_rate')) do
             = round_rate(@role.pick_rate / 10)
             = fa_icon('users')
       %main
