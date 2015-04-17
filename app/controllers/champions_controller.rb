@@ -93,7 +93,6 @@ class ChampionsController < ApplicationController
     @average_win_rate = win_rates.sum / win_rates.size
     pick_rates = @champions.map(&:pick_rate)
     @average_pick_rate = pick_rates.sum / pick_rates.size
-
   end
 
   def rounded_previous_hour
