@@ -1,22 +1,19 @@
 %main.index
-  %table.grid
-    - index = 0
-    - @champions.each_slice(3) do |slice|
-      %tr
-        - slice.each do |champion|
-          - index += 1
-          %td
-            = cache("view_champion_index_#{champion.name}_#{cachebuster}") do
-              = image_tag riot_image_link champion.name
-              %ul.links
-                = tooltip_helper(title: t('champions.tooltips.more_info')) do
-                  %a{ href: champion_path(name: champion.name) }
-                    = fa_icon 'line-chart'
-              .stats
-                = render 'champion_stats',
-                  champion: champion,
-                  average_win_rate: @average_win_rate,
-                  average_pick_rate: @average_pick_rate
-              .name
-                %h1= champion.name
-            .rank= index
+  - index = 0
+  - @champions.each_slice(3) do |slice|
+    - slice.each do |champion|
+      - index += 1
+      .card
+        = cache("view_champion_index_#{champion.name}_#{cachebuster}") do
+          = image_tag riot_image_link champion.name
+          %ul.links
+            = tooltip_helper(title: t('champions.tooltips.more_info')) do
+              %a{ href: champion_path(name: champion.name) }
+                = fa_icon 'line-chart'
+          .stats
+            = render 'champion_stats',
+              champion: champion,
+              average_win_rate: @average_win_rate,
+              average_pick_rate: @average_pick_rate
+          .name= champion.name
+        .rank= index

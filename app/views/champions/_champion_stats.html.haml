@@ -7,7 +7,7 @@
     = number_with_delimiter champion.total_picks
     = fa_icon('gamepad')
   = tooltip_helper(title: t('champions.tooltips.bans')) do
-    = number_with_delimiter @bans[champion.champion_id - 1].total_bans
+    = number_with_delimiter @bans.empty? ? 0 : @bans[champion.champion_id - 1].total_bans
     = fa_icon('ban')
 %ul
   = tooltip_helper(title: t('champions.tooltips.win_rate')) do
