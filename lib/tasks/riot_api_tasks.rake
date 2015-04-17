@@ -113,8 +113,10 @@ end
 
 task backfill_calculate_stats: [:environment] do
   ChampionMatchesStat.delete_all
-  start_time = Time.at(1427865900) - 12.hours
-  end_time = Time.parse('13 Apr 2015 08:00')
+  # First start_time = 1427864276539
+  start_time = Time.at(1427865900) - 1.hours
+  # Last start_time = 1428915627339
+  end_time = Time.parse('13 Apr 2015 12:00')
   time = start_time
   while time < end_time do
     Rake::Task['calculate_stats'].reenable
