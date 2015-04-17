@@ -29,7 +29,7 @@ class ChampionsController < ApplicationController
 
     latest = Rails.cache.fetch("max_created_at_#{ENV['CACHE_COUNTER']}") do
       ChampionMatchesStat.select('max(created_at) as created_at').
-       reorder('').first.created_at
+      reorder('').first.created_at
     end
     my_params = "#{params[:role]}_#{params[:order]}_#{params[:asc]}"
 

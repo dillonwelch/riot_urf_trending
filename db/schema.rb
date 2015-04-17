@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410221004) do
+ActiveRecord::Schema.define(version: 20150417034329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 20150410221004) do
 
   add_index "match_api_data", ["match_id"], name: "index_match_api_data_on_match_id", using: :btree
 
+  create_table "match_bans", force: :cascade do |t|
+    t.integer "champion_id"
+    t.integer "match_id"
+    t.integer "team_id"
+    t.integer "pick_turn"
+  end
+
+  add_index "match_bans", ["champion_id"], name: "index_match_bans_on_champion_id", using: :btree
+  add_index "match_bans", ["match_id", "champion_id"], name: "index_match_bans_on_match_id_and_champion_id", using: :btree
+
   create_table "matches", force: :cascade do |t|
     t.integer  "game_id"
     t.string   "region"
@@ -100,4 +110,6 @@ ActiveRecord::Schema.define(version: 20150410221004) do
   add_foreign_key "champion_matches", "matches", name: "fk_rails_champion_matches_matches", on_delete: :cascade
   add_foreign_key "champion_matches_stats", "champions", name: "fk_rails_champion_matches_stats_champions", on_delete: :cascade
   add_foreign_key "match_api_data", "matches", name: "fk_rails_match_api_data_matches", on_delete: :cascade
+  add_foreign_key "match_bans", "champions", name: "fk_rails_match_bans_champions", on_delete: :cascade
+  add_foreign_key "match_bans", "matches", name: "fk_rails_match_bans_matches", on_delete: :cascade
 end

@@ -10,7 +10,7 @@ class MatchService < RiotApiService
     return @match unless @match.nil?
     begin
       @match = client.match.get(match_id)
-    rescue Lol::InvalidAPIResponse => e
+    rescue Lol::InvalidAPIResponse
       sleep_time = 1
       puts I18n.t('services.rate_limit', count: sleep_time)
       sleep(sleep_time)
@@ -35,7 +35,7 @@ class MatchService < RiotApiService
   end
 
   def participant(teamId, championId)
-    participant = participants.find do |participant|
+    participants.detect do |participant|
       participant.fetch('teamId') == teamId &&
         participant.fetch('championId') == championId
     end
@@ -49,10 +49,33 @@ class MatchService < RiotApiService
     participants.map do |participant|
       {
         champion_id: participant.fetch('championId'),
-        team_id: participant.fetch('teamId'),
-        victory: team_won?(participant.fetch('teamId'))
+        team_id:     participant.fetch('teamId'),
+        victory:     team_won?(participant.fetch('teamId'))
       }
     end
+  end
+
+  def bans
+    bans = []
+    teams.each do |_team|
+      _team.fetch('bans').each do |ban|
+        bans << {
+          champion_id: ban.fetch('championId'),
+          team_id:     _team.fetch('teamId'),
+          pick_turn:   ban.fetch('pickTurn')
+        }
+      end
+    end
+    bans
+  end
+
+  def champion_mapping
+    return @c unless @c.nil?
+    @c = {}
+    Champion.find_each do |champion|
+      @c[champion.riot_id] = champion.id
+    end
+    @c
   end
 
   def populate_database
@@ -61,16 +84,39 @@ class MatchService < RiotApiService
                                 region: match.fetch('region'),
                                 start_time: match.fetch('matchCreation'),
                                 duration: match.fetch('matchDuration'))
-    MatchApiData.create!(match: match_model, raw_api_data: match)
-    champion_data.each do |data|
-      champion_id = Champion.where(riot_id: data[:champion_id]).pluck(:id).first
-      ChampionMatch.create!(champion_id: champion_id,
-                            match_id: match_model.id,
-                            team_id: data[:team_id],
-                            kills: participant_stat(data[:team_id], data[:champion_id], 'kills'),
-                            deaths: participant_stat(data[:team_id], data[:champion_id], 'deaths'),
-                            assists: participant_stat(data[:team_id], data[:champion_id], 'assists'),
-                            victory: data[:victory])
+
+    save_bans(match_model)
+    MatchApiData.create!(match_id: match_model.id, raw_api_data: match)
+    save_champion_match_data(match_model)
+  end
+
+  private
+
+  def save_bans(match_model)
+    bans.each do |ban|
+      MatchBan.create!(
+        match_id:    match_model.id,
+        champion_id: champion_mapping.fetch(ban[:champion_id]),
+        team_id:     ban[:team_id],
+        pick_turn:   ban[:pick_turn])
     end
   end
+
+  # rubocop:disable AbcSize
+  def save_champion_match_data(match_model)
+    champion_data.each do |data|
+      champion_id = champion_mapping.fetch(data[:champion_id])
+      kills = participant_stat(data[:team_id], data[:champion_id], 'kills')
+      deaths = participant_stat(data[:team_id], data[:champion_id], 'deaths')
+      assists = participant_stat(data[:team_id], data[:champion_id], 'assists')
+      ChampionMatch.create!(champion_id: champion_id,
+                            match_id:    match_model.id,
+                            team_id:     data[:team_id],
+                            kills:       kills,
+                            deaths:      deaths,
+                            assists:     assists,
+                            victory:     data[:victory])
+    end
+  end
+  # rubocop:enable AbcSize
 end

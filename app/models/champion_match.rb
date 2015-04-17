@@ -1,9 +1,5 @@
 class ChampionMatch < ActiveRecord::Base
-  belongs_to :champion
-  validates :champion, presence: true
-
-  belongs_to :match
-  validates :match, presence: true
+  include ChampionMatchJoinTable
 
   validates :victory, inclusion: [true, false]
 
@@ -13,14 +9,6 @@ class ChampionMatch < ActiveRecord::Base
 
   delegate :game_id, to: :match
   delegate :riot_id, to: :champion
-
-  def self.find_by_game_id(game_id)
-    joins(:match).where(matches: { game_id: game_id })
-  end
-
-  def self.find_by_riot_id(riot_id)
-    joins(:champion).where(champions: { riot_id: riot_id })
-  end
 
   def self.all_losses(start_time=Time.zone.now - 5.minutes,
                       end_time=Time.zone.now)

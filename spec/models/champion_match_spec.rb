@@ -1,50 +1,12 @@
 RSpec.describe ChampionMatch do
+  it { expect(subject).to have_champion_match_join_table_concern }
+
   it { expect(subject).to validate_presence_of(:kills) }
   it { expect(subject).to validate_numericality_of(:kills).only_integer }
   it { expect(subject).to validate_presence_of(:deaths) }
   it { expect(subject).to validate_numericality_of(:deaths).only_integer }
   it { expect(subject).to validate_presence_of(:assists) }
   it { expect(subject).to validate_numericality_of(:assists).only_integer }
-  it { expect(subject).to belong_to(:champion) }
-  it { expect(subject).to validate_presence_of(:champion) }
-  it { expect(subject).to belong_to(:match) }
-  it { expect(subject).to validate_presence_of(:match) }
-  it { expect(subject).to delegate_method(:game_id).to(:match) }
-  it { expect(subject).to delegate_method(:riot_id).to(:champion) }
-
-  describe '.find_by_game_id' do
-    let!(:cm1) { create(:champion_match) }
-    let!(:cm2) { create(:champion_match) }
-
-    it 'only returns the ChampionMatch with the match game_id' do
-      expect(ChampionMatch.find_by_game_id(cm1.match.game_id)).to eq [cm1]
-    end
-
-    describe 'game_id that does not exist' do
-      let(:game_id) { cm1.match.game_id + cm2.match.game_id }
-
-      it 'returns nil' do
-        expect(ChampionMatch.find_by_game_id(game_id)).to eq []
-      end
-    end
-  end
-
-  describe '.find_by_riot_id' do
-    let!(:cm1) { create(:champion_match) }
-    let!(:cm2) { create(:champion_match) }
-
-    it 'only returns the ChampionMatch with the champion riot_id' do
-      expect(ChampionMatch.find_by_riot_id(cm1.champion.riot_id)).to eq [cm1]
-    end
-
-    describe 'riot_id that does not exist' do
-      let(:riot_id) { cm1.champion.riot_id + cm2.champion.riot_id }
-
-      it 'returns nil' do
-        expect(ChampionMatch.find_by_riot_id(riot_id)).to eq []
-      end
-    end
-  end
 
   describe '.n_best' do
     let(:result)   { ChampionMatch.n_best(5, Time.zone.now - 30.minutes) }
