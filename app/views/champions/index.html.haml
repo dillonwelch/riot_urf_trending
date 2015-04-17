@@ -1,10 +1,6 @@
 .header
   %h1= t('.title')
   %h2= index_subtitle(params)
-.js-data-hidden
-  .js-role{ 'data-role': params[:role] }
-  .js-rated{ 'data-rated': params[:rated] }
-.content
   %nav.subnav.js-champions-index
     = fa_icon 'spinner spin', class: 'js-loading hideme'
     .btn-group.js-sort-champions{ role: 'group' }
@@ -13,4 +9,8 @@
         %button.btn.btn-default{ class: button_active_class(active), type: 'button', value: value.to_s }
           = fa_icon button_glyph_class(active)
           = text
+.js-data-hidden
+  .js-role{ 'data-role': params[:role] }
+  .js-rated{ 'data-rated': params[:rated] }
+.content
   = render 'all_champions'
