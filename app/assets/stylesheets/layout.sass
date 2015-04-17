@@ -52,10 +52,22 @@ body
 
 .header
   @extend .wide
+  position: relative
   background-color: $black-tint
   color: white
-  h1
-    font-size: 60px
+  .text
+    float: left
+    h1
+      font-size: 60px
+    h2
+  nav.subnav
+    position: absolute
+    right: 10px
+    bottom: 10px
+    i
+      color: black
+    .fa-spinner
+      color: white
 .stats-bg
   @extend .wide
   height: 400px
@@ -121,13 +133,6 @@ body
   position: relative
   width: 95%
   margin: auto
-  nav.subnav
-    float: right
-    margin-right: 10px
-    i
-      color: black
-    .fa-spinner
-      color: white
   main.misc
     width: 100%
     background-color: $blue-tint

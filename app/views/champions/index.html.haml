@@ -1,6 +1,7 @@
 .header
-  %h1= t('.title')
-  %h2= index_subtitle(params)
+  .text
+    %h1= t('.title')
+    %h2= index_subtitle(params)
   %nav.subnav.js-champions-index
     = fa_icon 'spinner spin', class: 'js-loading hideme'
     .btn-group.js-sort-champions{ role: 'group' }
