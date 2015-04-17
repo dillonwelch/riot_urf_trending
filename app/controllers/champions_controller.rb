@@ -37,9 +37,7 @@ class ChampionsController < ApplicationController
       @champions.to_a
     end
 
-    win_rates = @champions.map(&:win_rate)
-    @average_win_rate = win_rates.sum / win_rates.size
-    @average_pick_rate = 10.0 / @champions.size * 100
+    average_win_and_pick_rates
 
     if params[:rated].present?
       if params[:rated] == 'over'
@@ -69,13 +67,14 @@ class ChampionsController < ApplicationController
     @champions = Rails.cache.fetch('stats_show_all_champions') do
       ChampionMatchesStat.select(
         '(sum(victories)::float / sum(victories + losses)) * 100 as win_rate,
+          sum(victories + losses)::float / (
+            select sum(victories + losses) from champion_matches_stats
+          ) * 1000 as pick_rate,
         champion_id'
       ).joins(:champion).group(:champion_id).to_a
     end
 
-    win_rates = @champions.map(&:win_rate)
-    @average_win_rate = win_rates.sum / win_rates.size
-    @average_pick_rate = 10.0 / @champions.size * 100
+    average_win_and_pick_rates
 
   rescue NoMethodError
     @name = params[:name]
@@ -88,6 +87,13 @@ class ChampionsController < ApplicationController
   end
 
   private
+
+  def average_win_and_pick_rates
+    win_rates = @champions.map(&:win_rate)
+    @average_win_rate = win_rates.sum / win_rates.size
+    pick_rates = @champions.map(&:pick_rate)
+    @average_pick_rate = pick_rates.sum / pick_rates.size
+  end
 
   def rounded_previous_hour
     # Time.zone.now = 2:08PM => 1:00PM
