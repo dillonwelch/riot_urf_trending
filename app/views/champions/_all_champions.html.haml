@@ -10,7 +10,7 @@
               = image_tag riot_image_link champion.name
               %ul.links
                 %li
-                  %a{ href: champion_path(name: champion.name), 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
+                  %a{ href: champion_path(name: champion.name.gsub('.', '')), 'data-toggle': 'tooltip', title: t('champions.tooltips.more_info') }
                     = fa_icon 'line-chart'
               .stats
                 = render 'champion_stats',
