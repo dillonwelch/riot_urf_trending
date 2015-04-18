@@ -8,10 +8,35 @@
         %h1#js-champion-name
           = @champion.name
           = image_tag riot_image_link(@champion.name), class: 'profile'
-        = render 'champion_stats',
-          champion: @champion,
-          average_win_rate: @average_win_rate,
-          average_pick_rate: @average_pick_rate
+        - win_rate = round_rate(@champion.win_rate)
+        - pick_rate = round_rate(@champion.pick_rate)
+        - average_win_rate = normalize_average_rate(win_rate,  @average_win_rate)
+        - average_pick_rate = normalize_average_rate(pick_rate, @average_pick_rate)
+        %ul
+          = tooltip_helper(title: t('champions.tooltips.games_played')) do
+            = number_with_delimiter @champion.total_picks
+            = fa_icon('gamepad')
+          = tooltip_helper(title: t('champions.tooltips.bans')) do
+            = number_with_delimiter @bans.empty? ? 0 : @bans[@champion.champion_id - 1].total_bans
+            = fa_icon('ban')
+        %ul
+          = tooltip_helper(title: t('champions.tooltips.win_rate')) do
+            = "#{"%.2f" % win_rate}% "
+            = fa_icon('trophy')
+          = tooltip_helper(title: rate_tooltip(average_win_rate), class_name: rate_class(average_win_rate)) do
+            = "#{average_win_rate.abs}% "
+            = fa_icon(rate_glyph_class(average_win_rate))
+        %ul
+          = tooltip_helper(title: t('champions.tooltips.pick_rate')) do
+            = "#{"%.2f" % pick_rate}%"
+            - if pick_rate < 10.0
+              = fa_icon('users', class: 'extra-padding')
+            - else
+              = fa_icon('users')
+          = tooltip_helper(title: rate_tooltip(average_pick_rate), class_name: rate_class(average_pick_rate)) do
+            = "#{average_pick_rate.abs}% "
+            = fa_icon(rate_glyph_class(average_pick_rate))
+
         - kills = round_rate(@champion.per_game_kills)
         - deaths = round_rate(@champion.per_game_deaths)
         - assists = round_rate(@champion.per_game_assists)

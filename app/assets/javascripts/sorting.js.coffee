@@ -36,7 +36,7 @@ $(document).ready ->
       icon.removeClass(upIcon)
       icon.addClass(downIcon)
 
-    $('.content table').css('opacity', 0.5)
+    $('.content .card').css('opacity', 0.5)
     $('.js-loading').removeClass('hideme')
     $.ajax(
       url: "/champions?order=#{order}&asc=#{asc}&role=#{role}&rated=#{rated}"

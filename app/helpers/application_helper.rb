@@ -79,11 +79,19 @@ module ApplicationHelper
 
   def tooltip_helper(title:, tag_type: :li, class_name: '')
     capture_haml do
-      haml_tag(tag_type,
-               'data-toggle': 'tooltip',
-               title: title,
-               class: class_name) do
-        yield
+      unless tag_type == :td
+        haml_tag(tag_type,
+                 'data-toggle': 'tooltip',
+                 title: title,
+                 class: class_name) do
+          yield
+        end
+      else
+        haml_tag(tag_type, class: class_name) do
+          haml_tag(:span, 'data-toggle': 'tooltip', title: title) do
+            yield
+          end
+        end
       end
     end
   end

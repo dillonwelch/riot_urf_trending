@@ -299,7 +299,7 @@ RSpec.describe ApplicationHelper do
 
   describe '#tooltip_helper' do
     let(:title)  { 'rawr' }
-    let(:tag)    { 'li' }
+    let(:tag)    { :li }
     let(:_class) { '' }
     let(:result) do
       tooltip_helper(title: title, class_name: _class, tag_type: tag) do
@@ -307,7 +307,8 @@ RSpec.describe ApplicationHelper do
       end
     end
 
-    def expected(title:, _class: '', tag: 'li')
+    def expected(title:, _class: '', tag: :li)
+      tag = tag.to_s
       "<#{tag} class='#{_class}' data-toggle='tooltip' title='#{title}'>\n  "\
       "<div></div>\n</#{tag}>\n"
     end
@@ -319,7 +320,7 @@ RSpec.describe ApplicationHelper do
     end
 
     describe 'tag option' do
-      let(:tag) { 'div' }
+      let(:tag) { :div }
 
       it 'returns the passed tag with a tooltip' do
         expect(result).to eq expected(title: title, tag: tag)
@@ -331,6 +332,17 @@ RSpec.describe ApplicationHelper do
 
       it 'returns the tag with a tooltip and class' do
         expect(result).to eq expected(title: title, _class: _class)
+      end
+    end
+
+    context 'td tag' do
+      let(:tag) { :td }
+
+      it 'surrounds the content in a div' do
+        expect(result).to eq(
+          "<td class=''>\n  <span data-toggle='tooltip' title='#{title}'>\n"\
+          "    <div></div>\n  </span>\n</td>\n"
+        )
       end
     end
   end
