@@ -1,0 +1,43 @@
+.content
+  .show
+    %aside.award
+      %h1.award
+        = link_to 'League of Sona', champion_path(name: 'Sona')
+        = image_tag riot_image_link('Sona'), class: 'profile'
+      %ul
+        Highest winrate of URF. Picked or banned 87.18% of games.
+    %aside.award
+      %h1.award
+        = link_to 'Useless', champion_path(name: 'Thresh')
+        = image_tag riot_image_link('Thresh'), class: 'profile'
+      %ul
+        %li
+          Lowest winrate at a stunning 39.20%.
+    %aside.award
+      %h1.award
+        = link_to 'Ignored', champion_path(name: 'Elise')
+        = image_tag riot_image_link('Elise'), class: 'profile'
+      %ul
+        %li
+          Picked or banned only 4,784 times.
+    %aside.award
+      %h1.award
+        = link_to 'Sleeper', champion_path(name: 'Galio')
+        = image_tag riot_image_link('Galio'), class: 'profile'
+      %ul
+        %li
+          Second highest win rate but only picked 3.50% of the time.
+    %aside.award
+      %h1.award
+        = link_to 'Letdown', champion_path(name: 'Nidalee')
+        = image_tag riot_image_link('Nidalee'), class: 'profile'
+      %ul
+        %li
+          Picked 33.05% of the time but had a lower than average win rate.
+    %aside.award
+      %h1.award
+        = link_to 'Satan', champion_path(name: 'Teemo')
+        = image_tag riot_image_link('Teemo'), class: 'profile'
+      %ul
+        %li
+          Is Teemo
