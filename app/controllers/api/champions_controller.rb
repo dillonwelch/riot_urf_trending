@@ -22,5 +22,9 @@ module Api
       end
       render json: result
     end
+
+    def names
+      render json: Champion.pluck(:name).to_json
+    end
   end
 end

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       get '/:name/deaths', action: :deaths
 
       get '/:name/overall', action: :overall
+
+      get '/names', action: :names
     end
 
     namespace :matches do

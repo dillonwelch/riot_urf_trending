@@ -18,6 +18,7 @@ gem 'memcachier'
 gem 'pg'
 gem 'ruby-lol', require: 'lol'
 gem 'sass-rails', '~> 5.0'
+gem 'twitter-typeahead-rails'
 gem 'uglifier', '>= 1.3.0'
 
 group :doc do
