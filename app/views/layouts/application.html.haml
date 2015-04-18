@@ -39,9 +39,11 @@
             %button.btn.btn-default{ type: 'submit' }= t('.search')
           %ul.nav.navbar-nav.navbar-right
             %li
-              = mail_to 'urfstatistics@gmail.com', t('.contact')
+              = link_to t('.download'), ENV['DOWNLOAD_LINK']
             %li
-              = link_to 'About', about_path
+              = mail_to ENV['CONTACT_EMAIL'], t('.contact')
+            %li
+              = link_to t('.about'), about_path
   %body
     - if Rails.env.production?
       = render 'layouts/analytics'

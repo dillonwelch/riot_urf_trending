@@ -1,5 +1,7 @@
 RSpec.describe 'layouts/application' do
   before do
+    ENV['CONTACT_EMAIL'] = 'rawr@gmail.com'
+    ENV['DOWNLOAD_LINK'] = 'www.google.com'
     render
   end
 
