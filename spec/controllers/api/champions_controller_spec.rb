@@ -63,6 +63,7 @@ RSpec.describe Api::ChampionsController do
     let(:result) do
       double(win_rate: 1, pick_rate: 2, total_victories: 3, total_losses: 4)
     end
+
     before do
       expect(ChampionMatchesStat).to receive(:overall_for_champion).
         with(champion).and_return(result)
@@ -71,6 +72,15 @@ RSpec.describe Api::ChampionsController do
     it 'returns the overall stats for the champion' do
       get :overall, name: champion.name
       expect(response.body).to eq result.to_json
+    end
+  end
+
+  describe 'GET :names' do
+    let!(:champions) { create_list(:champion, 5) }
+
+    it 'returns the names of all champions' do
+      get :names
+      expect(response.body).to eq champions.map(&:name).to_json
     end
   end
 end
