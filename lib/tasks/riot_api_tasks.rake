@@ -34,7 +34,8 @@ end
 
 task :get_urf_matches, %i(time) => [:environment] do |_t, args|
   if args[:time].nil?
-    floor_time = ((Time.zone.now - 10.minutes).to_f / 5.minutes).floor * 5.minutes
+    min = 5.minutes
+    floor_time = ((Time.zone.now - 10.minutes).to_f / min).floor * min
     time = (Time.at(floor_time)).to_i
   else
     time = args[:time]
@@ -76,7 +77,7 @@ task backfill_urf_matches: [:environment] do
 
   end_time = Time.parse('13 Apr 2015 08:00').to_i
 
-  while ENV['BACKFILL_TIME'].to_i < end_time do
+  while ENV['BACKFILL_TIME'].to_i < end_time
     time = ENV['BACKFILL_TIME'].to_i
     Rake::Task['get_urf_matches'].reenable
     Rake::Task['get_urf_matches'].invoke(time)
@@ -118,7 +119,7 @@ task backfill_calculate_stats: [:environment] do
   # Last start_time = 1428915627339
   end_time = Time.parse('13 Apr 2015 12:00')
   time = start_time
-  while time < end_time do
+  while time < end_time
     Rake::Task['calculate_stats'].reenable
     Rake::Task['calculate_stats'].invoke(time)
     time += 1.hour
