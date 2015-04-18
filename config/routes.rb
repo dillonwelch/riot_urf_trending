@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/about', to: 'application#about'
   get '/urf', to: 'application#urf'
+  get '/urf_awards', to: 'application#urf_awards'
 
   namespace :champions do
     get '/', action: :index

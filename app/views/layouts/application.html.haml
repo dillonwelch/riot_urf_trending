@@ -38,6 +38,10 @@
             %span.js-search
               = text_field_tag :name, nil, placeholder: 'Search by champion', class: 'form-control typeahead'
             %button.btn.btn-default.js-submit{ type: 'submit' }= t('.search')
+          %ul.nav.navbar-nav
+            %li
+              %a{ href: urf_awards_path }
+                = t('.urf_awards')
           %ul.nav.navbar-nav.navbar-right
             %li
               = link_to t('.download'), ENV['DOWNLOAD_LINK']
