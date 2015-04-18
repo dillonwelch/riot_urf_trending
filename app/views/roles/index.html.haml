@@ -2,35 +2,32 @@
   %h1= t('.title')
 .content
   %main.index.role-index
-    %table.center
-      - index = 0
-      - @roles.each_slice(3) do |slice|
-        %tr
-          - slice.each do |role|
-            - index += 1
-            %td
-              = cache("view_role_index_#{role.primary_role}_#{cachebuster}") do
-                = image_tag riot_role_link role.primary_role
-                %ul.links
-                  = tooltip_helper(title: t('champions.tooltips.more_info')) do
-                    %a{ href: role_path(name: role.primary_role) }
-                      = fa_icon 'line-chart'
-                  = tooltip_helper(title: t('champions.tooltips.all', role: t("layouts.application.roles.#{role.primary_role}"))) do
-                    %a{ href: champions_path(role: role.primary_role) }
-                      = fa_icon 'filter'
-                .stats
-                  %ul
-                    = tooltip_helper(title: t('champions.tooltips.games_played')) do
-                      = number_with_delimiter role.total_picks
-                      = fa_icon('gamepad')
-                  %ul
-                    = tooltip_helper(title: t('champions.tooltips.win_rate')) do
-                      = "#{round_rate(role.win_rate)}%"
-                      = fa_icon('trophy')
-                  %ul
-                    = tooltip_helper(title: t('champions.tooltips.pick_rate')) do
-                      = "#{round_rate(role.pick_rate / 10)}%"
-                      = fa_icon('users')
-                .name
-                  %h1= role.primary_role
-              .rank= index
+    - index = 0
+    - @roles.each_slice(3) do |slice|
+      - slice.each do |role|
+        - index += 1
+        .card
+          = cache("view_role_index_#{role.primary_role}_#{cachebuster}") do
+            = image_tag riot_role_link role.primary_role
+            %ul.links
+              = tooltip_helper(title: t('champions.tooltips.more_info')) do
+                %a{ href: role_path(name: role.primary_role) }
+                  = fa_icon 'line-chart'
+              = tooltip_helper(title: t('champions.tooltips.all', role: t("layouts.application.roles.#{role.primary_role}"))) do
+                %a{ href: champions_path(role: role.primary_role) }
+                  = fa_icon 'filter'
+            .stats
+              %ul
+                = tooltip_helper(title: t('champions.tooltips.games_played')) do
+                  = number_with_delimiter role.total_picks
+                  = fa_icon('gamepad')
+              %ul
+                = tooltip_helper(title: t('champions.tooltips.win_rate')) do
+                  = "#{round_rate(role.win_rate)}%"
+                  = fa_icon('trophy')
+              %ul
+                = tooltip_helper(title: t('champions.tooltips.pick_rate')) do
+                  = "#{round_rate(role.pick_rate / 10)}%"
+                  = fa_icon('users')
+            .name= role.primary_role
+          .rank= index
