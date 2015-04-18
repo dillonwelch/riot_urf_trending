@@ -19,11 +19,15 @@ Copy `example.env` over to `.env` and replace `RIOT_API_KEY` with your personal 
 
 To populate champion data, run `rake populate_static_champion_data`
 
-You can run a clock process that will poll for URF matches by running `clockwork lib/clock.rb`, 
+You can run a clock process that will poll for URF matches by running `clockwork lib/clock.rb` (not recommended unless you update the timestamps it looks at), 
 or you can run `rake backfill_urf_matches` to get all URF match data directly.
+
+Note that this will get ALL URF matches; if you only want a subset you can edit the start/end times [here](https://github.com/oniofchaos/riot_urf_trending/blob/master/lib/tasks/riot_api_tasks.rake#L71) in the rake task. Use standard Ruby timestamps.
 
 Once you've collected all the data, run `rake backfill_calculate_stats` to populate the stats tables 
 used to calculate the numbers on site.
+
+All rake tasks are located in [lib/tasks/riot_api_tasks.rake](https://github.com/oniofchaos/riot_urf_trending/blob/master/lib/tasks/riot_api_tasks.rake).
 
 #Participant Info
 * Bumblingbear, NA Server, California, USA
