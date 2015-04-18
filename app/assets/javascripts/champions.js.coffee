@@ -5,7 +5,7 @@ $(document).ready ->
   if canvas.length
     page = show.data('page')
     if page == 'champion'
-      url = "/api/champions/#{$('#js-champion-name').text().trim()}/overall"
+      url = "/api/champions/#{$('#js-champion-name').text().replace('.', '').trim()}/overall"
     else if page == 'role'
       url = "/api/roles/#{$('#js-role-name').text().trim()}/overall"
 

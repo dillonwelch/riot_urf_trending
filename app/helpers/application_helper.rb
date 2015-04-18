@@ -108,7 +108,7 @@ module ApplicationHelper
         'LeBlanc' => 'Leblanc',   'Fiddlesticks' => 'FiddleSticks',
         'Wukong'  => 'MonkeyKing' }.fetch(display_name)
     rescue KeyError
-      return display_name
+      display_name
     end
   end
 

@@ -6,6 +6,19 @@ class ApplicationController < ActionController::Base
   private
 
   def champion
-    @_champion ||= Champion.find_by_lower_name(params[:name]).first
+    @_champion ||= Champion.find_by_lower_name(filtered_name).first
+  end
+
+  def filtered_name
+    name = params[:name].downcase
+
+    begin
+      { 'kogmaw' => "Kog'Maw",    'khazix' => "Kha'Zix",
+        'reksai' => "Rek'Sai",    'chogath' => "Cho'Gath",
+        'velkoz' => "Vel'Koz",    'mundo' => 'Dr. Mundo',
+        'dr mundo' => 'Dr. Mundo' }.fetch(name)
+    rescue KeyError
+      params[:name]
+    end
   end
 end
