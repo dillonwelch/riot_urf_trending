@@ -1,6 +1,6 @@
 #README
 
-<img src="https://circleci.com/gh/oniofchaos/riot_urf_trending.png?circle-token=9aff1d88b8467554cc766a99765d365b31caf8b8">
+[![Circle CI](https://circleci.com/gh/oniofchaos/riot_urf_trending.png?circle-token=9aff1d88b8467554cc766a99765d365b31caf8b8)](https://circleci.com/gh/oniofchaos/riot_urf_trending)
 
 To see the live version of the app, visit my website at [urfstatistics.net](http://www.urfstatistics.net/).
 
