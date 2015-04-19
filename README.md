@@ -2,7 +2,7 @@
 
 [![Circle CI](https://circleci.com/gh/oniofchaos/riot_urf_trending.png?circle-token=9aff1d88b8467554cc766a99765d365b31caf8b8)](https://circleci.com/gh/oniofchaos/riot_urf_trending)
 
-To see the live version of the app, visit my website at [urfstatistics.net](http://www.urfstatistics.net/).
+To see the live version of the app, visit my website at [urfstatistics.net](http://www.urfstatistics.net/), hosted on Heroku and with a domain from GoDaddy.
 
 # Setup
 You will need to have the following installed before running the app locally:
@@ -32,6 +32,10 @@ All rake tasks are located in [lib/tasks/riot_api_tasks.rake](https://github.com
 #Participant Info
 * Bumblingbear, NA Server, California, USA
 * Harley, NA Server, California, USA
+
+#Specs
+
+You can find my specs in `specs/`. You can run them all by typing `rspec` in the console. There are specs for models, views, controllers, helpers, and even some feature specs. 
 
 #Legal
 
