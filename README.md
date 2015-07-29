@@ -29,6 +29,8 @@ used to calculate the numbers on site.
 
 All rake tasks are located in [lib/tasks/riot_api_tasks.rake](https://github.com/oniofchaos/riot_urf_trending/blob/master/lib/tasks/riot_api_tasks.rake).
 
+Heroku cache max_created_at_2="2015-04-17 02:06:39 UTC"
+
 #Participant Info
 * Bumblingbear, NA Server, California, USA
 * Harley, NA Server, California, USA
