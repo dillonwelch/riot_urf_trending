@@ -99,8 +99,9 @@ class ChampionsController < ApplicationController
 
   def max_created_at
     @_max = Rails.cache.fetch("max_created_at_#{ENV['CACHE_COUNTER']}") do
-      ChampionMatchesStat.select('max(created_at) as created_at').
-      reorder('').first.created_at
+      #ChampionMatchesStat.select('max(created_at) as created_at').
+      #reorder('').first.created_at
+      ENV['MAX_CREATED_AT']
     end
   end
 
